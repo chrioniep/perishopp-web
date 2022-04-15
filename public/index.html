@@ -1,17 +1,63 @@
 <!DOCTYPE html>
 <html lang="">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link rel="icon" href="<%= BASE_URL %>favicon.png" />
+    <link href="<%= BASE_URL%>assets/css/styles.css" rel="stylesheet" />
     <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
   <body>
     <noscript>
-      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+      <strong
+        >We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work
+        properly without JavaScript enabled. Please enable it to
+        continue.</strong
+      >
     </noscript>
     <div id="app"></div>
     <!-- built files will be auto injected -->
+    <script src="<%= BASE_URL %>assets/js/jquery.min.js"></script>
+    <script src="<%= BASE_URL %>assets/js/popper.min.js"></script>
+    <script src="<%= BASE_URL %>assets/js/bootstrap.min.js"></script>
+    <script src="<%= BASE_URL %>assets/js/ion.rangeSlider.min.js"></script>
+    <script src="<%= BASE_URL %>assets/js/slick.js"></script>
+    <script src="<%= BASE_URL %>assets/js/slider-bg.js"></script>
+    <script src="<%= BASE_URL %>assets/js/lightbox.js"></script>
+    <script src="<%= BASE_URL %>assets/js/smoothproducts.js"></script>
+    <script src="<%= BASE_URL %>assets/js/snackbar.min.js"></script>
+    <script src="<%= BASE_URL %>assets/js/jQuery.style.switcher.js"></script>
+    <script src="<%= BASE_URL %>assets/js/custom.js"></script>
+    <!-- ============================================================== -->
+    <!-- This page plugins -->
+    <!-- ============================================================== -->
+
+    <script>
+      function openWishlist() {
+        document.getElementById("Wishlist").style.display = "block";
+      }
+      function closeWishlist() {
+        document.getElementById("Wishlist").style.display = "none";
+      }
+    </script>
+
+    <script>
+      function openCart() {
+        document.getElementById("Cart").style.display = "block";
+      }
+      function closeCart() {
+        document.getElementById("Cart").style.display = "none";
+      }
+    </script>
+
+    <script>
+      function openSearch() {
+        document.getElementById("Search").style.display = "block";
+      }
+      function closeSearch() {
+        document.getElementById("Search").style.display = "none";
+      }
+    </script>
   </body>
 </html>
