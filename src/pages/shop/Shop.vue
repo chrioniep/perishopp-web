@@ -270,7 +270,7 @@
                 </div>
 
                 <!-- Choose Category -->
-                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+                <!-- <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
                   <div class="single_filter_title mb-2">
                     <h6 class="mb-0 fs-sm ft-medium text-muted">
                       Choose Colors
@@ -411,7 +411,7 @@
                       ></label>
                     </div>
                   </div>
-                </div>
+                </div> -->
 
                 <!-- Choose Category -->
                 <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">

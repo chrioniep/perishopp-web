@@ -20,9 +20,7 @@
               <!-- Slide Title -->
               <div class="home-slider-desc text-center">
                 <div class="home-slider-title mb-4">
-                  <h5 class="text-light fs-lg ft-medium mb-0">
-                    Winter Arrivals
-                  </h5>
+                  <h5 class="text-light fs-lg ft-medium mb-0">Prix Dimi</h5>
                   <h1 class="mb-1 ft-bold lg-heading">Collections 2022</h1>
                 </div>
 
@@ -30,12 +28,12 @@
                   <a
                     href="#"
                     class="btn stretched-link light-borders mx-2 my-3 ft-bold"
-                    >Shop Men</a
+                    >Boutique Hommes</a
                   >
                   <a
                     href="#"
                     class="btn stretched-link light-borders mx-2 my-3 ft-bold"
-                    >Shop Women</a
+                    >Boutique Femmes</a
                   >
                 </p>
               </div>
@@ -56,10 +54,10 @@
               <div class="home-slider-desc">
                 <div class="home-slider-title mb-4">
                   <h5 class="text-light fs-md ft-medium mb-0">
-                    Summer Collection
+                    Prix Dimi Collection
                   </h5>
                   <h1 class="mb-1 ft-bold text-light lg-heading">
-                    Women's Fashion<br />UpTo 30% Off
+                    la mode des femmes<br />UpTo 30% Off
                   </h1>
                   <span class="trending text-light"
                     >There's nothing like trend</span
@@ -124,7 +122,7 @@
               /></a>
             </div>
             <div class="cats_caption text-center">
-              <h4 class="m-0">Women's</h4>
+              <h4 class="m-0">Femmes</h4>
               <span class="text-muted">5670 Collections</span>
             </div>
           </div>
@@ -138,7 +136,7 @@
               /></a>
             </div>
             <div class="cats_caption text-center">
-              <h4 class="m-0">Men's</h4>
+              <h4 class="m-0">Hommes</h4>
               <span class="text-muted">3220 Collections</span>
             </div>
           </div>
@@ -152,7 +150,7 @@
               /></a>
             </div>
             <div class="cats_caption text-center">
-              <h4 class="m-0">Kids</h4>
+              <h4 class="m-0">Enfants</h4>
               <span class="text-muted">7412 Collections</span>
             </div>
           </div>
@@ -169,7 +167,7 @@
               /></a>
             </div>
             <div class="cats_caption text-center">
-              <h4 class="m-0">Accessories</h4>
+              <h4 class="m-0">Accessoires</h4>
               <span class="text-muted">6580 Collections</span>
             </div>
           </div>
@@ -185,16 +183,22 @@
       <div class="row justify-content-center">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
           <div class="sec_title position-relative text-center">
-            <h2 class="off_title">Trendy Products</h2>
-            <h3 class="ft-bold pt-3">Our Trending Products</h3>
+            <h2 class="off_title">Tendances</h2>
+            <h3 class="ft-bold pt-3">Nos produits tendances</h3>
           </div>
         </div>
       </div>
 
       <!-- row -->
       <div class="row align-items-center rows-products">
+        <SingleProduct />
+        <SingleProduct />
+        <SingleProduct />
+        <SingleProduct />
+        <SingleProduct />
+        <SingleProduct />
         <!-- Single -->
-        <div class="col-xl-3 col-lg-4 col-md-6 col-6">
+        <!-- <div class="col-xl-3 col-lg-4 col-md-6 col-6">
           <div class="product_grid card b-0">
             <div
               class="badge bg-success text-white position-absolute ft-regular ab-left text-upper"
@@ -246,10 +250,10 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
 
         <!-- Single -->
-        <div class="col-xl-3 col-lg-4 col-md-6 col-6">
+        <!-- <div class="col-xl-3 col-lg-4 col-md-6 col-6">
           <div class="product_grid card b-0">
             <div
               class="badge bg-info text-white position-absolute ft-regular ab-left text-upper"
@@ -303,10 +307,10 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
 
         <!-- Single -->
-        <div class="col-xl-3 col-lg-4 col-md-6 col-6">
+        <!-- <div class="col-xl-3 col-lg-4 col-md-6 col-6">
           <div class="product_grid card b-0">
             <button
               class="snackbar-wishlist btn btn_love position-absolute ab-right"
@@ -353,280 +357,7 @@
               </div>
             </div>
           </div>
-        </div>
-
-        <!-- Single -->
-        <div class="col-xl-3 col-lg-4 col-md-6 col-6">
-          <div class="product_grid card b-0">
-            <div
-              class="badge bg-warning text-white position-absolute ft-regular ab-left text-upper"
-            >
-              Hot
-            </div>
-            <button
-              class="snackbar-wishlist btn btn_love position-absolute ab-right"
-            >
-              <i class="far fa-heart"></i>
-            </button>
-            <div class="card-body p-0">
-              <div class="shop_thumb position-relative">
-                <a
-                  class="card-img-top d-block overflow-hidden"
-                  href="shop-single-v1.html"
-                  ><img
-                    class="card-img-top"
-                    src="assets/img/product/4.jpg"
-                    alt="..."
-                /></a>
-                <div
-                  class="product-hover-overlay bg-dark d-flex align-items-center justify-content-center"
-                >
-                  <div class="edlio">
-                    <a
-                      href="#"
-                      data-toggle="modal"
-                      data-target="#quickview"
-                      class="text-white fs-sm ft-medium"
-                      ><i class="fas fa-eye mr-1"></i>Quick View</a
-                    >
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div
-              class="card-footer b-0 p-3 pb-0 bg-white d-flex align-items-start justify-content-center"
-            >
-              <div class="text-left">
-                <div class="text-center">
-                  <h5 class="fw-bolder fs-md mb-0 lh-1 mb-1">
-                    <a href="shop-single-v1.html">Half Fancy Lady Dress</a>
-                  </h5>
-                  <div class="elis_rty">
-                    <span class="text-muted ft-medium line-through mr-2"
-                      >$149.00</span
-                    ><span class="ft-bold theme-cl fs-md">$110.00</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Single -->
-        <div class="col-xl-3 col-lg-4 col-md-6 col-6">
-          <div class="product_grid card b-0">
-            <button
-              class="snackbar-wishlist btn btn_love position-absolute ab-right"
-            >
-              <i class="far fa-heart"></i>
-            </button>
-            <div class="card-body p-0">
-              <div class="shop_thumb position-relative">
-                <a
-                  class="card-img-top d-block overflow-hidden"
-                  href="shop-single-v1.html"
-                  ><img
-                    class="card-img-top"
-                    src="assets/img/product/5.jpg"
-                    alt="..."
-                /></a>
-                <div
-                  class="product-hover-overlay bg-dark d-flex align-items-center justify-content-center"
-                >
-                  <div class="edlio">
-                    <a
-                      href="#"
-                      data-toggle="modal"
-                      data-target="#quickview"
-                      class="text-white fs-sm ft-medium"
-                      ><i class="fas fa-eye mr-1"></i>Quick View</a
-                    >
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div
-              class="card-footer b-0 p-3 pb-0 bg-white d-flex align-items-start justify-content-center"
-            >
-              <div class="text-left">
-                <div class="text-center">
-                  <h5 class="fw-bolder fs-md mb-0 lh-1 mb-1">
-                    <a href="shop-single-v1.html">Flix Flox Jeans</a>
-                  </h5>
-                  <div class="elis_rty">
-                    <span class="text-muted ft-medium line-through mr-2"
-                      >$90.00</span
-                    ><span class="ft-bold theme-cl fs-md">$49.00</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Single -->
-        <div class="col-xl-3 col-lg-4 col-md-6 col-6">
-          <div class="product_grid card b-0">
-            <div
-              class="badge bg-danger text-white position-absolute ft-regular ab-left text-upper"
-            >
-              Hot
-            </div>
-            <button
-              class="snackbar-wishlist btn btn_love position-absolute ab-right"
-            >
-              <i class="far fa-heart"></i>
-            </button>
-            <div class="card-body p-0">
-              <div class="shop_thumb position-relative">
-                <a
-                  class="card-img-top d-block overflow-hidden"
-                  href="shop-single-v1.html"
-                  ><img
-                    class="card-img-top"
-                    src="assets/img/product/6.jpg"
-                    alt="..."
-                /></a>
-                <div
-                  class="product-hover-overlay bg-dark d-flex align-items-center justify-content-center"
-                >
-                  <div class="edlio">
-                    <a
-                      href="#"
-                      data-toggle="modal"
-                      data-target="#quickview"
-                      class="text-white fs-sm ft-medium"
-                      ><i class="fas fa-eye mr-1"></i>Quick View</a
-                    >
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div
-              class="card-footer b-0 p-3 pb-0 bg-white d-flex align-items-start justify-content-center"
-            >
-              <div class="text-left">
-                <div class="text-center">
-                  <h5 class="fw-bolder fs-md mb-0 lh-1 mb-1">
-                    <a href="shop-single-v1.html">Fancy Salwar Suits</a>
-                  </h5>
-                  <div class="elis_rty">
-                    <span class="ft-bold fs-md text-dark">$114.00</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Single -->
-        <div class="col-xl-3 col-lg-4 col-md-6 col-6">
-          <div class="product_grid card b-0">
-            <div
-              class="badge bg-success text-white position-absolute ft-regular ab-left text-upper"
-            >
-              Sale
-            </div>
-            <button
-              class="snackbar-wishlist btn btn_love position-absolute ab-right"
-            >
-              <i class="far fa-heart"></i>
-            </button>
-            <div class="card-body p-0">
-              <div class="shop_thumb position-relative">
-                <a
-                  class="card-img-top d-block overflow-hidden"
-                  href="shop-single-v1.html"
-                  ><img
-                    class="card-img-top"
-                    src="assets/img/product/7.jpg"
-                    alt="..."
-                /></a>
-                <div
-                  class="product-hover-overlay bg-dark d-flex align-items-center justify-content-center"
-                >
-                  <div class="edlio">
-                    <a
-                      href="#"
-                      data-toggle="modal"
-                      data-target="#quickview"
-                      class="text-white fs-sm ft-medium"
-                      ><i class="fas fa-eye mr-1"></i>Quick View</a
-                    >
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div
-              class="card-footer b-0 p-3 pb-0 bg-white d-flex align-items-start justify-content-center"
-            >
-              <div class="text-left">
-                <div class="text-center">
-                  <h5 class="fw-bolder fs-md mb-0 lh-1 mb-1">
-                    <a href="shop-single-v1.html">Collot Full Dress</a>
-                  </h5>
-                  <div class="elis_rty">
-                    <span class="ft-bold theme-cl fs-md text-dark"
-                      >$120.00</span
-                    >
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Single -->
-        <div class="col-xl-3 col-lg-4 col-md-6 col-6">
-          <div class="product_grid card b-0">
-            <button
-              class="snackbar-wishlist btn btn_love position-absolute ab-right"
-            >
-              <i class="far fa-heart"></i>
-            </button>
-            <div class="card-body p-0">
-              <div class="shop_thumb position-relative">
-                <a
-                  class="card-img-top d-block overflow-hidden"
-                  href="shop-single-v1.html"
-                  ><img
-                    class="card-img-top"
-                    src="assets/img/product/8.jpg"
-                    alt="..."
-                /></a>
-                <div
-                  class="product-hover-overlay bg-dark d-flex align-items-center justify-content-center"
-                >
-                  <div class="edlio">
-                    <a
-                      href="#"
-                      data-toggle="modal"
-                      data-target="#quickview"
-                      class="text-white fs-sm ft-medium"
-                      ><i class="fas fa-eye mr-1"></i>Quick View</a
-                    >
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div
-              class="card-footer b-0 p-3 pb-0 bg-white d-flex align-items-start justify-content-center"
-            >
-              <div class="text-left">
-                <div class="text-center">
-                  <h5 class="fw-bolder fs-md mb-0 lh-1 mb-1">
-                    <a href="shop-single-v1.html">Formal Fluex Kurti</a>
-                  </h5>
-                  <div class="elis_rty">
-                    <span class="text-muted ft-medium line-through mr-2"
-                      >$149.00</span
-                    ><span class="ft-bold theme-cl fs-md">$129.00</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        </div> -->
       </div>
       <!-- row -->
 
@@ -1775,8 +1506,9 @@
 <script>
 import Header from "../components/Header.vue";
 import Footer from "../components/Footer.vue";
+import SingleProduct from "../components/product/singleProduct.vue";
 export default {
-  components: { Header, Footer },
+  components: { Header, Footer, SingleProduct },
   name: "Home",
   data() {
     return {
