@@ -412,104 +412,397 @@
       <div class="row justify-content-center">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
           <div class="sec_title position-relative text-center">
-            <h2 class="off_title">Latest News</h2>
-            <h3 class="ft-bold pt-3">New Updates</h3>
+            <h2 class="off_title">Femmes</h2>
+            <h3 class="ft-bold pt-3">Produit pour femme</h3>
           </div>
         </div>
       </div>
 
-      <div class="row">
-        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
-          <div class="_blog_wrap">
-            <div class="_blog_thumb mb-2">
-              <a href="blog-detail.html" class="d-block"
-                ><img
-                  src="assets/img/bl-1.png"
-                  class="img-fluid rounded"
-                  alt=""
-              /></a>
+      <div class="row align-items-center rows-products">
+        <SingleProduct />
+        <SingleProduct />
+        <SingleProduct />
+        <SingleProduct />
+        <SingleProduct />
+        <SingleProduct />
+        <!-- Single -->
+        <!-- <div class="col-xl-3 col-lg-4 col-md-6 col-6">
+          <div class="product_grid card b-0">
+            <div
+              class="badge bg-success text-white position-absolute ft-regular ab-left text-upper"
+            >
+              Sale
             </div>
-            <div class="_blog_caption">
-              <span class="text-muted">26 Jan 2021</span>
-              <h5 class="bl_title lh-1">
-                <a href="blog-detail.html"
-                  >Let's start bring sale on this saummer vacation.</a
+            <button
+              class="snackbar-wishlist btn btn_love position-absolute ab-right"
+            >
+              <i class="far fa-heart"></i>
+            </button>
+            <div class="card-body p-0">
+              <div class="shop_thumb position-relative">
+                <a
+                  class="card-img-top d-block overflow-hidden"
+                  href="shop-single-v1.html"
+                  ><img
+                    class="card-img-top"
+                    src="assets/img/product/1.jpg"
+                    alt="..."
+                /></a>
+                <div
+                  class="product-hover-overlay bg-dark d-flex align-items-center justify-content-center"
                 >
-              </h5>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis
-              </p>
-              <a href="blog-detail.html" class="text-dark fs-sm"
-                >Continue Reading..</a
-              >
+                  <div class="edlio">
+                    <a
+                      href="#"
+                      data-toggle="modal"
+                      data-target="#quickview"
+                      class="text-white fs-sm ft-medium"
+                      ><i class="fas fa-eye mr-1"></i>Quick View</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="card-footer b-0 p-3 pb-0 bg-white d-flex align-items-start justify-content-center"
+            >
+              <div class="text-left">
+                <div class="text-center">
+                  <h5 class="fw-bolder fs-md mb-0 lh-1 mb-1">
+                    <a href="shop-single-v1.html">Half Running Set</a>
+                  </h5>
+                  <div class="elis_rty">
+                    <span class="ft-bold fs-md text-dark">$119.00</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
+        </div> -->
 
-        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
-          <div class="_blog_wrap">
-            <div class="_blog_thumb mb-2">
-              <a href="blog-detail.html" class="d-block"
-                ><img
-                  src="assets/img/bl-2.png"
-                  class="img-fluid rounded"
-                  alt=""
-              /></a>
+        <!-- Single -->
+        <!-- <div class="col-xl-3 col-lg-4 col-md-6 col-6">
+          <div class="product_grid card b-0">
+            <div
+              class="badge bg-info text-white position-absolute ft-regular ab-left text-upper"
+            >
+              New
             </div>
-            <div class="_blog_caption">
-              <span class="text-muted">17 July 2021</span>
-              <h5 class="bl_title lh-1">
-                <a href="blog-detail.html"
-                  >Let's start bring sale on this saummer vacation.</a
+            <button
+              class="snackbar-wishlist btn btn_love position-absolute ab-right"
+            >
+              <i class="far fa-heart"></i>
+            </button>
+            <div class="card-body p-0">
+              <div class="shop_thumb position-relative">
+                <a
+                  class="card-img-top d-block overflow-hidden"
+                  href="shop-single-v1.html"
+                  ><img
+                    class="card-img-top"
+                    src="assets/img/product/2.jpg"
+                    alt="..."
+                /></a>
+                <div
+                  class="product-hover-overlay bg-dark d-flex align-items-center justify-content-center"
                 >
-              </h5>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis
-              </p>
-              <a href="blog-detail.html" class="text-dark fs-sm"
-                >Continue Reading..</a
-              >
+                  <div class="edlio">
+                    <a
+                      href="#"
+                      data-toggle="modal"
+                      data-target="#quickview"
+                      class="text-white fs-sm ft-medium"
+                      ><i class="fas fa-eye mr-1"></i>Quick View</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="card-footer b-0 p-3 pb-0 bg-white d-flex align-items-start justify-content-center"
+            >
+              <div class="text-left">
+                <div class="text-center">
+                  <h5 class="fw-bolder fs-md mb-0 lh-1 mb-1">
+                    <a href="shop-single-v1.html">Formal Men Lowers</a>
+                  </h5>
+                  <div class="elis_rty">
+                    <span class="text-muted ft-medium line-through mr-2"
+                      >$129.00</span
+                    ><span class="ft-bold theme-cl fs-md">$79.00</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
+        </div> -->
 
-        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
-          <div class="_blog_wrap">
-            <div class="_blog_thumb mb-2">
-              <a href="blog-detail.html" class="d-block"
-                ><img
-                  src="assets/img/bl-3.png"
-                  class="img-fluid rounded"
-                  alt=""
-              /></a>
-            </div>
-            <div class="_blog_caption">
-              <span class="text-muted">10 Aug 2021</span>
-              <h5 class="bl_title lh-1">
-                <a href="blog-detail.html"
-                  >Let's start bring sale on this saummer vacation.</a
+        <!-- Single -->
+        <!-- <div class="col-xl-3 col-lg-4 col-md-6 col-6">
+          <div class="product_grid card b-0">
+            <button
+              class="snackbar-wishlist btn btn_love position-absolute ab-right"
+            >
+              <i class="far fa-heart"></i>
+            </button>
+            <div class="card-body p-0">
+              <div class="shop_thumb position-relative">
+                <a
+                  class="card-img-top d-block overflow-hidden"
+                  href="shop-single-v1.html"
+                  ><img
+                    class="card-img-top"
+                    src="assets/img/product/3.jpg"
+                    alt="..."
+                /></a>
+                <div
+                  class="product-hover-overlay bg-dark d-flex align-items-center justify-content-center"
                 >
-              </h5>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis
-              </p>
-              <a href="blog-detail.html" class="text-dark fs-sm"
-                >Continue Reading..</a
-              >
+                  <div class="edlio">
+                    <a
+                      href="#"
+                      data-toggle="modal"
+                      data-target="#quickview"
+                      class="text-white fs-sm ft-medium"
+                      ><i class="fas fa-eye mr-1"></i>Quick View</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="card-footer b-0 p-3 pb-0 bg-white d-flex align-items-start justify-content-center"
+            >
+              <div class="text-left">
+                <div class="text-center">
+                  <h5 class="fw-bolder fs-md mb-0 lh-1 mb-1">
+                    <a href="shop-single-v1.html">Half Running Suit</a>
+                  </h5>
+                  <div class="elis_rty">
+                    <span class="ft-bold fs-md text-dark">$80.00</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> -->
+      </div>
+    </div>
+  </section>
+  <!-- ======================= Blog Start ============================ -->
+
+  <section
+    class="bg-cover"
+    style="background: url(assets/img/banner-c.jpg) no-repeat"
+    data-overlay="5"
+  >
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-xl-8 col-lg-9 col-md-12 col-sm-12">
+          <div class="deals_wrap text-center">
+            <h4 class="ft-medium text-light">Get up to -40% Off</h4>
+            <h2 class="ft-bold text-light">Only Summer Collections</h2>
+            <p class="text-light">
+              At vero eos et accusamus et iusto odio dignissimos ducimus qui
+              blanditiis praesentium voluptatum deleniti atque corrupti quos
+              dolores et quas molestias excepturi sint occaecati cupiditate non
+              provident, similique sunt in culpa qui officia deserunt mollitia
+              animi, id est laborum et dolorum fuga. Et harum quidem rerum
+              facilis est et expedita distinctio.
+            </p>
+            <div class="mt-5">
+              <a href="#" class="btn btn-white stretched-link"
+                >Start Shopping <i class="lni lni-arrow-right"></i
+              ></a>
             </div>
           </div>
         </div>
       </div>
     </div>
   </section>
-  <!-- ======================= Blog Start ============================ -->
 
+  <section class="space min">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+          <div class="sec_title position-relative text-center">
+            <h2 class="off_title">Hommes</h2>
+            <h3 class="ft-bold pt-3">Produit pour Hommes</h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="row align-items-center rows-products">
+        <SingleProduct />
+        <SingleProduct />
+        <SingleProduct />
+        <SingleProduct />
+        <SingleProduct />
+        <SingleProduct />
+        <!-- Single -->
+        <!-- <div class="col-xl-3 col-lg-4 col-md-6 col-6">
+          <div class="product_grid card b-0">
+            <div
+              class="badge bg-success text-white position-absolute ft-regular ab-left text-upper"
+            >
+              Sale
+            </div>
+            <button
+              class="snackbar-wishlist btn btn_love position-absolute ab-right"
+            >
+              <i class="far fa-heart"></i>
+            </button>
+            <div class="card-body p-0">
+              <div class="shop_thumb position-relative">
+                <a
+                  class="card-img-top d-block overflow-hidden"
+                  href="shop-single-v1.html"
+                  ><img
+                    class="card-img-top"
+                    src="assets/img/product/1.jpg"
+                    alt="..."
+                /></a>
+                <div
+                  class="product-hover-overlay bg-dark d-flex align-items-center justify-content-center"
+                >
+                  <div class="edlio">
+                    <a
+                      href="#"
+                      data-toggle="modal"
+                      data-target="#quickview"
+                      class="text-white fs-sm ft-medium"
+                      ><i class="fas fa-eye mr-1"></i>Quick View</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="card-footer b-0 p-3 pb-0 bg-white d-flex align-items-start justify-content-center"
+            >
+              <div class="text-left">
+                <div class="text-center">
+                  <h5 class="fw-bolder fs-md mb-0 lh-1 mb-1">
+                    <a href="shop-single-v1.html">Half Running Set</a>
+                  </h5>
+                  <div class="elis_rty">
+                    <span class="ft-bold fs-md text-dark">$119.00</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> -->
+
+        <!-- Single -->
+        <!-- <div class="col-xl-3 col-lg-4 col-md-6 col-6">
+          <div class="product_grid card b-0">
+            <div
+              class="badge bg-info text-white position-absolute ft-regular ab-left text-upper"
+            >
+              New
+            </div>
+            <button
+              class="snackbar-wishlist btn btn_love position-absolute ab-right"
+            >
+              <i class="far fa-heart"></i>
+            </button>
+            <div class="card-body p-0">
+              <div class="shop_thumb position-relative">
+                <a
+                  class="card-img-top d-block overflow-hidden"
+                  href="shop-single-v1.html"
+                  ><img
+                    class="card-img-top"
+                    src="assets/img/product/2.jpg"
+                    alt="..."
+                /></a>
+                <div
+                  class="product-hover-overlay bg-dark d-flex align-items-center justify-content-center"
+                >
+                  <div class="edlio">
+                    <a
+                      href="#"
+                      data-toggle="modal"
+                      data-target="#quickview"
+                      class="text-white fs-sm ft-medium"
+                      ><i class="fas fa-eye mr-1"></i>Quick View</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="card-footer b-0 p-3 pb-0 bg-white d-flex align-items-start justify-content-center"
+            >
+              <div class="text-left">
+                <div class="text-center">
+                  <h5 class="fw-bolder fs-md mb-0 lh-1 mb-1">
+                    <a href="shop-single-v1.html">Formal Men Lowers</a>
+                  </h5>
+                  <div class="elis_rty">
+                    <span class="text-muted ft-medium line-through mr-2"
+                      >$129.00</span
+                    ><span class="ft-bold theme-cl fs-md">$79.00</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> -->
+
+        <!-- Single -->
+        <!-- <div class="col-xl-3 col-lg-4 col-md-6 col-6">
+          <div class="product_grid card b-0">
+            <button
+              class="snackbar-wishlist btn btn_love position-absolute ab-right"
+            >
+              <i class="far fa-heart"></i>
+            </button>
+            <div class="card-body p-0">
+              <div class="shop_thumb position-relative">
+                <a
+                  class="card-img-top d-block overflow-hidden"
+                  href="shop-single-v1.html"
+                  ><img
+                    class="card-img-top"
+                    src="assets/img/product/3.jpg"
+                    alt="..."
+                /></a>
+                <div
+                  class="product-hover-overlay bg-dark d-flex align-items-center justify-content-center"
+                >
+                  <div class="edlio">
+                    <a
+                      href="#"
+                      data-toggle="modal"
+                      data-target="#quickview"
+                      class="text-white fs-sm ft-medium"
+                      ><i class="fas fa-eye mr-1"></i>Quick View</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="card-footer b-0 p-3 pb-0 bg-white d-flex align-items-start justify-content-center"
+            >
+              <div class="text-left">
+                <div class="text-center">
+                  <h5 class="fw-bolder fs-md mb-0 lh-1 mb-1">
+                    <a href="shop-single-v1.html">Half Running Suit</a>
+                  </h5>
+                  <div class="elis_rty">
+                    <span class="ft-bold fs-md text-dark">$80.00</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> -->
+      </div>
+    </div>
+  </section>
   <!-- ======================= Instagram Start ============================ -->
   <section class="p-0">
     <div class="container-fluid p-0">
@@ -517,8 +810,8 @@
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
           <div class="sec_title position-relative text-center">
             <h2 class="off_title">Instagram Gallery</h2>
-            <span class="fs-lg ft-bold theme-cl pt-3">@mahak_71</span>
-            <h3 class="ft-bold lh-1">From Instagram</h3>
+            <span class="fs-lg ft-bold theme-cl pt-3">@prix_dimi</span>
+            <h3 class="ft-bold lh-1">Instagram</h3>
           </div>
         </div>
       </div>
@@ -660,286 +953,7 @@
               </div>
             </div>
 
-            <div class="quick_view_capt">
-              <div class="prd_details">
-                <div class="prt_01 mb-1">
-                  <span class="text-light bg-info rounded px-2 py-1"
-                    >Dresses</span
-                  >
-                </div>
-                <div class="prt_02 mb-2">
-                  <h2 class="ft-bold mb-1">Women Striped Shirt Dress</h2>
-                  <div class="text-left">
-                    <div
-                      class="star-rating align-items-center d-flex justify-content-left mb-1 p-0"
-                    >
-                      <i class="fas fa-star filled"></i>
-                      <i class="fas fa-star filled"></i>
-                      <i class="fas fa-star filled"></i>
-                      <i class="fas fa-star filled"></i>
-                      <i class="fas fa-star"></i>
-                      <span class="small">(412 Reviews)</span>
-                    </div>
-                    <div class="elis_rty">
-                      <span class="ft-medium text-muted line-through fs-md mr-2"
-                        >$199</span
-                      ><span class="ft-bold theme-cl fs-lg mr-2">$110</span
-                      ><span
-                        class="ft-regular text-danger bg-light-danger py-1 px-2 fs-sm"
-                        >Out of Stock</span
-                      >
-                    </div>
-                  </div>
-                </div>
-
-                <div class="prt_03 mb-3">
-                  <p>
-                    At vero eos et accusamus et iusto odio dignissimos ducimus
-                    qui blanditiis praesentium voluptatum deleniti atque
-                    corrupti quos dolores.
-                  </p>
-                </div>
-
-                <div class="prt_04 mb-2">
-                  <p class="d-flex align-items-center mb-0 text-dark ft-medium">
-                    Color:
-                  </p>
-                  <div class="text-left">
-                    <div class="form-check form-option form-check-inline mb-1">
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        name="color8"
-                        id="white8"
-                      />
-                      <label
-                        class="form-option-label rounded-circle"
-                        for="white8"
-                        ><span
-                          class="form-option-color rounded-circle blc7"
-                        ></span
-                      ></label>
-                    </div>
-                    <div class="form-check form-option form-check-inline mb-1">
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        name="color8"
-                        id="blue8"
-                      />
-                      <label
-                        class="form-option-label rounded-circle"
-                        for="blue8"
-                        ><span
-                          class="form-option-color rounded-circle blc2"
-                        ></span
-                      ></label>
-                    </div>
-                    <div class="form-check form-option form-check-inline mb-1">
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        name="color8"
-                        id="yellow8"
-                      />
-                      <label
-                        class="form-option-label rounded-circle"
-                        for="yellow8"
-                        ><span
-                          class="form-option-color rounded-circle blc5"
-                        ></span
-                      ></label>
-                    </div>
-                    <div class="form-check form-option form-check-inline mb-1">
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        name="color8"
-                        id="pink8"
-                      />
-                      <label
-                        class="form-option-label rounded-circle"
-                        for="pink8"
-                        ><span
-                          class="form-option-color rounded-circle blc3"
-                        ></span
-                      ></label>
-                    </div>
-                    <div class="form-check form-option form-check-inline mb-1">
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        name="color8"
-                        id="red"
-                      />
-                      <label class="form-option-label rounded-circle" for="red"
-                        ><span
-                          class="form-option-color rounded-circle blc4"
-                        ></span
-                      ></label>
-                    </div>
-                    <div class="form-check form-option form-check-inline mb-1">
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        name="color8"
-                        id="green"
-                      />
-                      <label
-                        class="form-option-label rounded-circle"
-                        for="green"
-                        ><span
-                          class="form-option-color rounded-circle blc6"
-                        ></span
-                      ></label>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="prt_04 mb-4">
-                  <p class="d-flex align-items-center mb-0 text-dark ft-medium">
-                    Size:
-                  </p>
-                  <div class="text-left pb-0 pt-2">
-                    <div
-                      class="form-check size-option form-option form-check-inline mb-2"
-                    >
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        name="size"
-                        id="28"
-                        checked=""
-                      />
-                      <label class="form-option-label" for="28">28</label>
-                    </div>
-                    <div
-                      class="form-check form-option size-option form-check-inline mb-2"
-                    >
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        name="size"
-                        id="30"
-                      />
-                      <label class="form-option-label" for="30">30</label>
-                    </div>
-                    <div
-                      class="form-check form-option size-option form-check-inline mb-2"
-                    >
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        name="size"
-                        id="32"
-                      />
-                      <label class="form-option-label" for="32">32</label>
-                    </div>
-                    <div
-                      class="form-check form-option size-option form-check-inline mb-2"
-                    >
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        name="size"
-                        id="34"
-                      />
-                      <label class="form-option-label" for="34">34</label>
-                    </div>
-                    <div
-                      class="form-check form-option size-option form-check-inline mb-2"
-                    >
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        name="size"
-                        id="36"
-                      />
-                      <label class="form-option-label" for="36">36</label>
-                    </div>
-                    <div
-                      class="form-check form-option size-option form-check-inline mb-2"
-                    >
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        name="size"
-                        id="38"
-                      />
-                      <label class="form-option-label" for="38">38</label>
-                    </div>
-                    <div
-                      class="form-check form-option size-option form-check-inline mb-2"
-                    >
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        name="size"
-                        id="40"
-                      />
-                      <label class="form-option-label" for="40">40</label>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="prt_05 mb-4">
-                  <div class="form-row mb-7">
-                    <div class="col-12 col-lg-auto">
-                      <!-- Quantity -->
-                      <select class="mb-2 custom-select">
-                        <option value="1" selected="">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                      </select>
-                    </div>
-                    <div class="col-12 col-lg">
-                      <!-- Submit -->
-                      <button
-                        type="submit"
-                        class="btn btn-block custom-height bg-dark mb-2"
-                      >
-                        <i class="lni lni-shopping-basket mr-2"></i>Add to Cart
-                      </button>
-                    </div>
-                    <div class="col-12 col-lg-auto">
-                      <!-- Wishlist -->
-                      <button
-                        class="btn custom-height btn-default btn-block mb-2 text-dark"
-                        data-toggle="button"
-                      >
-                        <i class="lni lni-heart mr-2"></i>Wishlist
-                      </button>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="prt_06">
-                  <p class="mb-0 d-flex align-items-center">
-                    <span class="mr-4">Share:</span>
-                    <a
-                      class="d-inline-flex align-items-center justify-content-center p-3 gray circle fs-sm text-muted mr-2"
-                      href="#!"
-                    >
-                      <i class="fab fa-twitter position-absolute"></i>
-                    </a>
-                    <a
-                      class="d-inline-flex align-items-center justify-content-center p-3 gray circle fs-sm text-muted mr-2"
-                      href="#!"
-                    >
-                      <i class="fab fa-facebook-f position-absolute"></i>
-                    </a>
-                    <a
-                      class="d-inline-flex align-items-center justify-content-center p-3 gray circle fs-sm text-muted"
-                      href="#!"
-                    >
-                      <i class="fab fa-pinterest-p position-absolute"></i>
-                    </a>
-                  </p>
-                </div>
-              </div>
-            </div>
+            <SingleQuickView />
           </div>
         </div>
       </div>
@@ -1507,9 +1521,11 @@
 import Header from "../components/Header.vue";
 import Footer from "../components/Footer.vue";
 import SingleProduct from "../components/product/singleProduct.vue";
+import SingleQuickView from "../components/product/singleQuickView.vue";
+
 export default {
-  components: { Header, Footer, SingleProduct },
-  name: "Home",
+  components: { Header, Footer, SingleProduct, SingleQuickView },
+  name: "HomePage",
   data() {
     return {
       loading: false,
