@@ -10,6 +10,7 @@ import DashboardCategory from "../pages/dashboard/category.vue";
 import DashboardCategoryDetail from "../pages/dashboard/categoryDetail.vue";
 import DashboardCategoryNew from "../pages/dashboard/categoryNew.vue";
 import DasboardGallery from "../pages/dashboard/gallery.vue";
+import CategoryShop from "../pages/shop/category.vue";
 
 const routes = [
   {
@@ -31,6 +32,11 @@ const routes = [
     path: "/dashboard/product",
     name: "DashboardProduct",
     component: DashboardProduct,
+  },
+  {
+    path: "/shop/category/:id",
+    name: "ShopCategory",
+    component: CategoryShop,
   },
   {
     path: "/dashboard/category",

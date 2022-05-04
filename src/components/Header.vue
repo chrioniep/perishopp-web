@@ -44,32 +44,32 @@
             <li>
               <a href="#">Homme</a>
               <ul class="nav-dropdown nav-submenu">
-                <li><a href="/shop">Pantalons</a></li>
-                <li><a href="/shop">Jacket</a></li>
-                <li><a href="/shop">Bloussons</a></li>
+                <li><a href="/shop/category/1">Pantalons</a></li>
+                <li><a href="/shop/category/1">Jacket</a></li>
+                <li><a href="/shop/category/1">Bloussons</a></li>
               </ul>
             </li>
             <li>
               <a href="#">Femme</a>
               <ul class="nav-dropdown nav-submenu">
-                <li><a href="/shop">Pantalons</a></li>
-                <li><a href="/shop">Jacket</a></li>
-                <li><a href="/shop">Blousse</a></li>
-                <li><a href="/shop">Jupe</a></li>
-                <li><a href="/shop">Lingerie</a></li>
+                <li><a href="/shop/category/1">Pantalons</a></li>
+                <li><a href="/shop/category/1">Jacket</a></li>
+                <li><a href="/shop/category/1">Blousse</a></li>
+                <li><a href="/shop/category/1">Jupe</a></li>
+                <li><a href="/shop/category/1">Lingerie</a></li>
               </ul>
             </li>
             <li>
               <a href="#">Enfant</a>
               <ul class="nav-dropdown nav-submenu">
-                <li><a href="/shop">Culotte</a></li>
-                <li><a href="/shop">Jacket</a></li>
+                <li><a href="/shop/category/1">Culotte</a></li>
+                <li><a href="/shop/category/1">Jacket</a></li>
               </ul>
             </li>
             <li>
               <a href="#">Accessoires</a>
               <ul class="nav-dropdown nav-submenu">
-                <li><a href="/shop">Badge</a></li>
+                <li><a href="/shop/category/1">Badge</a></li>
               </ul>
             </li>
 
@@ -82,11 +82,11 @@
                 <i class="lni lni-search-alt"></i>
               </a>
             </li>
-            <li>
+            <!-- <li>
               <a href="#" data-toggle="modal" data-target="#login">
                 <i class="lni lni-user"></i>
               </a>
-            </li>
+            </li> -->
             <!-- <li>
               <a href="#" onclick="openWishlist()">
                 <i class="lni lni-heart"></i

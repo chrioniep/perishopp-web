@@ -120,7 +120,9 @@
           <div class="col-lg-12 col-md-12 text-center">
             <p class="mb-0">
               © 2021 Perishopp Designd By
-              <a target="_blank" href="www.crioni.herokuapp.com">chrioniep</a>.
+              <a target="_blank" href="http://www.crioni.herokuapp.com"
+                >chrioniep</a
+              >.
             </p>
           </div>
         </div>

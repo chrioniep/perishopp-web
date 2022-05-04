@@ -12,7 +12,7 @@
               src="/assets/img/product/3.jpg"
               alt="..."
           /></a>
-          <div
+          <!-- <div
             class="product-hover-overlay bg-dark d-flex align-items-center justify-content-center"
           >
             <div class="edlio">
@@ -24,7 +24,7 @@
                 ><i class="fas fa-eye mr-1"></i>Quick View</a
               >
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
       <div
