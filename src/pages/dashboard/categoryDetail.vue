@@ -28,7 +28,7 @@
       <div class="row align-items-start justify-content-between">
         <div class="col-12 col-md-12 col-lg-4 col-xl-4 text-center miliods">
           <div class="d-block border rounded mfliud-bot">
-            <Navigation :menu="1" />
+            <Navigation :menu="2" />
           </div>
         </div>
 
@@ -37,16 +37,16 @@
           <form>
             <div class="row">
               <div class="col-12 col-lg-12 col-xl-12 col-md-12 mb-3">
-                <h4 class="ft-medium fs-lg">Ajouter un nouveau produit</h4>
+                <h4 class="ft-medium fs-lg">Modifier la categorie</h4>
               </div>
             </div>
 
-            <div class="row">
+            <!-- <div class="row">
               <ProductPhoto />
               <ProductPhoto />
               <ProductPhoto />
               <ProductPhoto />
-            </div>
+            </div> -->
 
             <div class="row">
               <div class="col-12 col-lg-12 col-xl-12 col-md-12 mb-3">
@@ -62,147 +62,24 @@
             </div>
 
             <div class="row mb-2">
-              <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12">
+              <div class="col-xl-12 col-lg-12 col-md-8 col-sm-12 col-12">
                 <div class="form-group">
                   <label class="text-dark">Titre*</label>
                   <input
                     type="text"
                     class="form-control"
-                    placeholder="nom du produit"
+                    placeholder="Titre de la categorie"
                   />
                 </div>
               </div>
-              <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
-                <div class="row mb-2">
-                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                    <div class="form-group">
-                      <label class="text-dark">Faux prix*</label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        placeholder="faux"
-                      />
-                    </div>
-                  </div>
-                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                    <div class="form-group">
-                      <label class="text-dark">Prix*</label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        placeholder="vraie"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                <div class="form-group">
-                  <label class="text-dark">Description*</label>
-                  <textarea
-                    class="form-control"
-                    placeholder="description du produit"
-                  />
-                </div>
-              </div>
-              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                <div class="form-group">
-                  <label class="text-dark">Categorie</label>
-                  <select class="custom-select">
-                    <option value="1" selected>
-                      Selectionner la categorie
-                    </option>
-                    <option value="1">Jeams femme</option>
-                    <option value="2">Jeans homme</option>
-                    <option value="3">jupe</option>
-                    <option value="4">role</option>
-                    <option value="5">bas</option>
-                  </select>
-                </div>
-              </div>
-
-              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                <div class="row mb-2">
-                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                    <div class="form-group">
-                      <label class="text-dark">Taille *</label>
-                      <select class="custom-select">
-                        <option value="1" selected>
-                          Selectionner la taille
-                        </option>
-                        <option value="1">28</option>
-                        <option value="2">29</option>
-                        <option value="3">30</option>
-                        <option value="4">31</option>
-                        <option value="5">32</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                    <div class="form-group">
-                      <label class="text-dark">Badge</label>
-                      <select class="custom-select">
-                        <option value="1" selected>
-                          Selectionner un badge
-                        </option>
-                        <option value="1">En solde</option>
-                        <option value="2">New</option>
-                        <!-- <option value="3">30</option>
-                            <option value="4">31</option>
-                            <option value="5">32</option> -->
-                      </select>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                <div class="row mb-2">
-                  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
-                    <div class="form-group">
-                      <input
-                        id="tendance"
-                        class="checkbox-custom"
-                        name="delivery"
-                        type="checkbox"
-                      />
-                      <label for="tendance" class="checkbox-custom-label"
-                        >Définir comme produit tendance</label
-                      >
-                    </div>
-                  </div>
-                  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
-                    <div class="form-group">
-                      <input
-                        id="category"
-                        class="checkbox-custom"
-                        name="delivery"
-                        type="checkbox"
-                      />
-                      <label for="category" class="checkbox-custom-label"
-                        >Définir dans le cateogrie</label
-                      >
-                    </div>
-                  </div>
-                  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
-                    <div class="form-group">
-                      <input
-                        id="stock"
-                        class="checkbox-custom"
-                        name="delivery"
-                        type="checkbox"
-                      />
-                      <label for="stock" class="checkbox-custom-label"
-                        >Stock épuiser</label
-                      >
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-lg-12 col-md-12 col-sm-12">
+              <div class="col-lg-6 col-md-6 col-sm-12">
                 <div class="form-group text-center">
-                  <a href="#" class="btn btn-dark full-width">Ajouter</a>
+                  <a href="#" class="btn btn-dark full-width">Modifier</a>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="form-group text-center">
+                  <a href="#" class="btn btn-danger full-width">Supprimer</a>
                 </div>
               </div>
             </div>
@@ -1115,10 +992,9 @@
 import Header from "../../components/Header.vue";
 import Footer from "../../components/Footer.vue";
 import Navigation from "../../components/dashboard/navigation.vue";
-import ProductPhoto from "../../components/dashboard/productPhoto.vue";
 
 export default {
-  components: { Header, Footer, Navigation, ProductPhoto },
+  components: { Header, Footer, Navigation },
 };
 </script>
 

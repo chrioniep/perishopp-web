@@ -200,9 +200,14 @@
                 </div>
               </div>
 
-              <div class="col-lg-12 col-md-12 col-sm-12">
+              <div class="col-lg-6 col-md-6 col-sm-12">
                 <div class="form-group text-center">
-                  <a href="#" class="btn btn-dark full-width">Ajouter</a>
+                  <a href="#" class="btn btn-dark full-width">Modifier</a>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="form-group text-center">
+                  <a href="#" class="btn btn-danger full-width">Supprimer</a>
                 </div>
               </div>
             </div>

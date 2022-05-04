@@ -5,6 +5,11 @@ import ProductDetail from "../pages/product/productDetail.vue";
 import DashboardLogin from "../pages/dashboard/login.vue";
 import DashboardProduct from "../pages/dashboard/product.vue";
 import DashboardProductAdd from "../pages/dashboard/productNew.vue";
+import DashboardProductDetail from "../pages/dashboard/productDetail.vue";
+import DashboardCategory from "../pages/dashboard/category.vue";
+import DashboardCategoryDetail from "../pages/dashboard/categoryDetail.vue";
+import DashboardCategoryNew from "../pages/dashboard/categoryNew.vue";
+import DasboardGallery from "../pages/dashboard/gallery.vue";
 
 const routes = [
   {
@@ -28,9 +33,34 @@ const routes = [
     component: DashboardProduct,
   },
   {
+    path: "/dashboard/category",
+    name: "DashboardCategory",
+    component: DashboardCategory,
+  },
+  {
+    path: "/dashboard/gallery",
+    name: "DasboardGallery",
+    component: DasboardGallery,
+  },
+  {
+    path: "/dashboard/category/:id/detail",
+    name: "DashboardCategoryDetail",
+    component: DashboardCategoryDetail,
+  },
+  {
+    path: "/dashboard/category/new",
+    name: "DashboardCategoryNew",
+    component: DashboardCategoryNew,
+  },
+  {
     path: "/dashboard/product/add",
     name: "DashboardProductAdd",
     component: DashboardProductAdd,
+  },
+  {
+    path: "/dashboard/product/:id/detail",
+    name: "DashboardProductDetail",
+    component: DashboardProductDetail,
   },
   {
     path: "/product/:id",

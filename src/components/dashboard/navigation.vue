@@ -7,17 +7,19 @@
     </h4>
     <ul class="dahs_navbar">
       <li>
-        <a href="wishlist.html" class="active"
-          ><i class="lni lni-producthunt mr-2"></i>Produits</a
+        <a href="/dashboard/product" :class="`${menu == 1 ? 'active' : ''}`">
+          <i class="lni lni-producthunt mr-2"></i>Produits</a
         >
       </li>
       <li>
-        <a href="profile-info.html"
+        <a href="/dashboard/category" :class="`${menu == 2 ? 'active' : ''}`"
           ><i class="lni lni-briefcase mr-2"></i>Categories</a
         >
       </li>
       <li>
-        <a href="addresses.html"><i class="lni lni-gallery mr-2"></i>Gallery</a>
+        <a href="/dashboard/gallery" :class="`${menu == 3 ? 'active' : ''}`"
+          ><i class="lni lni-gallery mr-2"></i>Gallery</a
+        >
       </li>
       <!-- <li>
         <a href="payment-methode.html"
@@ -34,7 +36,9 @@
 </template>
 
 <script>
-export default {};
+export default {
+  props: ["menu"],
+};
 </script>
 
 <style></style>

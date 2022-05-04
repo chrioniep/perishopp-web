@@ -1,6 +1,6 @@
 <template>
   <!-- Single -->
-  <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
+  <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
     <div class="product_grid card b-0">
       <!-- <div
         class="badge bg-success text-white position-absolute ft-regular ab-left text-upper"
@@ -35,7 +35,7 @@
           </div> -->
         </div>
       </div>
-      <div
+      <!-- <div
         class="card-footers b-0 pt-3 px-2 bg-white d-flex align-items-start justify-content-center"
       >
         <div class="text-left">
@@ -48,7 +48,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
