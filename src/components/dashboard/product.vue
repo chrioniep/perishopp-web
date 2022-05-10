@@ -14,11 +14,8 @@
         <div class="shop_thumb position-relative">
           <a
             class="card-img-top d-block overflow-hidden"
-            href="/dashboard/product/1/detail"
-            ><img
-              class="card-img-top"
-              src="/assets/img/product/1.jpg"
-              alt="..."
+            :href="`/dashboard/product/${user.id}/detail`"
+            ><img class="card-img-top" :src="user.images[0]" alt="..."
           /></a>
           <!-- <div
             class="product-hover-overlay bg-dark d-flex align-items-center justify-content-center"
@@ -41,10 +38,10 @@
         <div class="text-left">
           <div class="text-center">
             <h5 class="fw-bolder fs-md mb-0 lh-1 mb-1">
-              <a href="shop-single-v1.html">Half Running Set</a>
+              <a href="shop-single-v1.html">{{ user.name }}</a>
             </h5>
             <div class="elis_rty">
-              <span class="ft-bold fs-md text-dark">$119.00</span>
+              <span class="ft-bold fs-md text-dark">${{ user.price }}</span>
             </div>
           </div>
         </div>
@@ -54,7 +51,9 @@
 </template>
 
 <script>
-export default {};
+export default {
+  props: ["user"],
+};
 </script>
 
 <style></style>

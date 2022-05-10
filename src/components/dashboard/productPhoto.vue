@@ -12,13 +12,8 @@
       </button>
       <div class="card-body p-0">
         <div class="shop_thumb position-relative">
-          <a
-            class="card-img-top d-block overflow-hidden"
-            href="/dashboard/product/1/detail"
-            ><img
-              class="card-img-top"
-              src="/assets/img/product/1.jpg"
-              alt="..."
+          <a class="card-img-top d-block overflow-hidden"
+            ><img class="card-img-top" :src="url" alt="..."
           /></a>
           <!-- <div
             class="product-hover-overlay bg-dark d-flex align-items-center justify-content-center"
@@ -54,7 +49,9 @@
 </template>
 
 <script>
-export default {};
+export default {
+  props: ["url"],
+};
 </script>
 
 <style></style>

@@ -1,4 +1,11 @@
 <template>
+  <loading
+    color="#6618CE"
+    v-model:active="loading"
+    :can-cancel="true"
+    :on-cancel="onCancel"
+    :is-full-page="true"
+  />
   <Header />
   <!-- ======================= Top Breadcrubms ======================== -->
   <!-- ======================= Top Breadcrubms ======================== -->
@@ -42,10 +49,41 @@
             </div>
 
             <div class="row">
-              <ProductPhoto />
-              <ProductPhoto />
-              <ProductPhoto />
-              <ProductPhoto />
+              <div
+                v-for="item in images"
+                :key="item"
+                class="col-xl-3 col-lg-3 col-md-6 col-sm-12"
+              >
+                <div class="product_grid card b-0">
+                  <button
+                    @click.prevent="removeImage(item)"
+                    class="btn btn_love position-absolute ab-right theme-cl"
+                  >
+                    <i class="fas fa-times"></i>
+                  </button>
+                  <div class="card-body p-0">
+                    <div class="shop_thumb position-relative">
+                      <a class="card-img-top d-block overflow-hidden"
+                        ><img class="card-img-top" :src="item" alt="..."
+                      /></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-xl-12 col-lg-12 col-md-12 justify-content-center">
+                <div
+                  v-if="progress != null"
+                  class="progress-bar bg-dark"
+                  role="progressbar"
+                  :style="`width: ${progress}%`"
+                  aria-valuenow="100"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                ></div>
+              </div>
             </div>
 
             <div class="row">
@@ -53,6 +91,7 @@
                 <div class="form-group">
                   <label class="text-dark">Upload image</label>
                   <input
+                    @change="addImage"
                     type="file"
                     class="form-control"
                     placeholder="Upload image"
@@ -66,6 +105,7 @@
                 <div class="form-group">
                   <label class="text-dark">Titre*</label>
                   <input
+                    v-model="name"
                     type="text"
                     class="form-control"
                     placeholder="nom du produit"
@@ -78,6 +118,7 @@
                     <div class="form-group">
                       <label class="text-dark">Faux prix*</label>
                       <input
+                        v-model="fakePrice"
                         type="text"
                         class="form-control"
                         placeholder="faux"
@@ -88,6 +129,7 @@
                     <div class="form-group">
                       <label class="text-dark">Prix*</label>
                       <input
+                        v-model="price"
                         type="text"
                         class="form-control"
                         placeholder="vraie"
@@ -101,6 +143,7 @@
                 <div class="form-group">
                   <label class="text-dark">Description*</label>
                   <textarea
+                    v-model="description"
                     class="form-control"
                     placeholder="description du produit"
                   />
@@ -108,16 +151,15 @@
               </div>
               <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 <div class="form-group">
-                  <label class="text-dark">Categorie</label>
-                  <select class="custom-select">
-                    <option value="1" selected>
-                      Selectionner la categorie
+                  <label class="text-dark">Categories</label>
+                  <select v-model="category" class="custom-select">
+                    <option
+                      v-for="cat in categories"
+                      :key="cat.id"
+                      :value="cat.id"
+                    >
+                      {{ cat.name }}
                     </option>
-                    <option value="1">Jeams femme</option>
-                    <option value="2">Jeans homme</option>
-                    <option value="3">jupe</option>
-                    <option value="4">role</option>
-                    <option value="5">bas</option>
                   </select>
                 </div>
               </div>
@@ -127,30 +169,29 @@
                   <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
                     <div class="form-group">
                       <label class="text-dark">Taille *</label>
-                      <select class="custom-select">
-                        <option value="1" selected>
-                          Selectionner la taille
+                      <select v-model="size" class="custom-select">
+                        <option
+                          v-for="item in sizes"
+                          :key="item.value"
+                          :value="item.value"
+                          selected
+                        >
+                          {{ item.text }}
                         </option>
-                        <option value="1">28</option>
-                        <option value="2">29</option>
-                        <option value="3">30</option>
-                        <option value="4">31</option>
-                        <option value="5">32</option>
                       </select>
                     </div>
                   </div>
                   <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
                     <div class="form-group">
                       <label class="text-dark">Badge</label>
-                      <select class="custom-select">
-                        <option value="1" selected>
-                          Selectionner un badge
+                      <select v-model="badge" class="custom-select">
+                        <option
+                          v-for="item in badges"
+                          :key="item.value"
+                          :value="item.value"
+                        >
+                          {{ item.text }}
                         </option>
-                        <option value="1">En solde</option>
-                        <option value="2">New</option>
-                        <!-- <option value="3">30</option>
-                            <option value="4">31</option>
-                            <option value="5">32</option> -->
                       </select>
                     </div>
                   </div>
@@ -161,6 +202,7 @@
                   <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
                     <div class="form-group">
                       <input
+                        v-model="isTrending"
                         id="tendance"
                         class="checkbox-custom"
                         name="delivery"
@@ -174,6 +216,7 @@
                   <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
                     <div class="form-group">
                       <input
+                        v-model="inCategory"
                         id="category"
                         class="checkbox-custom"
                         name="delivery"
@@ -187,6 +230,7 @@
                   <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
                     <div class="form-group">
                       <input
+                        v-model="stock"
                         id="stock"
                         class="checkbox-custom"
                         name="delivery"
@@ -202,7 +246,14 @@
 
               <div class="col-lg-12 col-md-12 col-sm-12">
                 <div class="form-group text-center">
-                  <a href="#" class="btn btn-dark full-width">Ajouter</a>
+                  <a
+                    href="#"
+                    @click.prevent="newProduct"
+                    class="btn btn-dark full-width"
+                  >
+                    {{ !creating ? "Créer" : null }}
+                    {{ creating ? "En cours..." : null }}
+                  </a>
                 </div>
               </div>
             </div>
@@ -1116,9 +1167,141 @@ import Header from "../../components/Header.vue";
 import Footer from "../../components/Footer.vue";
 import Navigation from "../../components/dashboard/navigation.vue";
 import ProductPhoto from "../../components/dashboard/productPhoto.vue";
+import Loading from "vue-loading-overlay";
+import "vue-loading-overlay/dist/vue-loading.css";
+import { getCategoryList } from "../../services/category.services";
+import { CreateProduct } from "../../services/product.services";
+import firebase from "../../firebase/config";
 
 export default {
-  components: { Header, Footer, Navigation, ProductPhoto },
+  components: { Header, Footer, Navigation, ProductPhoto, Loading },
+  data() {
+    return {
+      id: "",
+      name: "",
+      price: "",
+      images: [],
+      fakePrice: "",
+      description: "",
+      category: "",
+      size: "",
+      badge: "",
+      isTrending: false,
+      inCategory: false,
+      progress: null,
+      stock: false,
+      categories: null,
+      loading: false,
+      creating: false,
+      error: null,
+      uploadLoadingImage: false,
+      sizes: [
+        { value: "S", text: "S" },
+        { value: "M", text: "M" },
+        { value: "L", text: "L" },
+        { value: "XL", text: "XL" },
+        { value: "XXL", text: "XXL" },
+        { value: "3X", text: "3XL" },
+        { value: "20", text: "20" },
+        { value: "22", text: "22" },
+        { value: "24", text: "24" },
+        { value: "26", text: "26" },
+        { value: "28", text: "28" },
+        { value: "30", text: "30" },
+        { value: "32", text: "32" },
+        { value: "34", text: "34" },
+        { value: "36", text: "36" },
+        { value: "38", text: "38" },
+        { value: "40", text: "40" },
+        { value: "42", text: "42" },
+        { value: "46", text: "46" },
+      ],
+      badges: [
+        { value: "new", text: "New" },
+        { value: "sale", text: "En solde" },
+      ],
+    };
+  },
+  methods: {
+    newProduct() {
+      console.log(this.$data);
+    },
+    removeImage(item) {
+      var array = this.images.filter((e) => e != item);
+      this.images = array;
+    },
+    addImage(event) {
+      let value = event.target.files[0];
+      this.uploadImage(value);
+    },
+    uploadImage(image) {
+      const storageRef = firebase.storage().ref();
+      this.uploadLoadingImage = true;
+      const productImage = storageRef.child(`products/${image.name}`);
+      const task = productImage.put(image);
+      task.on("state_changed", (snapshot) => {
+        const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        this.progress = progress;
+        if (progress == 100) {
+          this.progress = null;
+          snapshot.ref.getDownloadURL().then((url) => {
+            this.images.push(url);
+            this.$swal({
+              toast: true,
+              icon: "success",
+              title: "Image uploaded",
+              position: "top-end",
+              showConfirmButton: false,
+              timer: 3000,
+              timerProgressBar: true,
+            });
+          });
+        }
+      });
+    },
+    newProduct() {
+      this.creating = true;
+      CreateProduct(this.$data).then((res) => {
+        if (res.state) {
+          this.creating = false;
+          this.$swal({
+            title: "Ajout du produit",
+            text: "produit ajouté avec succès",
+            icon: "success",
+            button: "Ok",
+          }).then(() => {
+            window.location.assign("/dashboard/product");
+          });
+        } else {
+          this.creating = false;
+          this.$swal({
+            title: "Erreur",
+            text: resp.message,
+            icon: "error",
+            button: "Ok",
+          });
+        }
+        this.creating = false;
+      });
+    },
+  },
+  mounted() {
+    if (localStorage.getItem("user-perish-auth")) {
+      getCategoryList().then((resp) => {
+        this.loading = true;
+        if (resp.state) {
+          this.categories = resp.data;
+          this.loading = false;
+        } else {
+          this.error = res.message;
+          this.loading = false;
+        }
+      });
+    } else {
+      this.$router.push("/dashboard");
+    }
+  },
 };
 </script>
 

@@ -1,4 +1,11 @@
 <template>
+  <loading
+    color="#6618CE"
+    v-model:active="loading"
+    :can-cancel="true"
+    :on-cancel="onCancel"
+    :is-full-page="true"
+  />
   <Header />
   <!-- ======================= Top Breadcrubms ======================== -->
   <!-- ======================= Top Breadcrubms ======================== -->
@@ -15,12 +22,24 @@
 
         <div class="col-12 col-md-12 col-lg-8 col-xl-8 text-center">
           <!-- row -->
+          <div
+            v-if="no_datas"
+            class="row align-items-center d-block justify-content-center"
+          >
+            <img
+              class="mb-3"
+              style="height: 300px"
+              src="/assets/img/empty-icon.svg"
+              alt=""
+            />
+            <h3 class="mb-3">Aucun produit disponible veuillez ajouter👇🏾</h3>
+          </div>
           <div class="row align-items-center">
-            <SingleProduct />
-            <SingleProduct />
-            <SingleProduct />
-            <SingleProduct />
-            <SingleProduct />
+            <SingleProduct
+              v-for="item in products"
+              :key="item.id"
+              :user="item"
+            />
           </div>
           <!-- row -->
           <!-- row -->
@@ -945,9 +964,46 @@ import Header from "../../components/Header.vue";
 import Footer from "../../components/Footer.vue";
 import Navigation from "../../components/dashboard/navigation.vue";
 import SingleProduct from "../../components/dashboard/product.vue";
+import Loading from "vue-loading-overlay";
+import "vue-loading-overlay/dist/vue-loading.css";
+import { getProductList } from "../../services/product.services";
 
 export default {
-  components: { Header, Footer, Navigation, SingleProduct },
+  components: { Header, Footer, Navigation, SingleProduct, Loading },
+  data() {
+    return {
+      products: [],
+      loading: false,
+      error: "",
+      no_datas: false,
+    };
+  },
+  methods: {
+    getProduct() {
+      console.log("function run...");
+      this.loading = true;
+      this.no_datas = false;
+      getProductList().then((resp) => {
+        console.log(resp);
+        if (resp.state) {
+          this.products = resp.data;
+          this.loading = false;
+        } else if (resp.data.length == 0) {
+          this.no_datas = true;
+          this.loading = false;
+        }
+      });
+    },
+  },
+  mounted() {
+    if (localStorage.getItem("user-perish-auth")) {
+      this.user = JSON.parse(localStorage.getItem("user-perish-auth"));
+      this.$router.push("/dashboard/product");
+      this.getProduct();
+    } else {
+      this.$router.push("/dashboard");
+    }
+  },
 };
 </script>
 

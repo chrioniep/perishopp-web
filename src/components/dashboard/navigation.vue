@@ -21,23 +21,38 @@
           ><i class="lni lni-gallery mr-2"></i>Gallery</a
         >
       </li>
-      <!-- <li>
-        <a href="payment-methode.html"
-          ><i class="lni lni-mastercard mr-2"></i>Payment Methode</a
-        >
-      </li>
       <li>
-        <a href="login.html"
+        <a @click="logoutAdmin" href="#"
           ><i class="lni lni-power-switch mr-2"></i>Log Out</a
         >
-      </li> -->
+      </li>
     </ul>
   </div>
 </template>
 
 <script>
+import { logout } from "../../services/auth.services";
 export default {
   props: ["menu"],
+  data() {
+    return {
+      loading: false,
+    };
+  },
+  methods: {
+    logoutAdmin() {
+      logout();
+      this.$router.push("/dashboard");
+    },
+  },
+  // mounted() {
+  //   if (localStorage.getItem("user-perish-auth")) {
+  //     this.user = JSON.parse(localStorage.getItem("user-perish-auth"));
+  //     this.$router.push("/dashboard/product");
+  //   } else {
+  //     this.$router.push("/dashboard");
+  //   }
+  // },
 };
 </script>
 

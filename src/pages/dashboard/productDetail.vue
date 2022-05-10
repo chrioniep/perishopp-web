@@ -1,4 +1,11 @@
 <template>
+  <loading
+    color="#6618CE"
+    v-model:active="loading"
+    :can-cancel="true"
+    :on-cancel="onCancel"
+    :is-full-page="true"
+  />
   <Header />
   <!-- ======================= Top Breadcrubms ======================== -->
   <!-- ======================= Top Breadcrubms ======================== -->
@@ -42,10 +49,45 @@
             </div>
 
             <div class="row">
-              <ProductPhoto />
-              <ProductPhoto />
-              <ProductPhoto />
-              <ProductPhoto />
+              <!-- <ProductPhoto
+                v-for="item in product.images"
+                :key="item"
+                :url="item"
+              /> -->
+              <div
+                v-for="item in product.images"
+                :key="item"
+                class="col-xl-3 col-lg-3 col-md-6 col-sm-12"
+              >
+                <div class="product_grid card b-0">
+                  <button
+                    @click.prevent="removeImage(item)"
+                    class="btn btn_love position-absolute ab-right theme-cl"
+                  >
+                    <i class="fas fa-times"></i>
+                  </button>
+                  <div class="card-body p-0">
+                    <div class="shop_thumb position-relative">
+                      <a class="card-img-top d-block overflow-hidden"
+                        ><img class="card-img-top" :src="item" alt="..."
+                      /></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xl-12 col-lg-12 col-md-12 justify-content-center">
+                <div
+                  v-if="progress != null"
+                  class="progress-bar bg-dark"
+                  role="progressbar"
+                  :style="`width: ${progress}%`"
+                  aria-valuenow="100"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                ></div>
+              </div>
             </div>
 
             <div class="row">
@@ -53,6 +95,7 @@
                 <div class="form-group">
                   <label class="text-dark">Upload image</label>
                   <input
+                    @change="addImage"
                     type="file"
                     class="form-control"
                     placeholder="Upload image"
@@ -66,6 +109,7 @@
                 <div class="form-group">
                   <label class="text-dark">Titre*</label>
                   <input
+                    v-model="product.name"
                     type="text"
                     class="form-control"
                     placeholder="nom du produit"
@@ -78,6 +122,7 @@
                     <div class="form-group">
                       <label class="text-dark">Faux prix*</label>
                       <input
+                        v-model="product.fakePrice"
                         type="text"
                         class="form-control"
                         placeholder="faux"
@@ -88,6 +133,7 @@
                     <div class="form-group">
                       <label class="text-dark">Prix*</label>
                       <input
+                        v-model="product.price"
                         type="text"
                         class="form-control"
                         placeholder="vraie"
@@ -101,6 +147,7 @@
                 <div class="form-group">
                   <label class="text-dark">Description*</label>
                   <textarea
+                    v-model="product.description"
                     class="form-control"
                     placeholder="description du produit"
                   />
@@ -109,15 +156,17 @@
               <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 <div class="form-group">
                   <label class="text-dark">Categorie</label>
-                  <select class="custom-select">
-                    <option value="1" selected>
-                      Selectionner la categorie
+                  <select v-model="product.category" class="custom-select">
+                    <option
+                      v-for="item in categories"
+                      :key="item.id"
+                      :value="item.id"
+                      :selected="
+                        item.id === product.category && product.category.id
+                      "
+                    >
+                      {{ item.name }}
                     </option>
-                    <option value="1">Jeams femme</option>
-                    <option value="2">Jeans homme</option>
-                    <option value="3">jupe</option>
-                    <option value="4">role</option>
-                    <option value="5">bas</option>
                   </select>
                 </div>
               </div>
@@ -127,30 +176,30 @@
                   <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
                     <div class="form-group">
                       <label class="text-dark">Taille *</label>
-                      <select class="custom-select">
-                        <option value="1" selected>
-                          Selectionner la taille
+                      <select v-model="product.size" class="custom-select">
+                        <option
+                          v-for="item in size"
+                          :value="item.value"
+                          :key="item.value"
+                          :selected="item.value === product.size"
+                        >
+                          {{ item.text }}
                         </option>
-                        <option value="1">28</option>
-                        <option value="2">29</option>
-                        <option value="3">30</option>
-                        <option value="4">31</option>
-                        <option value="5">32</option>
                       </select>
                     </div>
                   </div>
                   <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
                     <div class="form-group">
                       <label class="text-dark">Badge</label>
-                      <select class="custom-select">
-                        <option value="1" selected>
-                          Selectionner un badge
+                      <select v-model="product.badge" class="custom-select">
+                        <option
+                          v-for="item in badges"
+                          :key="item.value"
+                          :value="item.value"
+                          :selected="item.value === product.badge"
+                        >
+                          {{ item.text }}
                         </option>
-                        <option value="1">En solde</option>
-                        <option value="2">New</option>
-                        <!-- <option value="3">30</option>
-                            <option value="4">31</option>
-                            <option value="5">32</option> -->
                       </select>
                     </div>
                   </div>
@@ -164,6 +213,8 @@
                         id="tendance"
                         class="checkbox-custom"
                         name="delivery"
+                        v-model="product.isTrending"
+                        :checked="product.isTrending ? 'checked' : null"
                         type="checkbox"
                       />
                       <label for="tendance" class="checkbox-custom-label"
@@ -176,8 +227,10 @@
                       <input
                         id="category"
                         class="checkbox-custom"
+                        v-model="product.inCategory"
                         name="delivery"
                         type="checkbox"
+                        :checked="product.inCategory ? 'checked' : null"
                       />
                       <label for="category" class="checkbox-custom-label"
                         >Définir dans le cateogrie</label
@@ -191,6 +244,8 @@
                         class="checkbox-custom"
                         name="delivery"
                         type="checkbox"
+                        v-model="product.stock"
+                        :checked="product.stock ? 'checked' : null"
                       />
                       <label for="stock" class="checkbox-custom-label"
                         >Stock épuiser</label
@@ -202,12 +257,28 @@
 
               <div class="col-lg-6 col-md-6 col-sm-12">
                 <div class="form-group text-center">
-                  <a href="#" class="btn btn-dark full-width">Modifier</a>
+                  <a
+                    href="#"
+                    :disabled="updating"
+                    @click.prevent="update"
+                    class="btn btn-dark full-width"
+                  >
+                    {{ updating ? "En cours..." : null }}
+                    {{ !updating ? "Modifier" : null }}
+                  </a>
                 </div>
               </div>
               <div class="col-lg-6 col-md-6 col-sm-12">
                 <div class="form-group text-center">
-                  <a href="#" class="btn btn-danger full-width">Supprimer</a>
+                  <a
+                    href="#"
+                    :disabled="deleting"
+                    @click.prevent="deleteProd"
+                    class="btn btn-danger full-width"
+                  >
+                    {{ deleting ? "En cours..." : null }}
+                    {{ !deleting ? "Supprimer" : null }}</a
+                  >
                 </div>
               </div>
             </div>
@@ -415,7 +486,7 @@
 
                 <div class="prt_04 mb-4">
                   <p class="d-flex align-items-center mb-0 text-dark ft-medium">
-                    Size:
+                    Taille:
                   </p>
                   <div class="text-left pb-0 pt-2">
                     <div
@@ -564,91 +635,6 @@
   </div>
   <!-- End Modal -->
 
-  <!-- Log In Modal -->
-  <div
-    class="modal fade"
-    id="login"
-    tabindex="-1"
-    role="dialog"
-    aria-labelledby="loginmodal"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog modal-xl login-pop-form" role="document">
-      <div class="modal-content" id="loginmodal">
-        <div class="modal-headers">
-          <button
-            type="button"
-            class="close"
-            data-dismiss="modal"
-            aria-label="Close"
-          >
-            <span class="ti-close"></span>
-          </button>
-        </div>
-
-        <div class="modal-body p-5">
-          <div class="text-center mb-4">
-            <h2 class="m-0 ft-regular">Login</h2>
-          </div>
-
-          <form>
-            <div class="form-group">
-              <label>User Name</label>
-              <input type="text" class="form-control" placeholder="Username*" />
-            </div>
-
-            <div class="form-group">
-              <label>Password</label>
-              <input
-                type="password"
-                class="form-control"
-                placeholder="Password*"
-              />
-            </div>
-
-            <div class="form-group">
-              <div class="d-flex align-items-center justify-content-between">
-                <div class="flex-1">
-                  <input
-                    id="dd"
-                    class="checkbox-custom"
-                    name="dd"
-                    type="checkbox"
-                  />
-                  <label for="dd" class="checkbox-custom-label"
-                    >Remember Me</label
-                  >
-                </div>
-                <div class="eltio_k2">
-                  <a href="#">Lost Your Password?</a>
-                </div>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <button
-                type="submit"
-                class="btn btn-md full-width bg-dark text-light fs-md ft-medium"
-              >
-                Login
-              </button>
-            </div>
-
-            <div class="form-group text-center mb-0">
-              <p class="extra">
-                Not a member?<a href="#et-register-wrap" class="text-dark">
-                  Register</a
-                >
-              </p>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- End Modal -->
-
-  <!-- Search -->
   <div
     class="w3-ch-sideBar w3-bar-block w3-card-2 w3-animate-right"
     style="display: none; right: 0"
@@ -837,280 +823,6 @@
     </div>
   </div>
 
-  <!-- Wishlist -->
-  <div
-    class="w3-ch-sideBar w3-bar-block w3-card-2 w3-animate-right"
-    style="display: none; right: 0"
-    id="Wishlist"
-  >
-    <div class="rightMenu-scroll">
-      <div
-        class="d-flex align-items-center justify-content-between slide-head py-3 px-3"
-      >
-        <h4 class="cart_heading fs-md ft-medium mb-0">Saved Products</h4>
-        <button onclick="closeWishlist()" class="close_slide">
-          <i class="ti-close"></i>
-        </button>
-      </div>
-      <div class="right-ch-sideBar">
-        <div class="cart_select_items py-2">
-          <!-- Single Item -->
-          <div
-            class="d-flex align-items-center justify-content-between br-bottom px-3 py-3"
-          >
-            <div class="cart_single d-flex align-items-center">
-              <div class="cart_selected_single_thumb">
-                <a href="#"
-                  ><img
-                    src="assets/img/product/4.jpg"
-                    width="60"
-                    class="img-fluid"
-                    alt=""
-                /></a>
-              </div>
-              <div class="cart_single_caption pl-2">
-                <h4 class="product_title fs-sm ft-medium mb-0 lh-1">
-                  Women Striped Shirt Dress
-                </h4>
-                <p class="mb-2">
-                  <span class="text-dark ft-medium small">36</span>,
-                  <span class="text-dark small">Red</span>
-                </p>
-                <h4 class="fs-md ft-medium mb-0 lh-1">$129</h4>
-              </div>
-            </div>
-            <div class="fls_last">
-              <button class="close_slide gray">
-                <i class="ti-close"></i>
-              </button>
-            </div>
-          </div>
-
-          <!-- Single Item -->
-          <div
-            class="d-flex align-items-center justify-content-between br-bottom px-3 py-3"
-          >
-            <div class="cart_single d-flex align-items-center">
-              <div class="cart_selected_single_thumb">
-                <a href="#"
-                  ><img
-                    src="assets/img/product/7.jpg"
-                    width="60"
-                    class="img-fluid"
-                    alt=""
-                /></a>
-              </div>
-              <div class="cart_single_caption pl-2">
-                <h4 class="product_title fs-sm ft-medium mb-0 lh-1">
-                  Girls Floral Print Jumpsuit
-                </h4>
-                <p class="mb-2">
-                  <span class="text-dark ft-medium small">36</span>,
-                  <span class="text-dark small">Red</span>
-                </p>
-                <h4 class="fs-md ft-medium mb-0 lh-1">$129</h4>
-              </div>
-            </div>
-            <div class="fls_last">
-              <button class="close_slide gray">
-                <i class="ti-close"></i>
-              </button>
-            </div>
-          </div>
-
-          <!-- Single Item -->
-          <div
-            class="d-flex align-items-center justify-content-between px-3 py-3"
-          >
-            <div class="cart_single d-flex align-items-center">
-              <div class="cart_selected_single_thumb">
-                <a href="#"
-                  ><img
-                    src="assets/img/product/8.jpg"
-                    width="60"
-                    class="img-fluid"
-                    alt=""
-                /></a>
-              </div>
-              <div class="cart_single_caption pl-2">
-                <h4 class="product_title fs-sm ft-medium mb-0 lh-1">
-                  Girls Solid A-Line Dress
-                </h4>
-                <p class="mb-2">
-                  <span class="text-dark ft-medium small">30</span>,
-                  <span class="text-dark small">Blue</span>
-                </p>
-                <h4 class="fs-md ft-medium mb-0 lh-1">$100</h4>
-              </div>
-            </div>
-            <div class="fls_last">
-              <button class="close_slide gray">
-                <i class="ti-close"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div
-          class="d-flex align-items-center justify-content-between br-top br-bottom px-3 py-3"
-        >
-          <h6 class="mb-0">Subtotal</h6>
-          <h3 class="mb-0 ft-medium">$417</h3>
-        </div>
-
-        <div class="cart_action px-3 py-3">
-          <div class="form-group">
-            <button type="button" class="btn d-block full-width btn-dark">
-              Move To Cart
-            </button>
-          </div>
-          <div class="form-group">
-            <button type="button" class="btn d-block full-width btn-dark-light">
-              Edit or View
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Cart -->
-  <div
-    class="w3-ch-sideBar w3-bar-block w3-card-2 w3-animate-right"
-    style="display: none; right: 0"
-    id="Cart"
-  >
-    <div class="rightMenu-scroll">
-      <div
-        class="d-flex align-items-center justify-content-between slide-head py-3 px-3"
-      >
-        <h4 class="cart_heading fs-md ft-medium mb-0">Products List</h4>
-        <button onclick="closeCart()" class="close_slide">
-          <i class="ti-close"></i>
-        </button>
-      </div>
-      <div class="right-ch-sideBar">
-        <div class="cart_select_items py-2">
-          <!-- Single Item -->
-          <div
-            class="d-flex align-items-center justify-content-between br-bottom px-3 py-3"
-          >
-            <div class="cart_single d-flex align-items-center">
-              <div class="cart_selected_single_thumb">
-                <a href="#"
-                  ><img
-                    src="assets/img/product/4.jpg"
-                    width="60"
-                    class="img-fluid"
-                    alt=""
-                /></a>
-              </div>
-              <div class="cart_single_caption pl-2">
-                <h4 class="product_title fs-sm ft-medium mb-0 lh-1">
-                  Women Striped Shirt Dress
-                </h4>
-                <p class="mb-2">
-                  <span class="text-dark ft-medium small">36</span>,
-                  <span class="text-dark small">Red</span>
-                </p>
-                <h4 class="fs-md ft-medium mb-0 lh-1">$129</h4>
-              </div>
-            </div>
-            <div class="fls_last">
-              <button class="close_slide gray">
-                <i class="ti-close"></i>
-              </button>
-            </div>
-          </div>
-
-          <!-- Single Item -->
-          <div
-            class="d-flex align-items-center justify-content-between br-bottom px-3 py-3"
-          >
-            <div class="cart_single d-flex align-items-center">
-              <div class="cart_selected_single_thumb">
-                <a href="#"
-                  ><img
-                    src="assets/img/product/7.jpg"
-                    width="60"
-                    class="img-fluid"
-                    alt=""
-                /></a>
-              </div>
-              <div class="cart_single_caption pl-2">
-                <h4 class="product_title fs-sm ft-medium mb-0 lh-1">
-                  Girls Floral Print Jumpsuit
-                </h4>
-                <p class="mb-2">
-                  <span class="text-dark ft-medium small">36</span>,
-                  <span class="text-dark small">Red</span>
-                </p>
-                <h4 class="fs-md ft-medium mb-0 lh-1">$129</h4>
-              </div>
-            </div>
-            <div class="fls_last">
-              <button class="close_slide gray">
-                <i class="ti-close"></i>
-              </button>
-            </div>
-          </div>
-
-          <!-- Single Item -->
-          <div
-            class="d-flex align-items-center justify-content-between px-3 py-3"
-          >
-            <div class="cart_single d-flex align-items-center">
-              <div class="cart_selected_single_thumb">
-                <a href="#"
-                  ><img
-                    src="assets/img/product/8.jpg"
-                    width="60"
-                    class="img-fluid"
-                    alt=""
-                /></a>
-              </div>
-              <div class="cart_single_caption pl-2">
-                <h4 class="product_title fs-sm ft-medium mb-0 lh-1">
-                  Girls Solid A-Line Dress
-                </h4>
-                <p class="mb-2">
-                  <span class="text-dark ft-medium small">30</span>,
-                  <span class="text-dark small">Blue</span>
-                </p>
-                <h4 class="fs-md ft-medium mb-0 lh-1">$100</h4>
-              </div>
-            </div>
-            <div class="fls_last">
-              <button class="close_slide gray">
-                <i class="ti-close"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div
-          class="d-flex align-items-center justify-content-between br-top br-bottom px-3 py-3"
-        >
-          <h6 class="mb-0">Subtotal</h6>
-          <h3 class="mb-0 ft-medium">$1023</h3>
-        </div>
-
-        <div class="cart_action px-3 py-3">
-          <div class="form-group">
-            <button type="button" class="btn d-block full-width btn-dark">
-              Checkout Now
-            </button>
-          </div>
-          <div class="form-group">
-            <button type="button" class="btn d-block full-width btn-dark-light">
-              Edit or View
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <a id="back2Top" class="top-scroll" title="Back to top" href="#"
     ><i class="ti-arrow-up"></i
   ></a>
@@ -1121,9 +833,176 @@ import Header from "../../components/Header.vue";
 import Footer from "../../components/Footer.vue";
 import Navigation from "../../components/dashboard/navigation.vue";
 import ProductPhoto from "../../components/dashboard/productPhoto.vue";
+import Loading from "vue-loading-overlay";
+import "vue-loading-overlay/dist/vue-loading.css";
+import {
+  getProductDetail,
+  UpdateProduct,
+  DeleteProduct,
+} from "../../services/product.services";
+import { getCategoryList } from "../../services/category.services";
+import firebase from "../../firebase/config";
 
 export default {
-  components: { Header, Footer, Navigation, ProductPhoto },
+  components: { Header, Footer, Navigation, ProductPhoto, Loading },
+  data() {
+    return {
+      product: {},
+      categories: null,
+      progress: null,
+      loading: false,
+      updating: false,
+      deleting: false,
+      error: null,
+      uploadLoadingImage: false,
+      size: [
+        { value: "S", text: "S" },
+        { value: "M", text: "M" },
+        { value: "L", text: "L" },
+        { value: "XL", text: "XL" },
+        { value: "XXL", text: "XXL" },
+        { value: "3X", text: "3XL" },
+        { value: "20", text: "20" },
+        { value: "22", text: "22" },
+        { value: "24", text: "24" },
+        { value: "26", text: "26" },
+        { value: "28", text: "28" },
+        { value: "30", text: "30" },
+        { value: "32", text: "32" },
+        { value: "34", text: "34" },
+        { value: "36", text: "36" },
+        { value: "38", text: "38" },
+        { value: "40", text: "40" },
+        { value: "42", text: "42" },
+        { value: "46", text: "46" },
+      ],
+      badges: [
+        { value: "new", text: "New" },
+        { value: "sale", text: "En solde" },
+      ],
+    };
+  },
+  methods: {
+    getProduct() {
+      const id = this.$route.params.id;
+      getProductDetail(id).then((res) => {
+        console.log(res);
+        if (res.state) {
+          this.product = res.data;
+          this.loading = false;
+        } else {
+          this.error = res.message;
+          this.loading = false;
+        }
+      });
+    },
+    update() {
+      this.updating = true;
+      UpdateProduct(this.product).then((res) => {
+        if (res.state) {
+          this.updating = false;
+          this.$swal({
+            title: "Success",
+            text: "Product updated successfully",
+            icon: "success",
+            button: "Ok",
+          });
+        } else {
+          this.updating = false;
+          this.$swal({
+            title: "Erreur",
+            text: resp.message,
+            icon: "error",
+            button: "Ok",
+          });
+        }
+      });
+    },
+    deleteProd() {
+      DeleteProduct(this.product.id).then((res) => {
+        if (res.state) {
+          this.$swal({
+            title: "Attention",
+            text: "êtes-vous sur de vouloir supprimer ?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Oui",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.$router.push("/dashboard/products");
+              DeleteProduct(this.product.id)
+                .then((res) => {
+                  if (res.state) {
+                    this.$swal({
+                      title: "Supprimer",
+                      icon: "success",
+                    }).then(() => {
+                      window.location.assign("/dashboard/product");
+                    });
+                  }
+                })
+                .catch((e) => {
+                  this.$swal({
+                    title: "Erreur",
+                    text: `Une erreur est survenue lors de la suppression\n${e.message}`,
+                    icon: "error",
+                  });
+                });
+            }
+          });
+        }
+      });
+    },
+    removeImage(item) {
+      var array = this.product.images.filter((e) => e != item);
+      this.product.images = array;
+    },
+    addImage(event) {
+      let value = event.target.files[0];
+      this.uploadImage(value);
+    },
+    uploadImage(image) {
+      const storageRef = firebase.storage().ref();
+      this.uploadLoadingImage = true;
+      const productImage = storageRef.child(`products/${image.name}`);
+      const task = productImage.put(image);
+      task.on("state_changed", (snapshot) => {
+        const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        this.progress = progress;
+        if (progress == 100) {
+          this.progress = null;
+          snapshot.ref.getDownloadURL().then((url) => {
+            this.product.images.push(url);
+            this.$swal({
+              toast: true,
+              icon: "success",
+              title: "Image uploaded",
+              position: "top-end",
+              showConfirmButton: false,
+              timer: 3000,
+              timerProgressBar: true,
+            });
+          });
+        }
+      });
+    },
+  },
+  mounted() {
+    if (localStorage.getItem("user-perish-auth")) {
+      getCategoryList().then((resp) => {
+        this.loading = true;
+        if (resp.state) {
+          this.categories = resp.data;
+          this.getProduct();
+        } else {
+          this.error = res.message;
+        }
+      });
+    } else {
+      this.$router.push("/dashboard");
+    }
+  },
 };
 </script>
 
