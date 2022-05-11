@@ -33,24 +33,17 @@ export const getProductDetail = (id) => {
       .then((doc) => {
         let product = {};
         if (doc.exists) {
-          // product = { ...doc.data(), category: catDoc.data() };
-          product = doc.data();
-          resolve({
-            state: true,
-            data: product,
-            message: "product detail",
-          });
-          // db.collection("Categorie")
-          //   .doc(doc.data().category)
-          //   .get()
-          //   .then((catDoc) => {
-          //     product = { ...doc.data(), category: catDoc.data() };
-          //     resolve({
-          //       state: true,
-          //       data: product,
-          //       message: "product detail",
-          //     });
-          //   });
+          db.collection("Categorie")
+            .doc(doc.data().category)
+            .get()
+            .then((catDoc) => {
+              product = { ...doc.data(), category: catDoc.data() };
+              resolve({
+                state: true,
+                data: product,
+                message: "product detail",
+              });
+            });
         } else {
           resolve({ state: false, data: null, message: "product not found" });
         }
@@ -60,6 +53,26 @@ export const getProductDetail = (id) => {
       });
   });
 };
+
+export const getProductByCategory = (category) => {
+  return new Promise((resolve, reject) => {
+    db.collection("Product")
+      .where("category", "==", category)
+      .get()
+      .then((query) => {
+        if (query.size > 0) {
+          let products = [];
+          query.forEach((doc) => {
+            products.push(doc.data());
+          });
+          resolve({ state: true, data: products, message: "product list" });
+        } else {
+          resolve({ state: false, data: [], message: "no products found" });
+        }
+      });
+  });
+};
+
 export const CreateProduct = (data) => {
   return new Promise((resolve, reject) => {
     const id = db.collection("Product").doc().id;
@@ -139,6 +152,93 @@ export const DeleteProduct = (id) => {
       })
       .catch((err) => {
         resolve({ state: false, data: null, message: err });
+      });
+  });
+};
+
+export const getTrendingProducts = () => {
+  return new Promise((resolve, reject) => {
+    db.collection("Product")
+      .where("flag", "==", true)
+      .where("isTrending", "==", true)
+      .get()
+      .then((query) => {
+        if (query.size > 0) {
+          let products = [];
+          query.forEach((doc) => {
+            products.push(doc.data());
+          });
+          resolve({
+            state: true,
+            data: products,
+            message: "trending products",
+          });
+        } else {
+          resolve({
+            state: false,
+            data: null,
+            message: "no trending products",
+          });
+        }
+      })
+      .catch((err) => {
+        reject({ state: false, data: null, message: err });
+      });
+  });
+};
+
+export const getMenProductCat = () => {
+  return new Promise((resolve, reject) => {
+    db.collection("Product")
+      .where("flag", "==", true)
+      .where("inCategory", "==", true)
+      .where("category", "==", "vHgIXAw8ilTjztphRqlt")
+      .get()
+      .then((query) => {
+        if (query.size > 0) {
+          let products = [];
+          query.forEach((doc) => {
+            products.push(doc.data());
+          });
+          resolve({
+            state: true,
+            data: products,
+            message: "list of product cat men",
+          });
+        } else {
+          resolve({ state: false, data: [], message: "Aucun produit trouvé" });
+        }
+      })
+      .catch((err) => {
+        reject({ state: false, data: null, message: err });
+      });
+  });
+};
+
+export const getWomanProductCat = () => {
+  return new Promise((resolve, reject) => {
+    db.collection("Product")
+      .where("flag", "==", true)
+      .where("inCategory", "==", true)
+      .where("category", "==", "5rOJKSgcRepM3QDjeARC")
+      .get()
+      .then((query) => {
+        if (query.size > 0) {
+          let products = [];
+          query.forEach((doc) => {
+            products.push(doc.data());
+          });
+          resolve({
+            state: true,
+            data: products,
+            message: "list of product cat woman",
+          });
+        } else {
+          resolve({ state: false, data: [], message: "Aucun produit trouvé" });
+        }
+      })
+      .catch((err) => {
+        reject({ state: false, data: null, message: err });
       });
   });
 };

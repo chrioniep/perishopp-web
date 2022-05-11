@@ -2,6 +2,13 @@
   <!-- ============================================================== -->
   <!-- Main wrapper - style you can find in pages.scss -->
   <!-- ============================================================== -->
+  <loading
+    color="#6618CE"
+    v-model:active="loading"
+    :can-cancel="true"
+    :on-cancel="onCancel"
+    :is-full-page="true"
+  />
   <Header />
 
   <!-- ============================ Hero Banner  Start================================== -->
@@ -114,64 +121,7 @@
   <section class="p-0">
     <div class="container">
       <div class="row overlio">
-        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
-          <div class="cats_caption_wrap">
-            <div class="cats_caption_thumb mb-2">
-              <a href="#" class="d-block"
-                ><img src="assets/img/a-7.png" class="img-fluid rounded" alt=""
-              /></a>
-            </div>
-            <div class="cats_caption text-center">
-              <h4 class="m-0">Femmes</h4>
-              <span class="text-muted">5670 Collections</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
-          <div class="cats_caption_wrap">
-            <div class="cats_caption_thumb mb-2">
-              <a href="#" class="d-block"
-                ><img src="assets/img/a-9.png" class="img-fluid rounded" alt=""
-              /></a>
-            </div>
-            <div class="cats_caption text-center">
-              <h4 class="m-0">Hommes</h4>
-              <span class="text-muted">3220 Collections</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
-          <div class="cats_caption_wrap">
-            <div class="cats_caption_thumb mb-2">
-              <a href="#" class="d-block"
-                ><img src="assets/img/a-8.png" class="img-fluid rounded" alt=""
-              /></a>
-            </div>
-            <div class="cats_caption text-center">
-              <h4 class="m-0">Enfants</h4>
-              <span class="text-muted">7412 Collections</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
-          <div class="cats_caption_wrap">
-            <div class="cats_caption_thumb mb-2">
-              <a href="#" class="d-block"
-                ><img
-                  src="assets/img/a-10.png"
-                  class="img-fluid rounded"
-                  alt=""
-              /></a>
-            </div>
-            <div class="cats_caption text-center">
-              <h4 class="m-0">Accessoires</h4>
-              <span class="text-muted">6580 Collections</span>
-            </div>
-          </div>
-        </div>
+        <CategoryCard v-for="cat in categories" :key="cat.id" :data="cat" />
       </div>
     </div>
   </section>
@@ -191,12 +141,12 @@
 
       <!-- row -->
       <div class="row align-items-center rows-products">
-        <SingleProduct />
-        <SingleProduct />
-        <SingleProduct />
-        <SingleProduct />
-        <SingleProduct />
-        <SingleProduct />
+        <SingleProduct
+          v-for="trend in trendingProducts.data"
+          :key="trend.id"
+          :data="trend"
+        />
+
         <!-- Single -->
         <!-- <div class="col-xl-3 col-lg-4 col-md-6 col-6">
           <div class="product_grid card b-0">
@@ -419,173 +369,11 @@
       </div>
 
       <div class="row align-items-center rows-products">
-        <SingleProduct />
-        <SingleProduct />
-        <SingleProduct />
-        <SingleProduct />
-        <SingleProduct />
-        <SingleProduct />
-        <!-- Single -->
-        <!-- <div class="col-xl-3 col-lg-4 col-md-6 col-6">
-          <div class="product_grid card b-0">
-            <div
-              class="badge bg-success text-white position-absolute ft-regular ab-left text-upper"
-            >
-              Sale
-            </div>
-            <button
-              class="snackbar-wishlist btn btn_love position-absolute ab-right"
-            >
-              <i class="far fa-heart"></i>
-            </button>
-            <div class="card-body p-0">
-              <div class="shop_thumb position-relative">
-                <a
-                  class="card-img-top d-block overflow-hidden"
-                  href="shop-single-v1.html"
-                  ><img
-                    class="card-img-top"
-                    src="assets/img/product/1.jpg"
-                    alt="..."
-                /></a>
-                <div
-                  class="product-hover-overlay bg-dark d-flex align-items-center justify-content-center"
-                >
-                  <div class="edlio">
-                    <a
-                      href="#"
-                      data-toggle="modal"
-                      data-target="#quickview"
-                      class="text-white fs-sm ft-medium"
-                      ><i class="fas fa-eye mr-1"></i>Quick View</a
-                    >
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div
-              class="card-footer b-0 p-3 pb-0 bg-white d-flex align-items-start justify-content-center"
-            >
-              <div class="text-left">
-                <div class="text-center">
-                  <h5 class="fw-bolder fs-md mb-0 lh-1 mb-1">
-                    <a href="shop-single-v1.html">Half Running Set</a>
-                  </h5>
-                  <div class="elis_rty">
-                    <span class="ft-bold fs-md text-dark">$119.00</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> -->
-
-        <!-- Single -->
-        <!-- <div class="col-xl-3 col-lg-4 col-md-6 col-6">
-          <div class="product_grid card b-0">
-            <div
-              class="badge bg-info text-white position-absolute ft-regular ab-left text-upper"
-            >
-              New
-            </div>
-            <button
-              class="snackbar-wishlist btn btn_love position-absolute ab-right"
-            >
-              <i class="far fa-heart"></i>
-            </button>
-            <div class="card-body p-0">
-              <div class="shop_thumb position-relative">
-                <a
-                  class="card-img-top d-block overflow-hidden"
-                  href="shop-single-v1.html"
-                  ><img
-                    class="card-img-top"
-                    src="assets/img/product/2.jpg"
-                    alt="..."
-                /></a>
-                <div
-                  class="product-hover-overlay bg-dark d-flex align-items-center justify-content-center"
-                >
-                  <div class="edlio">
-                    <a
-                      href="#"
-                      data-toggle="modal"
-                      data-target="#quickview"
-                      class="text-white fs-sm ft-medium"
-                      ><i class="fas fa-eye mr-1"></i>Quick View</a
-                    >
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div
-              class="card-footer b-0 p-3 pb-0 bg-white d-flex align-items-start justify-content-center"
-            >
-              <div class="text-left">
-                <div class="text-center">
-                  <h5 class="fw-bolder fs-md mb-0 lh-1 mb-1">
-                    <a href="shop-single-v1.html">Formal Men Lowers</a>
-                  </h5>
-                  <div class="elis_rty">
-                    <span class="text-muted ft-medium line-through mr-2"
-                      >$129.00</span
-                    ><span class="ft-bold theme-cl fs-md">$79.00</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> -->
-
-        <!-- Single -->
-        <!-- <div class="col-xl-3 col-lg-4 col-md-6 col-6">
-          <div class="product_grid card b-0">
-            <button
-              class="snackbar-wishlist btn btn_love position-absolute ab-right"
-            >
-              <i class="far fa-heart"></i>
-            </button>
-            <div class="card-body p-0">
-              <div class="shop_thumb position-relative">
-                <a
-                  class="card-img-top d-block overflow-hidden"
-                  href="shop-single-v1.html"
-                  ><img
-                    class="card-img-top"
-                    src="assets/img/product/3.jpg"
-                    alt="..."
-                /></a>
-                <div
-                  class="product-hover-overlay bg-dark d-flex align-items-center justify-content-center"
-                >
-                  <div class="edlio">
-                    <a
-                      href="#"
-                      data-toggle="modal"
-                      data-target="#quickview"
-                      class="text-white fs-sm ft-medium"
-                      ><i class="fas fa-eye mr-1"></i>Quick View</a
-                    >
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div
-              class="card-footer b-0 p-3 pb-0 bg-white d-flex align-items-start justify-content-center"
-            >
-              <div class="text-left">
-                <div class="text-center">
-                  <h5 class="fw-bolder fs-md mb-0 lh-1 mb-1">
-                    <a href="shop-single-v1.html">Half Running Suit</a>
-                  </h5>
-                  <div class="elis_rty">
-                    <span class="ft-bold fs-md text-dark">$80.00</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> -->
+        <SingleProduct
+          v-for="item in girlCatProducts.data"
+          :key="item.id"
+          :data="item"
+        />
       </div>
     </div>
   </section>
@@ -633,12 +421,12 @@
       </div>
 
       <div class="row align-items-center rows-products">
-        <SingleProduct />
-        <SingleProduct />
-        <SingleProduct />
-        <SingleProduct />
-        <SingleProduct />
-        <SingleProduct />
+        <SingleProduct
+          v-for="item in menCatProducts.data"
+          :key="item.id"
+          :data="item"
+        />
+
         <!-- Single -->
         <!-- <div class="col-xl-3 col-lg-4 col-md-6 col-6">
           <div class="product_grid card b-0">
@@ -911,15 +699,93 @@ import Header from "../components/Header.vue";
 import Footer from "../components/Footer.vue";
 import SingleProduct from "../components/product/singleProduct.vue";
 import SingleQuickView from "../components/product/singleQuickView.vue";
+import CategoryCard from "../components/categoryCard.vue";
 import SearchModal from "../components/searchModal.vue";
+import Loading from "vue-loading-overlay";
+import "vue-loading-overlay/dist/vue-loading.css";
+import { getCategoryList } from "../services/category.services";
+import {
+  getTrendingProducts,
+  getWomanProductCat,
+  getMenProductCat,
+} from "../services/product.services";
 
 export default {
-  components: { Header, Footer, SingleProduct, SingleQuickView, SearchModal },
+  components: {
+    Header,
+    Footer,
+    SingleProduct,
+    SingleQuickView,
+    SearchModal,
+    CategoryCard,
+    Loading,
+  },
   name: "HomePage",
   data() {
     return {
       loading: false,
+      categories: [],
+      trendingProducts: {
+        data: [],
+        no_datas: false,
+      },
+      menCatProducts: {
+        data: [],
+        no_datas: false,
+      },
+      girlCatProducts: {
+        data: [],
+        no_datas: false,
+      },
     };
+  },
+  methods: {
+    // categoryList() {
+    //   this.loading = true;
+    //   getCategoryList().then((resp) => {
+    //     if (resp.state) {
+    //       this.categories = resp.data;
+    //       this.loading = false;
+    //     } else {
+    //       this.loading = false;
+    //     }
+    //   });
+    // },
+    async HomeData() {
+      this.loading = true;
+      const cats = await getCategoryList();
+      if (cats.state) {
+        this.categories = cats.data;
+      } else {
+        console.log("no cat found !");
+      }
+      const trending = await getTrendingProducts();
+      if (trending.state) {
+        this.trendingProducts.data = trending.data;
+      } else {
+        this.trendingProducts.no_datas = true;
+      }
+
+      const menCat = await getMenProductCat();
+      if (menCat.state) {
+        this.menCatProducts.data = menCat.data;
+      } else {
+        this.menCatProducts.no_datas = true;
+      }
+
+      const girlCat = await getWomanProductCat();
+      if (girlCat.state) {
+        this.girlCatProducts.data = girlCat.data;
+        console.log(this.girlCatProducts.data);
+        this.loading = false;
+      } else {
+        this.girlCatProducts.no_datas = true;
+        this.loading = false;
+      }
+    },
+  },
+  mounted() {
+    this.HomeData();
   },
 };
 </script>

@@ -1,4 +1,11 @@
 <template>
+  <loading
+    color="#6618CE"
+    v-model:active="loading"
+    :can-cancel="true"
+    :on-cancel="onCancel"
+    :is-full-page="true"
+  />
   <Header />
   <!-- ======================= Top Breadcrubms ======================== -->
   <div class="gray py-3">
@@ -30,35 +37,20 @@
             <a href="/assets/img/product/16.png"
               ><img src="/assets/img/product/16.png" alt=""
             /></a>
-            <a href="/assets/img/product/17.png"
-              ><img src="/assets/img/product/17.png" alt=""
-            /></a>
-            <a href="/assets/img/product/18.png"
-              ><img src="/assets/img/product/18.png" alt=""
-            /></a>
-            <a href="/assets/img/product/19.png"
-              ><img src="/assets/img/product/19.png" alt=""
-            /></a>
-            <a href="/assets/img/product/20.png"
-              ><img src="/assets/img/product/20.png" alt=""
-            /></a>
-            <a href="/assets/img/product/21.png"
-              ><img src="/assets/img/product/21.png" alt=""
-            /></a>
           </div>
         </div>
 
         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
           <div class="prd_details">
             <div class="prt_01 mb-1">
-              <span class="text-purple bg-light-purple rounded py-1"
-                >Women's Suit</span
-              >
+              <span class="text-purple bg-light-purple rounded py-1">{{
+                product.category && product.category.name
+              }}</span>
             </div>
             <div class="prt_02 mb-3">
-              <h2 class="ft-bold mb-1">Women Striped Shirt Dress</h2>
+              <h2 class="ft-bold mb-1">{{ product.name }}</h2>
               <div class="text-left">
-                <div
+                <!-- <div
                   class="star-rating align-items-center d-flex justify-content-left mb-1 p-0"
                 >
                   <i class="fas fa-star filled"></i>
@@ -67,12 +59,14 @@
                   <i class="fas fa-star filled"></i>
                   <i class="fas fa-star"></i>
                   <span class="small">(412 Reviews)</span>
-                </div>
+                </div> -->
                 <div class="elis_rty">
                   <span class="ft-medium text-muted line-through fs-md mr-2"
-                    >$199</span
-                  ><span class="ft-bold theme-cl fs-lg mr-2">$110</span
+                    >${{ product.fakePrice }}</span
+                  ><span class="ft-bold theme-cl fs-lg mr-2"
+                    >${{ product.price }}</span
                   ><span
+                    v-if="product.stock"
                     class="ft-regular text-light bg-success py-1 px-2 fs-sm"
                     >In Stock</span
                   >
@@ -82,10 +76,7 @@
 
             <div class="prt_03 mb-4">
               <p>
-                At vero eos et accusamus et iusto odio dignissimos ducimus qui
-                blanditiis praesentium voluptatum deleniti atque corrupti quos
-                dolores et quas molestias excepturi sint occaecati cupiditate
-                non provident, similique sunt in culpa.
+                {{ product.description }}
               </p>
             </div>
 
@@ -163,7 +154,7 @@
               </div>
             </div> -->
 
-            <div class="prt_04 mb-4">
+            <!-- <div class="prt_04 mb-4">
               <p class="d-flex align-items-center mb-0 text-dark ft-medium">
                 Size:
               </p>
@@ -302,7 +293,7 @@
                   <label class="form-option-label" for="50">50</label>
                 </div>
               </div>
-            </div>
+            </div> -->
 
             <div class="prt_05 mb-4">
               <div class="form-row mb-7">
@@ -318,12 +309,21 @@
                 </div>
                 <div class="col-12 col-lg">
                   <!-- Submit -->
-                  <button
+                  <!-- <button
                     type="submit"
                     class="btn btn-block text-light custom-height bg-green mb-2"
                   >
+                   
+                  </button> -->
+                  <ShareNetwork
+                    class="btn btn-block text-light custom-height bg-green mb-2"
+                    network="whatsapp"
+                    :url="fullPath"
+                    title="J'aimerais acheter cet article sur votre site de vente en ligne"
+                    :description="product.description"
+                  >
                     <i class="lni lni-whatsapp mr-2"></i>Acheter sur whatsapp
-                  </button>
+                  </ShareNetwork>
                 </div>
                 <div class="col-12 col-lg-auto">
                   <!-- Wishlist -->
@@ -758,10 +758,10 @@
       <div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
           <div class="slide_items">
+            <!-- <single-product />
             <single-product />
             <single-product />
-            <single-product />
-            <single-product />
+            <single-product /> -->
           </div>
         </div>
       </div>
@@ -838,12 +838,40 @@ import Header from "../../components/Header.vue";
 import Footer from "../../components/Footer.vue";
 import SingleProduct from "../../components/product/singleProduct.vue";
 import SearchModal from "../../components/searchModal.vue";
+import Loading from "vue-loading-overlay";
+import "vue-loading-overlay/dist/vue-loading.css";
+import { getProductDetail } from "../../services/product.services";
 export default {
-  components: { Header, Footer, SingleProduct, SearchModal },
+  components: {
+    Header,
+    Footer,
+    SingleProduct,
+    SearchModal,
+    Loading,
+  },
   data() {
     return {
       loading: false,
+      product: {},
+      fullPath: window.location.href,
     };
+  },
+  methods: {
+    productDetail() {
+      this.loading = true;
+      getProductDetail(this.$route.params.id).then((res) => {
+        if (res.state) {
+          this.product = res.data;
+          console.log(res.data);
+          this.loading = false;
+        } else {
+          this.loading = false;
+        }
+      });
+    },
+  },
+  mounted() {
+    this.productDetail();
   },
 };
 </script>

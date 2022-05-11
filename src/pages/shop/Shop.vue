@@ -1,4 +1,11 @@
 <template>
+  <loading
+    color="#6618CE"
+    v-model:active="loading"
+    :can-cancel="true"
+    :on-cancel="onCancel"
+    :is-full-page="true"
+  />
   <Header />
 
   <!-- ======================= Shop Style 1 ======================== -->
@@ -446,11 +453,7 @@
       <!-- row -->
       <div class="row align-items-center rows-products">
         <!-- Single -->
-        <SingleProduct />
-        <SingleProduct />
-        <SingleProduct />
-        <SingleProduct />
-        <SingleProduct />
+        <SingleProduct v-for="item in products" :key="item.id" :data="item" />
       </div>
       <!-- row -->
 
@@ -554,12 +557,35 @@ import Header from "../../components/Header.vue";
 import Footer from "../../components/Footer.vue";
 import SingleProduct from "../../components/product/singleProduct.vue";
 import SearchModal from "../../components/searchModal.vue";
+import Loading from "vue-loading-overlay";
+import "vue-loading-overlay/dist/vue-loading.css";
+import { getProductList } from "../../services/product.services";
 export default {
-  components: { Footer, Header, SingleProduct, SearchModal },
+  components: { Footer, Header, SingleProduct, SearchModal, Loading },
   data() {
     return {
       loading: false,
+      products: [],
+      no_datas: false,
     };
+  },
+  methods: {
+    getAvailableProduct() {
+      this.no_datas = false;
+      this.loading = true;
+      getProductList().then((resp) => {
+        if (resp.state) {
+          this.products = resp.data;
+          this.loading = false;
+        } else {
+          this.loading = false;
+          this.no_datas = true;
+        }
+      });
+    },
+  },
+  mounted() {
+    this.getAvailableProduct();
   },
 };
 </script>

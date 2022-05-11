@@ -6,11 +6,10 @@
       </button>
       <div class="card-body p-0">
         <div class="shop_thumb position-relative">
-          <a class="card-img-top d-block overflow-hidden" href="/product/1"
-            ><img
-              class="card-img-top"
-              src="/assets/img/product/3.jpg"
-              alt="..."
+          <a
+            class="card-img-top d-block overflow-hidden"
+            :href="`/product/${data.id}`"
+            ><img class="card-img-top" :src="data.images[0]" alt="..."
           /></a>
           <!-- <div
             class="product-hover-overlay bg-dark d-flex align-items-center justify-content-center"
@@ -33,10 +32,10 @@
         <div class="text-left">
           <div class="text-center">
             <h5 class="fw-bolder fs-md mb-0 lh-1 mb-1">
-              <a href="shop-single-v1.html">Half Running Suit</a>
+              <a href="shop-single-v1.html">{{ data.name }}</a>
             </h5>
             <div class="elis_rty">
-              <span class="ft-bold fs-md text-dark">$80.00</span>
+              <span class="ft-bold fs-md text-dark">${{ data.price }}</span>
             </div>
           </div>
         </div>
@@ -46,7 +45,9 @@
 </template>
 
 <script>
-export default {};
+export default {
+  props: ["data"],
+};
 </script>
 
 <style></style>
