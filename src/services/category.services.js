@@ -21,6 +21,34 @@ export const getCategoryList = () => {
       });
   });
 };
+
+export const getSubCategory = (id) => {
+  return new Promise((resolve, reject) => {
+    db.collection("SubCategory")
+      .where("category", "==", id)
+      .get()
+      .then((snapshot) => {
+        let subCategories = [];
+        if (snapshot.size > 0) {
+          snapshot.forEach((doc) => {
+            subCategories.push(doc.data());
+          });
+          resolve({
+            state: true,
+            data: subCategories,
+            message: "sub category list",
+          });
+        } else {
+          resolve({
+            state: false,
+            data: [],
+            message: "no sub categories found",
+          });
+        }
+      });
+  });
+};
+
 export const UploadImage = (callback) => {
   const id = db.collection("Categories").doc().id;
   const file = data.file;
@@ -36,62 +64,73 @@ export const UploadImage = (callback) => {
     })
     .catch((err) => {});
 };
-export const getCategoryDetail = (id, callback) => {
-  db.collection("Categories")
-    .get(id)
-    .then((doc) => {
-      let category = {};
-      if (doc.exists) {
-        category = doc.data();
-        callback(true, category, "category detail");
-      } else {
-        callback(false, null, "category not found");
-      }
-    })
-    .catch((err) => {
-      callback(false, null, err);
-    });
+export const getCategoryDetail = (id) => {
+  return new Promise((resolve, reject) => {
+    db.collection("Categorie")
+      .doc(id)
+      .get()
+      .then((doc) => {
+        let category = {};
+        if (doc.exists) {
+          category = doc.data();
+          resolve({ state: true, data: category, message: "category detail" });
+        } else {
+          resolve({ state: false, data: [], message: "no category found" });
+        }
+      })
+      .catch((err) => {
+        resolve({ state: false, data: [], message: err });
+      });
+  });
 };
-export const CreateCategory = (callback) => {
-  const id = db.collection("Categories").doc().id;
-  db.collection("Categories")
-    .set({
-      id: id,
-      name: data.name,
-      image: data.image,
-      flag: data.flag,
-    })
-    .then(() => {
-      callback(true, null, "category created");
-    })
-    .catch((err) => {
-      callback(false, null, err);
-    });
+export const CreateCategory = (data) => {
+  return new Promise((resolve, reject) => {
+    const id = db.collection("Categorie").doc().id;
+    db.collection("Categorie")
+      .doc(id)
+      .set({
+        id: id,
+        name: data.name,
+        image: data.image,
+        flag: true,
+      })
+      .then(() => {
+        resolve({ state: true, data: null, message: "category created" });
+      })
+      .catch((err) => {
+        resolve({ state: false, data: null, message: err });
+      });
+  });
 };
-export const UpdateCategory = (callback) => {
-  db.collection("Categories")
-    .doc(data.id)
-    .update({
-      name: data.name,
-      image: data.image,
-    })
-    .then(() => {
-      callback(true, null, "category updated");
-    })
-    .catch((err) => {
-      callback(false, null, err);
-    });
+export const UpdateCategory = (id, data) => {
+  return new Promise((resolve, reject) => {
+    db.collection("Categorie")
+      .doc(id)
+      .update({
+        name: data.name,
+        image: data.image,
+        flag: data.flag,
+      })
+      .then((doc) => {
+        resolve({ state: true, data: data, message: "category updated" });
+      })
+      .catch((err) => {
+        resolve({ state: false, data: [], message: err });
+      });
+  });
 };
-export const DeleteCategory = (callback) => {
-  db.collection("Categories")
-    .doc(data.id)
-    .update({
-      flag: false,
-    })
-    .then(() => {
-      callback(true, null, "category deleted");
-    })
-    .catch((err) => {
-      callback(false, null, err);
-    });
+export const DeleteCategory = (id) => {
+  return new Promise((resolve, reject) => {
+    db.collection("Categorie")
+      .doc(id)
+      .update({
+        flag: false,
+      })
+      .then((doc) => {
+        resolve({ state: true, data: {}, message: "category deleted" });
+      })
+      .catch((err) => {
+        resolve({ state: false, data: [], message: err });
+      });
+  });
 };

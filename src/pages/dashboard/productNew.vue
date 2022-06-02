@@ -165,20 +165,59 @@
               </div>
 
               <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="form-group">
+                  <label class="text-dark">Sous Categorie</label>
+                  <select v-model="subCategory" class="custom-select">
+                    <option
+                      v-for="cat in subCategories"
+                      :key="cat.id"
+                      :value="cat.id"
+                    >
+                      {{ cat.name }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 <div class="row mb-2">
                   <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                    <div class="form-group">
-                      <label class="text-dark">Taille *</label>
-                      <select v-model="size" class="custom-select">
-                        <option
-                          v-for="item in sizes"
-                          :key="item.value"
-                          :value="item.value"
-                          selected
+                    <div class="row">
+                      <div class="col-xl-6 col-lg-6">
+                        <div class="form-group">
+                          <label class="text-dark">Taille*</label>
+                          <input
+                            v-model="size"
+                            type="text"
+                            class="form-control"
+                            placeholder="nom du produit"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-xl-6 col-lg-6 align-items-center d-flex">
+                        <span
+                          @click.prevent="addNewSize"
+                          class="btn btn-dark mt-3"
                         >
-                          {{ item.text }}
-                        </option>
-                      </select>
+                          Add
+                        </span>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <div
+                        v-for="item in sizes"
+                        :key="item"
+                        class="d-flex align-items-center justify-content-between mb-2"
+                      >
+                        <h5 style="margin-bottom: 0px">{{ item }}</h5>
+                        <button
+                          @click.prevent="removeSize(item)"
+                          class="border bg-white text-danger p-3 circle text-dark d-inline-flex align-items-center justify-content-center"
+                        >
+                          <i class="fas fa-times position-absolute"></i>
+                        </button>
+                      </div>
                     </div>
                   </div>
                   <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
@@ -1169,7 +1208,10 @@ import Navigation from "../../components/dashboard/navigation.vue";
 import ProductPhoto from "../../components/dashboard/productPhoto.vue";
 import Loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/vue-loading.css";
-import { getCategoryList } from "../../services/category.services";
+import {
+  getCategoryList,
+  getSubCategory,
+} from "../../services/category.services";
 import { CreateProduct } from "../../services/product.services";
 import firebase from "../../firebase/config";
 
@@ -1184,6 +1226,7 @@ export default {
       fakePrice: "",
       description: "",
       category: "",
+      subCategory: "",
       size: "",
       badge: "",
       isTrending: false,
@@ -1191,31 +1234,12 @@ export default {
       progress: null,
       stock: false,
       categories: null,
+      subCategories: null,
       loading: false,
       creating: false,
       error: null,
       uploadLoadingImage: false,
-      sizes: [
-        { value: "S", text: "S" },
-        { value: "M", text: "M" },
-        { value: "L", text: "L" },
-        { value: "XL", text: "XL" },
-        { value: "XXL", text: "XXL" },
-        { value: "3X", text: "3XL" },
-        { value: "20", text: "20" },
-        { value: "22", text: "22" },
-        { value: "24", text: "24" },
-        { value: "26", text: "26" },
-        { value: "28", text: "28" },
-        { value: "30", text: "30" },
-        { value: "32", text: "32" },
-        { value: "34", text: "34" },
-        { value: "36", text: "36" },
-        { value: "38", text: "38" },
-        { value: "40", text: "40" },
-        { value: "42", text: "42" },
-        { value: "46", text: "46" },
-      ],
+      sizes: [],
       badges: [
         { value: "new", text: "New" },
         { value: "sale", text: "En solde" },
@@ -1235,30 +1259,39 @@ export default {
       this.uploadImage(value);
     },
     uploadImage(image) {
-      const storageRef = firebase.storage().ref();
-      this.uploadLoadingImage = true;
-      const productImage = storageRef.child(`products/${image.name}`);
-      const task = productImage.put(image);
-      task.on("state_changed", (snapshot) => {
-        const progress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        this.progress = progress;
-        if (progress == 100) {
-          this.progress = null;
-          snapshot.ref.getDownloadURL().then((url) => {
-            this.images.push(url);
-            this.$swal({
-              toast: true,
-              icon: "success",
-              title: "Image uploaded",
-              position: "top-end",
-              showConfirmButton: false,
-              timer: 3000,
-              timerProgressBar: true,
+      try {
+        const storageRef = firebase.storage().ref();
+        this.uploadLoadingImage = true;
+        const productImage = storageRef.child(`products/${image.name}`);
+        const task = productImage.put(image);
+        task.on("state_changed", (snapshot) => {
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          this.progress = progress;
+          if (progress == 100) {
+            this.progress = null;
+            snapshot.ref.getDownloadURL().then((url) => {
+              this.images.push(url);
+              this.$swal({
+                toast: true,
+                icon: "success",
+                title: "Image uploaded",
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+              });
             });
-          });
-        }
-      });
+          }
+        });
+      } catch (e) {
+        this.$swal({
+          title: "Erreur",
+          text: `${e}`,
+          icon: "error",
+          button: "Ok",
+        });
+      }
     },
     newProduct() {
       this.creating = true;
@@ -1285,6 +1318,14 @@ export default {
         this.creating = false;
       });
     },
+    addNewSize() {
+      this.sizes.push(this.size);
+      this.size = "";
+    },
+    removeSize(item) {
+      var array = this.sizes.filter((e) => e != item);
+      this.sizes = array;
+    },
   },
   mounted() {
     if (localStorage.getItem("user-perish-auth")) {
@@ -1301,6 +1342,21 @@ export default {
     } else {
       this.$router.push("/dashboard");
     }
+  },
+  watch: {
+    // whenever question changes, this function will run
+    category(newCat, oldCat) {
+      if (newCat !== "") {
+        console.log("get sub cat list");
+        getSubCategory(this.category).then((resp) => {
+          if (resp.state) {
+            this.subCategories = resp.data;
+          } else {
+            this.error = resp.message;
+          }
+        });
+      }
+    },
   },
 };
 </script>

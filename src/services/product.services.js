@@ -37,12 +37,21 @@ export const getProductDetail = (id) => {
             .doc(doc.data().category)
             .get()
             .then((catDoc) => {
-              product = { ...doc.data(), category: catDoc.data() };
-              resolve({
-                state: true,
-                data: product,
-                message: "product detail",
-              });
+              db.collection("SubCategory")
+                .doc(doc.data().subCategory)
+                .get()
+                .then((subDoc) => {
+                  product = {
+                    ...doc.data(),
+                    category: catDoc.data(),
+                    subCategory: subDoc.data(),
+                  };
+                  resolve({
+                    state: true,
+                    data: product,
+                    message: "product detail",
+                  });
+                });
             });
         } else {
           resolve({ state: false, data: null, message: "product not found" });
@@ -86,7 +95,8 @@ export const CreateProduct = (data) => {
         fakePrice: data.fakePrice,
         description: data.description,
         category: data.category,
-        size: data.size,
+        subCategory: data.subCategory,
+        size: data.sizes,
         badge: data.badge,
         isTrending: data.isTrending,
         inCategory: data.inCategory,
@@ -117,6 +127,7 @@ export const UploadImage = (data, callback) => {
 };
 export const UpdateProduct = (data) => {
   return new Promise((resolve, reject) => {
+    console.log(data);
     db.collection("Product")
       .doc(data.id)
       .update({
@@ -125,7 +136,10 @@ export const UpdateProduct = (data) => {
         price: data.price,
         fakePrice: data.fakePrice,
         description: data.description,
-        category: data.category,
+        category: data.category.id ? data.category.id : data.category,
+        subCategory: data.subCategory.id
+          ? data.subCategory.id
+          : data.subCategory,
         size: data.size,
         badge: data.badge,
         isTrending: data.isTrending,

@@ -17,7 +17,14 @@
         >
       </li>
       <li>
-        <a href="/dashboard/gallery" :class="`${menu == 3 ? 'active' : ''}`"
+        <a
+          href="/dashboard/sub-category"
+          :class="`${menu == 3 ? 'active' : ''}`"
+          ><i class="lni lni-briefcase mr-2"></i>Sous Categories</a
+        >
+      </li>
+      <li>
+        <a href="/dashboard/gallery" :class="`${menu == 4 ? 'active' : ''}`"
           ><i class="lni lni-gallery mr-2"></i>Gallery</a
         >
       </li>

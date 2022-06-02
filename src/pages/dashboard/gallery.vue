@@ -9,7 +9,7 @@
       <div class="row justify-content-center justify-content-between">
         <div class="col-12 col-md-12 col-lg-4 col-xl-4 text-center miliods">
           <div class="d-block border rounded mfliud-bot">
-            <Navigation :menu="3" />
+            <Navigation :menu="4" />
           </div>
         </div>
 

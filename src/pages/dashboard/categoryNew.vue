@@ -41,18 +41,56 @@
               </div>
             </div>
 
-            <!-- <div class="row">
-              <ProductPhoto />
-              <ProductPhoto />
-              <ProductPhoto />
-              <ProductPhoto />
-            </div> -->
+            <div class="row">
+              <!-- <ProductPhoto
+                v-for="item in product.images"
+                :key="item"
+                :url="item"
+              /> -->
+              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                <div class="product_grid card b-0">
+                  <div class="card-body p-0">
+                    <div class="shop_thumb position-relative">
+                      <a class="card-img-top d-block overflow-hidden"
+                        ><img
+                          v-if="image"
+                          class="card-img-top"
+                          :src="image"
+                          alt="..."
+                      /></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
 
             <div class="row">
+              <div class="col-xl-12 col-lg-12 col-md-12 justify-content-center">
+                <div
+                  v-if="progress != null"
+                  class="progress-bar bg-dark"
+                  role="progressbar"
+                  :style="`width: ${progress}%`"
+                  aria-valuenow="100"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                ></div>
+              </div>
+            </div>
+
+            <div class="row">
+              <loading
+                color="#6618CE"
+                v-model:active="loading"
+                :can-cancel="true"
+                :on-cancel="onCancel"
+                :is-full-page="true"
+              />
               <div class="col-12 col-lg-12 col-xl-12 col-md-12 mb-3">
                 <div class="form-group">
                   <label class="text-dark">Upload image</label>
                   <input
+                    @change="addImage"
                     type="file"
                     class="form-control"
                     placeholder="Upload image"
@@ -64,8 +102,10 @@
             <div class="row mb-2">
               <div class="col-xl-12 col-lg-12 col-md-8 col-sm-12 col-12">
                 <div class="form-group">
-                  <label class="text-dark">Titre*</label>
+                  <label class="text-dark">Nom*</label>
                   <input
+                    v-model="name"
+                    required
                     type="text"
                     class="form-control"
                     placeholder="Titre de la categorie"
@@ -74,7 +114,15 @@
               </div>
               <div class="col-lg-12 col-md-12 col-sm-12">
                 <div class="form-group text-center">
-                  <a href="#" class="btn btn-dark full-width">Modifier</a>
+                  <a
+                    href="#"
+                    :disabled="loading"
+                    @click.prevent="createCategoryNew"
+                    class="btn btn-dark full-width"
+                  >
+                    {{ loading ? "En cours..." : null }}
+                    {{ !loading ? "Ajouter" : null }}
+                  </a>
                 </div>
               </div>
             </div>
@@ -987,9 +1035,78 @@
 import Header from "../../components/Header.vue";
 import Footer from "../../components/Footer.vue";
 import Navigation from "../../components/dashboard/navigation.vue";
-
+import Loading from "vue-loading-overlay";
+import "vue-loading-overlay/dist/vue-loading.css";
+import { CreateCategory } from "../../services/category.services";
+import firebase from "../../firebase/config";
 export default {
-  components: { Header, Footer, Navigation },
+  components: { Header, Footer, Navigation, Loading },
+  data() {
+    return {
+      loading: false,
+      name: null,
+      image: null,
+      progress: null,
+    };
+  },
+  methods: {
+    addImage(event) {
+      let value = event.target.files[0];
+      this.uploadImage(value);
+    },
+    uploadImage(image) {
+      const storageRef = firebase.storage().ref();
+      this.uploadLoadingImage = true;
+      const categoryImage = storageRef.child(`category/${image.name}`);
+      const task = categoryImage.put(image);
+      task.on("state_changed", (snapshot) => {
+        const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        this.progress = progress;
+        if (progress == 100) {
+          this.progress = null;
+          snapshot.ref.getDownloadURL().then((url) => {
+            this.image = url;
+            this.$swal({
+              toast: true,
+              icon: "success",
+              title: "Image uploaded",
+              position: "top-end",
+              showConfirmButton: false,
+              timer: 3000,
+              timerProgressBar: true,
+            });
+          });
+        }
+      });
+    },
+    createCategoryNew() {
+      this.loading = true;
+      CreateCategory(this.$data).then((resp) => {
+        if (resp.state) {
+          this.loading = false;
+          this.$swal({
+            title: "Creer",
+            text: "Categorie creer avec succes",
+            icon: "success",
+            confirmButtonText: "Ok",
+          }).then(() => {
+            window.location.assign("/dashboard/category");
+          });
+        } else {
+          this.loading = false;
+          this.$swal({
+            title: "Erreur",
+            text: resp.message,
+            icon: "error",
+            confirmButtonText: "Ok",
+          }).then(() => {
+            window.location.assign("/dashboard/category");
+          });
+        }
+      });
+    },
+  },
 };
 </script>
 

@@ -315,15 +315,14 @@
                   >
                    
                   </button> -->
-                  <ShareNetwork
+                  <a
+                    :href="`https://wa.me/${243995303733}`"
+                    target="_blank"
                     class="btn btn-block text-light custom-height bg-green mb-2"
-                    network="whatsapp"
-                    :url="fullPath"
-                    title="J'aimerais acheter cet article sur votre site de vente en ligne"
                     :description="product.description"
                   >
                     <i class="lni lni-whatsapp mr-2"></i>Acheter sur whatsapp
-                  </ShareNetwork>
+                  </a>
                 </div>
                 <div class="col-12 col-lg-auto">
                   <!-- Wishlist -->

@@ -13,7 +13,12 @@
         class="card-wrap-header px-3 py-2 br-bottom d-flex align-items-center justify-content-between"
       >
         <div class="card-header-flex">
-          <h4 class="fs-md ft-bold mb-1">{{ data.name }}</h4>
+          <h4 class="fs-md ft-bold mb-1">
+            {{ data.name }} |
+            <span class="text-inverse">{{
+              data.category && data.category.name
+            }}</span>
+          </h4>
           <!-- <p class="m-0 p-0">
             <span
               class="text-success bg-light-success small ft-medium px-2 py-1"
@@ -25,12 +30,12 @@
           <!-- Button -->
           <a
             class="border p-3 circle text-dark d-inline-flex align-items-center justify-content-center"
-            :href="`/dashboard/category/${data.id}/detail`"
+            :href="`/dashboard/sub-category/${data.id}/detail`"
             ><i class="fas fa-pen-nib position-absolute"></i
           ></a>
           <!-- Button -->
           <button
-            @click="DeleteCat(data.id)"
+            @click="DeleteSubCat(data.id)"
             style="cursor: pointer"
             class="border bg-white text-danger ml-1 p-3 circle text-dark d-inline-flex align-items-center justify-content-center"
           >
@@ -38,15 +43,12 @@
           </button>
         </div>
       </div>
-      <div class="card-wrap-body px-3 py-3">
-        <img :src="data.image" class="img-fluid rounded" alt="" />
-      </div>
     </div>
   </div>
 </template>
 
 <script>
-import { DeleteCategory } from "@/services/category.services";
+import { DeleteSubCategory } from "@/services/subCategory.services";
 import Loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/vue-loading.css";
 
@@ -59,7 +61,7 @@ export default {
     };
   },
   methods: {
-    DeleteCat(id) {
+    DeleteSubCat(id) {
       this.$swal({
         title: "Attention",
         text: "êtes-vous sur de vouloir supprimer ?",
@@ -69,7 +71,7 @@ export default {
       }).then((result) => {
         if (result.isConfirmed) {
           this.loading = true;
-          DeleteCategory(id)
+          DeleteSubCategory(id)
             .then((res) => {
               if (res.state) {
                 this.loading = false;

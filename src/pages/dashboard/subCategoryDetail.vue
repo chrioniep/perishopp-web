@@ -28,7 +28,7 @@
       <div class="row align-items-start justify-content-between">
         <div class="col-12 col-md-12 col-lg-4 col-xl-4 text-center miliods">
           <div class="d-block border rounded mfliud-bot">
-            <Navigation :menu="2" />
+            <Navigation :menu="3" />
           </div>
         </div>
 
@@ -54,66 +54,35 @@
               <ProductPhoto />
               <ProductPhoto />
             </div> -->
-            <div class="row">
-              <!-- <ProductPhoto
-                v-for="item in product.images"
-                :key="item"
-                :url="item"
-              /> -->
-              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                <div class="product_grid card b-0">
-                  <div class="card-body p-0">
-                    <div class="shop_thumb position-relative">
-                      <a class="card-img-top d-block overflow-hidden"
-                        ><img
-                          class="card-img-top"
-                          :src="category.image"
-                          alt="..."
-                      /></a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col-xl-12 col-lg-12 col-md-12 justify-content-center">
-                <div
-                  v-if="progress != null"
-                  class="progress-bar bg-dark"
-                  role="progressbar"
-                  :style="`width: ${progress}%`"
-                  aria-valuenow="100"
-                  aria-valuemin="0"
-                  aria-valuemax="100"
-                ></div>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col-12 col-lg-12 col-xl-12 col-md-12 mb-3">
-                <div class="form-group">
-                  <label class="text-dark">Upload image</label>
-                  <input
-                    @change="addImage"
-                    type="file"
-                    class="form-control"
-                    placeholder="Upload image"
-                  />
-                </div>
-              </div>
-            </div>
 
             <div class="row mb-2">
               <div class="col-xl-12 col-lg-12 col-md-8 col-sm-12 col-12">
                 <div class="form-group">
-                  <label class="text-dark">Titre*</label>
+                  <label class="text-dark">Nom*</label>
                   <input
-                    v-model="category.name"
+                    v-model="subCategory.name"
                     type="text"
                     class="form-control"
                     placeholder="Titre de la categorie"
                   />
+                </div>
+              </div>
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="form-group">
+                  <label class="text-dark">Categorie</label>
+                  <select v-model="subCategory.category" class="custom-select">
+                    <option
+                      v-for="item in categories"
+                      :key="item.id"
+                      :value="item.id"
+                      :selected="
+                        item.id === subCategory.category &&
+                        subCategory.category.id
+                      "
+                    >
+                      {{ item.name }}
+                    </option>
+                  </select>
                 </div>
               </div>
               <div class="col-lg-6 col-md-6 col-sm-12">
@@ -134,7 +103,7 @@
                   <a
                     href="#"
                     :disabled="deleting"
-                    @click.prevent="deleteCat"
+                    @click.prevent="deleteSubCat"
                     class="btn btn-danger full-width"
                   >
                     {{ deleting ? "En cours..." : null }}
@@ -781,12 +750,12 @@ import Navigation from "../../components/dashboard/navigation.vue";
 import Loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/vue-loading.css";
 import firebase from "../../firebase/config";
+import { getCategoryList } from "@/services/category.services";
 import {
-  getCategoryDetail,
-  CreateCategory,
-  UpdateCategory,
-  DeleteCategory,
-} from "@/services/category.services";
+  getSubCategoryDetail,
+  DeleteSubCategory,
+  UpdateSubCategory,
+} from "@/services/subCategory.services";
 
 export default {
   components: { Header, Footer, Navigation, Loading },
@@ -796,69 +765,41 @@ export default {
       uploadLoadingImage: false,
       updating: false,
       deleting: false,
-      category: {},
+      subCategory: {},
       progress: null,
       error: null,
     };
   },
   methods: {
-    addImage(event) {
-      let value = event.target.files[0];
-      this.uploadImage(value);
-    },
-    uploadImage(image) {
-      const storageRef = firebase.storage().ref();
-      this.uploadLoadingImage = true;
-      const categoryImage = storageRef.child(`category/${image.name}`);
-      const task = categoryImage.put(image);
-      task.on("state_changed", (snapshot) => {
-        const progress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        this.progress = progress;
-        if (progress == 100) {
-          this.progress = null;
-          snapshot.ref.getDownloadURL().then((url) => {
-            this.category.image = url;
-            this.$swal({
-              toast: true,
-              icon: "success",
-              title: "Image uploaded",
-              position: "top-end",
-              showConfirmButton: false,
-              timer: 3000,
-              timerProgressBar: true,
-            });
-          });
-        }
-      });
-    },
     update() {
       this.updating = true;
-      UpdateCategory(this.$route.params.id, this.category).then((resp) => {
-        if (resp.state) {
-          this.updating = false;
-          this.$swal({
-            title: "Success",
-            text: "Category updated successfully",
-            icon: "success",
-            button: "Ok",
-          }).then(() => {
-            window.location.assign("/dashboard/category");
-          });
-        } else {
-          this.updating = false;
-          this.$swal({
-            title: "Erreur",
-            text: resp.message,
-            icon: "error",
-            button: "Ok",
-          }).then(() => {
-            window.location.assign("/dashboard/category");
-          });
+      UpdateSubCategory(this.$route.params.id, this.subCategory).then(
+        (resp) => {
+          if (resp.state) {
+            this.updating = false;
+            this.$swal({
+              title: "Success",
+              text: "Category updated successfully",
+              icon: "success",
+              button: "Ok",
+            }).then(() => {
+              window.location.assign("/dashboard/sub-category");
+            });
+          } else {
+            this.updating = false;
+            this.$swal({
+              title: "Erreur",
+              text: resp.message,
+              icon: "error",
+              button: "Ok",
+            }).then(() => {
+              window.location.assign("/dashboard/sub-category");
+            });
+          }
         }
-      });
+      );
     },
-    deleteCat() {
+    deleteSubCat() {
       this.$swal({
         title: "Attention",
         text: "êtes-vous sur de vouloir supprimer ?",
@@ -868,7 +809,7 @@ export default {
       }).then((result) => {
         if (result.isConfirmed) {
           this.deleting = true;
-          DeleteCategory(this.$route.params.id)
+          DeleteSubCategory(this.$route.params.id)
             .then((res) => {
               if (res.state) {
                 this.deleting = false;
@@ -877,7 +818,7 @@ export default {
                   icon: "success",
                   button: "Ok",
                 }).then(() => {
-                  window.location.assign("/dashboard/category");
+                  window.location.assign("/dashboard/sub-category");
                 });
               }
             })
@@ -895,10 +836,15 @@ export default {
   mounted() {
     if (localStorage.getItem("user-perish-auth")) {
       this.loading = true;
-      getCategoryDetail(this.$route.params.id).then((resp) => {
+      getSubCategoryDetail(this.$route.params.id).then((resp) => {
         if (resp.state) {
-          this.category = resp.data;
-          this.loading = false;
+          this.subCategory = resp.data;
+          getCategoryList().then((res) => {
+            if (res.state) {
+              this.categories = res.data;
+              this.loading = false;
+            }
+          });
         } else {
           this.error = resp.message;
           this.loading = false;
@@ -909,7 +855,7 @@ export default {
             button: "Ok",
             // confirmButtonClass: "btn btn-confirm mt-2"
           }).then(() => {
-            window.location.assign("/dashboard/category");
+            window.location.assign("/dashboard/sub-category");
           });
         }
       });

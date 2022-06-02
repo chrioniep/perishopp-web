@@ -1,11 +1,4 @@
 <template>
-  <loading
-    color="#6618CE"
-    v-model:active="loading"
-    :can-cancel="true"
-    :on-cancel="onCancel"
-    :is-full-page="true"
-  />
   <Header />
   <!-- ======================= Top Breadcrubms ======================== -->
   <!-- ======================= Top Breadcrubms ======================== -->
@@ -40,6 +33,13 @@
         </div>
 
         <div class="col-12 col-md-12 col-lg-8 col-xl-8">
+          <loading
+            color="#6618CE"
+            v-model:active="loading"
+            :can-cancel="true"
+            :on-cancel="onCancel"
+            :is-full-page="true"
+          />
           <!-- row -->
           <form>
             <div class="row">
@@ -172,20 +172,65 @@
               </div>
 
               <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="form-group">
+                  <label class="text-dark">Sous Categorie</label>
+                  <select v-model="product.subCategory" class="custom-select">
+                    <option
+                      v-for="item in subCategories"
+                      :key="item.id"
+                      :value="item.id"
+                      :selected="
+                        item.id === product.subCategory &&
+                        product.subCategory.id
+                      "
+                    >
+                      {{ item.name }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 <div class="row mb-2">
                   <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                    <div class="form-group">
-                      <label class="text-dark">Taille *</label>
-                      <select v-model="product.size" class="custom-select">
-                        <option
-                          v-for="item in size"
-                          :value="item.value"
-                          :key="item.value"
-                          :selected="item.value === product.size"
+                    <div class="row">
+                      <div class="col-xl-9 col-lg-9">
+                        <div class="form-group">
+                          <label class="text-dark">Taille*</label>
+                          <input
+                            v-model="size"
+                            type="text"
+                            class="form-control"
+                            placeholder="taille..."
+                          />
+                        </div>
+                      </div>
+                      <div
+                        class="col-xl-3 col-lg-3 align-items-center justify-content-end d-flex"
+                      >
+                        <span
+                          @click.prevent="addNewSize"
+                          class="btn btn-dark mt-3"
                         >
-                          {{ item.text }}
-                        </option>
-                      </select>
+                          Add
+                        </span>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <div
+                        v-for="item in product.size"
+                        :key="item"
+                        class="d-flex align-items-center justify-content-between mb-2"
+                      >
+                        <h5 style="margin-bottom: 0px">{{ item }}</h5>
+                        <button
+                          @click.prevent="removeSize(item)"
+                          class="border bg-white text-danger p-3 circle text-dark d-inline-flex align-items-center justify-content-center"
+                        >
+                          <i class="fas fa-times position-absolute"></i>
+                        </button>
+                      </div>
                     </div>
                   </div>
                   <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
@@ -840,7 +885,10 @@ import {
   UpdateProduct,
   DeleteProduct,
 } from "../../services/product.services";
-import { getCategoryList } from "../../services/category.services";
+import {
+  getCategoryList,
+  getSubCategory,
+} from "../../services/category.services";
 import firebase from "../../firebase/config";
 
 export default {
@@ -849,33 +897,14 @@ export default {
     return {
       product: {},
       categories: null,
+      subCategories: null,
+      size: "",
       progress: null,
       loading: false,
       updating: false,
       deleting: false,
       error: null,
       uploadLoadingImage: false,
-      size: [
-        { value: "S", text: "S" },
-        { value: "M", text: "M" },
-        { value: "L", text: "L" },
-        { value: "XL", text: "XL" },
-        { value: "XXL", text: "XXL" },
-        { value: "3X", text: "3XL" },
-        { value: "20", text: "20" },
-        { value: "22", text: "22" },
-        { value: "24", text: "24" },
-        { value: "26", text: "26" },
-        { value: "28", text: "28" },
-        { value: "30", text: "30" },
-        { value: "32", text: "32" },
-        { value: "34", text: "34" },
-        { value: "36", text: "36" },
-        { value: "38", text: "38" },
-        { value: "40", text: "40" },
-        { value: "42", text: "42" },
-        { value: "46", text: "46" },
-      ],
       badges: [
         { value: "new", text: "New" },
         { value: "sale", text: "En solde" },
@@ -889,10 +918,35 @@ export default {
         console.log(res);
         if (res.state) {
           this.product = res.data;
+          getSubCategory(
+            this.product && this.product.category && this.product.category.id
+          ).then((res) => {
+            if (res.state) {
+              this.subCategories = res.data;
+            } else {
+              this.error = res.message;
+              this.$swal({
+                title: "Erreur",
+                text: this.error,
+                icon: "error",
+                button: "Ok",
+              }).then(() => {
+                window.location.assign("/dashboard/product");
+              });
+            }
+          });
           this.loading = false;
         } else {
           this.error = res.message;
           this.loading = false;
+          this.$swal({
+            title: "Erreur",
+            text: this.error,
+            icon: "error",
+            button: "Ok",
+          }).then(() => {
+            window.location.assign("/dashboard/product");
+          });
         }
       });
     },
@@ -906,6 +960,8 @@ export default {
             text: "Product updated successfully",
             icon: "success",
             button: "Ok",
+          }).then(() => {
+            window.location.assign("/dashboard/product");
           });
         } else {
           this.updating = false;
@@ -914,6 +970,8 @@ export default {
             text: resp.message,
             icon: "error",
             button: "Ok",
+          }).then(() => {
+            window.locationw.assign("/dashboard/product");
           });
         }
       });
@@ -987,6 +1045,14 @@ export default {
         }
       });
     },
+    addNewSize() {
+      this.product.size.push(this.size);
+      this.size = "";
+    },
+    removeSize(item) {
+      var array = this.product.size.filter((e) => e != item);
+      this.product.size = array;
+    },
   },
   mounted() {
     if (localStorage.getItem("user-perish-auth")) {
@@ -996,12 +1062,36 @@ export default {
           this.categories = resp.data;
           this.getProduct();
         } else {
-          this.error = res.message;
+          this.error = resp.message;
+          this.$swal({
+            title: "Erreur",
+            text: this.error,
+            icon: "error",
+            button: "Ok",
+          }).then(() => {
+            window.location.assign("/dashboard/product");
+          });
         }
       });
     } else {
       this.$router.push("/dashboard");
     }
+  },
+  watch: {
+    // whenever question changes, this function will run
+    "product.category"(newCat, oldCat) {
+      if (newCat !== oldCat) {
+        console.log("get sub cat list");
+        console.log(this.product.category);
+        getSubCategory(this.product.category).then((resp) => {
+          if (resp.state) {
+            this.subCategories = resp.data;
+          } else {
+            this.error = resp.message;
+          }
+        });
+      }
+    },
   },
 };
 </script>

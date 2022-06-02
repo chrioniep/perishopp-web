@@ -6,6 +6,13 @@
   <!-- ======================= Dashboard Detail ======================== -->
   <section class="middle">
     <div class="container">
+      <loading
+        color="#6618CE"
+        v-model:active="loading"
+        :can-cancel="true"
+        :on-cancel="onCancel"
+        :is-full-page="true"
+      />
       <div class="row justify-content-center justify-content-between">
         <div class="col-12 col-md-12 col-lg-4 col-xl-4 text-center miliods">
           <div class="d-block border rounded mfliud-bot">
@@ -15,12 +22,24 @@
 
         <div class="col-12 col-md-12 col-lg-8 col-xl-8 text-center">
           <!-- row -->
+          <div
+            v-if="no_datas"
+            class="row align-items-center d-block justify-content-center"
+          >
+            <img
+              class="mb-3"
+              style="height: 300px"
+              src="/assets/img/empty-icon.svg"
+              alt=""
+            />
+            <h3 class="mb-3">Aucun categori disponible veuillez ajouter👇🏾</h3>
+          </div>
           <div class="row align-items-center">
-            <SingleCat />
-            <SingleCat />
-            <SingleCat />
-            <SingleCat />
-            <SingleCat />
+            <SingleCat
+              v-for="item in categoryList"
+              :key="item.id"
+              :data="item"
+            />
           </div>
           <!-- row -->
           <!-- row -->
@@ -946,9 +965,44 @@ import Footer from "../../components/Footer.vue";
 import Navigation from "../../components/dashboard/navigation.vue";
 import SingleProduct from "../../components/dashboard/product.vue";
 import SingleCat from "../../components/dashboard/category.vue";
+import { getCategoryList } from "@/services/category.services";
+import Loading from "vue-loading-overlay";
+import "vue-loading-overlay/dist/vue-loading.css";
 
 export default {
-  components: { Header, Footer, Navigation, SingleProduct, SingleCat },
+  components: { Header, Footer, Navigation, SingleProduct, SingleCat, Loading },
+  data() {
+    return {
+      categoryList: [],
+      loading: false,
+      error: "",
+      no_datas: false,
+    };
+  },
+  methods: {
+    getAllCategory() {
+      this.loading = true;
+      this.no_datas = false;
+      getCategoryList().then((resp) => {
+        if (resp.state) {
+          this.categoryList = resp.data;
+          this.loading = false;
+        } else if (resp.data.length == 0) {
+          this.no_datas = true;
+          this.loading = false;
+        }
+      });
+    },
+  },
+  mounted() {
+    if (localStorage.getItem("user-perish-auth")) {
+      this.user = JSON.parse(localStorage.getItem("user-perish-auth"));
+      this.$router.push("/dashboard/category");
+      this.getAllCategory();
+    } else {
+      this.$router.push("/dashboard");
+    }
+  },
 };
 </script>
 

@@ -8,6 +8,9 @@ import DashboardProductAdd from "../pages/dashboard/productNew.vue";
 import DashboardProductDetail from "../pages/dashboard/productDetail.vue";
 import DashboardCategory from "../pages/dashboard/category.vue";
 import DashboardCategoryDetail from "../pages/dashboard/categoryDetail.vue";
+import DashboardSubCategory from "../pages/dashboard/subCategory.vue";
+import DashboardSubCategoryDetail from "../pages/dashboard/subCategoryDetail.vue";
+import DashboardSubCategoryNew from "../pages/dashboard/subCategoryNew.vue";
 import DashboardCategoryNew from "../pages/dashboard/categoryNew.vue";
 import DasboardGallery from "../pages/dashboard/gallery.vue";
 import CategoryShop from "../pages/shop/category.vue";
@@ -57,6 +60,21 @@ const routes = [
     path: "/dashboard/category/new",
     name: "DashboardCategoryNew",
     component: DashboardCategoryNew,
+  },
+  {
+    path: "/dashboard/sub-category",
+    name: "DashboardSubCategory",
+    component: DashboardSubCategory,
+  },
+  {
+    path: "/dashboard/sub-category/:id/detail",
+    name: "DashboardSubCategoryDetail",
+    component: DashboardSubCategoryDetail,
+  },
+  {
+    path: "/dashboard/sub-category/new",
+    name: "DashboardSubCategoryNew",
+    component: DashboardSubCategoryNew,
   },
   {
     path: "/dashboard/product/add",
