@@ -4129,6 +4129,17 @@ select.form-control:focus {
   color: #888;
 }
 
+.prod-image-cover img {
+  width: 500px;
+}
+
+.prod-image-small img {
+  width: 60px;
+  height: 60px;
+}
+.prod-image-small img:hover {
+  border: 1px solid #000;
+}
 /* Element wrapper */
 
 .sp-wrap {

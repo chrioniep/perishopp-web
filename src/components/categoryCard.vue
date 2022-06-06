@@ -2,7 +2,7 @@
   <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
     <div class="cats_caption_wrap">
       <div class="cats_caption_thumb mb-2">
-        <a href="#" class="d-block"
+        <a :href="`category/${data.id}`" class="d-block"
           ><img :src="data.image" class="img-fluid rounded" alt=""
         /></a>
       </div>

@@ -41,38 +41,7 @@
         </div>
         <div class="nav-menus-wrapper" style="transition-property: none">
           <ul class="nav-menu">
-            <li>
-              <a href="#">Homme</a>
-              <ul class="nav-dropdown nav-submenu">
-                <li><a href="/shop/category/1">Pantalons</a></li>
-                <li><a href="/shop/category/1">Jacket</a></li>
-                <li><a href="/shop/category/1">Bloussons</a></li>
-              </ul>
-            </li>
-            <li>
-              <a href="#">Femme</a>
-              <ul class="nav-dropdown nav-submenu">
-                <li><a href="/shop/category/1">Pantalons</a></li>
-                <li><a href="/shop/category/1">Jacket</a></li>
-                <li><a href="/shop/category/1">Blousse</a></li>
-                <li><a href="/shop/category/1">Jupe</a></li>
-                <li><a href="/shop/category/1">Lingerie</a></li>
-              </ul>
-            </li>
-            <li>
-              <a href="#">Enfant</a>
-              <ul class="nav-dropdown nav-submenu">
-                <li><a href="/shop/category/1">Culotte</a></li>
-                <li><a href="/shop/category/1">Jacket</a></li>
-              </ul>
-            </li>
-            <li>
-              <a href="#">Accessoires</a>
-              <ul class="nav-dropdown nav-submenu">
-                <li><a href="/shop/category/1">Badge</a></li>
-              </ul>
-            </li>
-
+            <NavMenu v-for="item in categoryList" :key="item.id" :data="item" />
             <li><a href="/shop">Boutiques</a></li>
           </ul>
 
@@ -112,7 +81,30 @@
 </template>
 
 <script>
-export default {};
+import { getCategoryList, getSubCategory } from "@/services/category.services";
+import { getSubCategoryList } from "@/services/subCategory.services";
+import NavMenu from "./navbarMenu.vue";
+export default {
+  components: {
+    NavMenu,
+  },
+  data() {
+    return {
+      categoryList: [],
+      subCategoryList: [],
+    };
+  },
+  mounted() {
+    getCategoryList().then((res) => {
+      if (res.state) {
+        console.log(res.data);
+        this.categoryList = res.data;
+      } else {
+        console.log("not category");
+      }
+    });
+  },
+};
 </script>
 
 <style></style>

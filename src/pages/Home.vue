@@ -27,74 +27,6 @@
               <!-- Slide Title -->
               <div class="home-slider-desc text-center">
                 <div class="home-slider-title mb-4">
-                  <h5 class="text-light fs-lg ft-medium mb-0">Prix Dimi</h5>
-                  <h1 class="mb-1 ft-bold lg-heading">Collections 2022</h1>
-                </div>
-
-                <p class="mb-0">
-                  <a
-                    href="#"
-                    class="btn stretched-link light-borders mx-2 my-3 ft-bold"
-                    >Boutique Hommes</a
-                  >
-                  <a
-                    href="#"
-                    class="btn stretched-link light-borders mx-2 my-3 ft-bold"
-                    >Boutique Femmes</a
-                  >
-                </p>
-              </div>
-              <!-- Slide Title / End -->
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Slide -->
-    <div data-background-image="assets/img/banner-b.jpg" class="item">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="home-slider-container">
-              <!-- Slide Title -->
-              <div class="home-slider-desc">
-                <div class="home-slider-title mb-4">
-                  <h5 class="text-light fs-md ft-medium mb-0">
-                    Prix Dimi Collection
-                  </h5>
-                  <h1 class="mb-1 ft-bold text-light lg-heading">
-                    la mode des femmes<br />UpTo 30% Off
-                  </h1>
-                  <span class="trending text-light"
-                    >There's nothing like trend</span
-                  >
-                </div>
-
-                <a href="#" class="btn btn-white stretched-link"
-                  >Shop Now<i class="lni lni-arrow-right ml-2"></i
-                ></a>
-              </div>
-              <!-- Slide Title / End -->
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Slide -->
-    <div
-      data-background-image="assets/img/banner-c.jpg"
-      class="item"
-      data-overlay="3"
-    >
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="home-slider-container">
-              <!-- Slide Title -->
-              <div class="home-slider-desc text-center">
-                <div class="home-slider-title mb-4">
                   <h5 class="text-light fs-lg ft-medium mb-0">
                     Get Summer Styles
                   </h5>
@@ -104,7 +36,7 @@
                   >
                 </div>
 
-                <a href="#" class="btn btn-white stretched-link"
+                <a href="/shop" class="btn btn-white stretched-link"
                   >Shop Now<i class="lni lni-arrow-right ml-2"></i
                 ></a>
               </div>
@@ -146,168 +78,6 @@
           :key="trend.id"
           :data="trend"
         />
-
-        <!-- Single -->
-        <!-- <div class="col-xl-3 col-lg-4 col-md-6 col-6">
-          <div class="product_grid card b-0">
-            <div
-              class="badge bg-success text-white position-absolute ft-regular ab-left text-upper"
-            >
-              Sale
-            </div>
-            <button
-              class="snackbar-wishlist btn btn_love position-absolute ab-right"
-            >
-              <i class="far fa-heart"></i>
-            </button>
-            <div class="card-body p-0">
-              <div class="shop_thumb position-relative">
-                <a
-                  class="card-img-top d-block overflow-hidden"
-                  href="shop-single-v1.html"
-                  ><img
-                    class="card-img-top"
-                    src="assets/img/product/1.jpg"
-                    alt="..."
-                /></a>
-                <div
-                  class="product-hover-overlay bg-dark d-flex align-items-center justify-content-center"
-                >
-                  <div class="edlio">
-                    <a
-                      href="#"
-                      data-toggle="modal"
-                      data-target="#quickview"
-                      class="text-white fs-sm ft-medium"
-                      ><i class="fas fa-eye mr-1"></i>Quick View</a
-                    >
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div
-              class="card-footer b-0 p-3 pb-0 bg-white d-flex align-items-start justify-content-center"
-            >
-              <div class="text-left">
-                <div class="text-center">
-                  <h5 class="fw-bolder fs-md mb-0 lh-1 mb-1">
-                    <a href="shop-single-v1.html">Half Running Set</a>
-                  </h5>
-                  <div class="elis_rty">
-                    <span class="ft-bold fs-md text-dark">$119.00</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> -->
-
-        <!-- Single -->
-        <!-- <div class="col-xl-3 col-lg-4 col-md-6 col-6">
-          <div class="product_grid card b-0">
-            <div
-              class="badge bg-info text-white position-absolute ft-regular ab-left text-upper"
-            >
-              New
-            </div>
-            <button
-              class="snackbar-wishlist btn btn_love position-absolute ab-right"
-            >
-              <i class="far fa-heart"></i>
-            </button>
-            <div class="card-body p-0">
-              <div class="shop_thumb position-relative">
-                <a
-                  class="card-img-top d-block overflow-hidden"
-                  href="shop-single-v1.html"
-                  ><img
-                    class="card-img-top"
-                    src="assets/img/product/2.jpg"
-                    alt="..."
-                /></a>
-                <div
-                  class="product-hover-overlay bg-dark d-flex align-items-center justify-content-center"
-                >
-                  <div class="edlio">
-                    <a
-                      href="#"
-                      data-toggle="modal"
-                      data-target="#quickview"
-                      class="text-white fs-sm ft-medium"
-                      ><i class="fas fa-eye mr-1"></i>Quick View</a
-                    >
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div
-              class="card-footer b-0 p-3 pb-0 bg-white d-flex align-items-start justify-content-center"
-            >
-              <div class="text-left">
-                <div class="text-center">
-                  <h5 class="fw-bolder fs-md mb-0 lh-1 mb-1">
-                    <a href="shop-single-v1.html">Formal Men Lowers</a>
-                  </h5>
-                  <div class="elis_rty">
-                    <span class="text-muted ft-medium line-through mr-2"
-                      >$129.00</span
-                    ><span class="ft-bold theme-cl fs-md">$79.00</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> -->
-
-        <!-- Single -->
-        <!-- <div class="col-xl-3 col-lg-4 col-md-6 col-6">
-          <div class="product_grid card b-0">
-            <button
-              class="snackbar-wishlist btn btn_love position-absolute ab-right"
-            >
-              <i class="far fa-heart"></i>
-            </button>
-            <div class="card-body p-0">
-              <div class="shop_thumb position-relative">
-                <a
-                  class="card-img-top d-block overflow-hidden"
-                  href="shop-single-v1.html"
-                  ><img
-                    class="card-img-top"
-                    src="assets/img/product/3.jpg"
-                    alt="..."
-                /></a>
-                <div
-                  class="product-hover-overlay bg-dark d-flex align-items-center justify-content-center"
-                >
-                  <div class="edlio">
-                    <a
-                      href="#"
-                      data-toggle="modal"
-                      data-target="#quickview"
-                      class="text-white fs-sm ft-medium"
-                      ><i class="fas fa-eye mr-1"></i>Quick View</a
-                    >
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div
-              class="card-footer b-0 p-3 pb-0 bg-white d-flex align-items-start justify-content-center"
-            >
-              <div class="text-left">
-                <div class="text-center">
-                  <h5 class="fw-bolder fs-md mb-0 lh-1 mb-1">
-                    <a href="shop-single-v1.html">Half Running Suit</a>
-                  </h5>
-                  <div class="elis_rty">
-                    <span class="ft-bold fs-md text-dark">$80.00</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> -->
       </div>
       <!-- row -->
 
@@ -426,168 +196,6 @@
           :key="item.id"
           :data="item"
         />
-
-        <!-- Single -->
-        <!-- <div class="col-xl-3 col-lg-4 col-md-6 col-6">
-          <div class="product_grid card b-0">
-            <div
-              class="badge bg-success text-white position-absolute ft-regular ab-left text-upper"
-            >
-              Sale
-            </div>
-            <button
-              class="snackbar-wishlist btn btn_love position-absolute ab-right"
-            >
-              <i class="far fa-heart"></i>
-            </button>
-            <div class="card-body p-0">
-              <div class="shop_thumb position-relative">
-                <a
-                  class="card-img-top d-block overflow-hidden"
-                  href="shop-single-v1.html"
-                  ><img
-                    class="card-img-top"
-                    src="assets/img/product/1.jpg"
-                    alt="..."
-                /></a>
-                <div
-                  class="product-hover-overlay bg-dark d-flex align-items-center justify-content-center"
-                >
-                  <div class="edlio">
-                    <a
-                      href="#"
-                      data-toggle="modal"
-                      data-target="#quickview"
-                      class="text-white fs-sm ft-medium"
-                      ><i class="fas fa-eye mr-1"></i>Quick View</a
-                    >
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div
-              class="card-footer b-0 p-3 pb-0 bg-white d-flex align-items-start justify-content-center"
-            >
-              <div class="text-left">
-                <div class="text-center">
-                  <h5 class="fw-bolder fs-md mb-0 lh-1 mb-1">
-                    <a href="shop-single-v1.html">Half Running Set</a>
-                  </h5>
-                  <div class="elis_rty">
-                    <span class="ft-bold fs-md text-dark">$119.00</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> -->
-
-        <!-- Single -->
-        <!-- <div class="col-xl-3 col-lg-4 col-md-6 col-6">
-          <div class="product_grid card b-0">
-            <div
-              class="badge bg-info text-white position-absolute ft-regular ab-left text-upper"
-            >
-              New
-            </div>
-            <button
-              class="snackbar-wishlist btn btn_love position-absolute ab-right"
-            >
-              <i class="far fa-heart"></i>
-            </button>
-            <div class="card-body p-0">
-              <div class="shop_thumb position-relative">
-                <a
-                  class="card-img-top d-block overflow-hidden"
-                  href="shop-single-v1.html"
-                  ><img
-                    class="card-img-top"
-                    src="assets/img/product/2.jpg"
-                    alt="..."
-                /></a>
-                <div
-                  class="product-hover-overlay bg-dark d-flex align-items-center justify-content-center"
-                >
-                  <div class="edlio">
-                    <a
-                      href="#"
-                      data-toggle="modal"
-                      data-target="#quickview"
-                      class="text-white fs-sm ft-medium"
-                      ><i class="fas fa-eye mr-1"></i>Quick View</a
-                    >
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div
-              class="card-footer b-0 p-3 pb-0 bg-white d-flex align-items-start justify-content-center"
-            >
-              <div class="text-left">
-                <div class="text-center">
-                  <h5 class="fw-bolder fs-md mb-0 lh-1 mb-1">
-                    <a href="shop-single-v1.html">Formal Men Lowers</a>
-                  </h5>
-                  <div class="elis_rty">
-                    <span class="text-muted ft-medium line-through mr-2"
-                      >$129.00</span
-                    ><span class="ft-bold theme-cl fs-md">$79.00</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> -->
-
-        <!-- Single -->
-        <!-- <div class="col-xl-3 col-lg-4 col-md-6 col-6">
-          <div class="product_grid card b-0">
-            <button
-              class="snackbar-wishlist btn btn_love position-absolute ab-right"
-            >
-              <i class="far fa-heart"></i>
-            </button>
-            <div class="card-body p-0">
-              <div class="shop_thumb position-relative">
-                <a
-                  class="card-img-top d-block overflow-hidden"
-                  href="shop-single-v1.html"
-                  ><img
-                    class="card-img-top"
-                    src="assets/img/product/3.jpg"
-                    alt="..."
-                /></a>
-                <div
-                  class="product-hover-overlay bg-dark d-flex align-items-center justify-content-center"
-                >
-                  <div class="edlio">
-                    <a
-                      href="#"
-                      data-toggle="modal"
-                      data-target="#quickview"
-                      class="text-white fs-sm ft-medium"
-                      ><i class="fas fa-eye mr-1"></i>Quick View</a
-                    >
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div
-              class="card-footer b-0 p-3 pb-0 bg-white d-flex align-items-start justify-content-center"
-            >
-              <div class="text-left">
-                <div class="text-center">
-                  <h5 class="fw-bolder fs-md mb-0 lh-1 mb-1">
-                    <a href="shop-single-v1.html">Half Running Suit</a>
-                  </h5>
-                  <div class="elis_rty">
-                    <span class="ft-bold fs-md text-dark">$80.00</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> -->
       </div>
     </div>
   </section>
@@ -598,81 +206,23 @@
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
           <div class="sec_title position-relative text-center">
             <h2 class="off_title">Instagram Gallery</h2>
-            <span class="fs-lg ft-bold theme-cl pt-3">@prix_dimi</span>
+            <span class="fs-lg ft-bold theme-cl pt-3"
+              >@prix_dimi_perishopp</span
+            >
             <h3 class="ft-bold lh-1">Instagram</h3>
           </div>
         </div>
       </div>
 
       <div class="row no-gutters">
-        <div class="col">
+        <div v-for="item in gelleryPhoto.data" :key="item.id" class="col">
           <div class="_insta_wrap">
             <div class="_insta_thumb">
-              <a href="javascript:void(0);" class="d-block"
-                ><img src="assets/img/i-1.png" class="img-fluid" alt=""
-              /></a>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="_insta_wrap">
-            <div class="_insta_thumb">
-              <a href="javascript:void(0);" class="d-block"
-                ><img src="assets/img/i-2.png" class="img-fluid" alt=""
-              /></a>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="_insta_wrap">
-            <div class="_insta_thumb">
-              <a href="javascript:void(0);" class="d-block"
-                ><img src="assets/img/i-3.png" class="img-fluid" alt=""
-              /></a>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="_insta_wrap">
-            <div class="_insta_thumb">
-              <a href="javascript:void(0);" class="d-block"
-                ><img src="assets/img/i-7.png" class="img-fluid" alt=""
-              /></a>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="_insta_wrap">
-            <div class="_insta_thumb">
-              <a href="javascript:void(0);" class="d-block"
-                ><img src="assets/img/i-8.png" class="img-fluid" alt=""
-              /></a>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="_insta_wrap">
-            <div class="_insta_thumb">
-              <a href="javascript:void(0);" class="d-block"
-                ><img src="assets/img/i-4.png" class="img-fluid" alt=""
-              /></a>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="_insta_wrap">
-            <div class="_insta_thumb">
-              <a href="javascript:void(0);" class="d-block"
-                ><img src="assets/img/i-5.png" class="img-fluid" alt=""
-              /></a>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="_insta_wrap">
-            <div class="_insta_thumb">
-              <a href="javascript:void(0);" class="d-block"
-                ><img src="assets/img/i-6.png" class="img-fluid" alt=""
+              <a
+                href="https://www.instagram.com/prix_dimi_perishopp/"
+                class="d-block"
+                target="_blank"
+                ><img :src="item.url" class="img-fluid" alt=""
               /></a>
             </div>
           </div>
@@ -704,6 +254,7 @@ import SearchModal from "../components/searchModal.vue";
 import Loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/vue-loading.css";
 import { getCategoryList } from "../services/category.services";
+import { getGalleryList } from "@/services/gallery.services";
 import {
   getTrendingProducts,
   getWomanProductCat,
@@ -726,6 +277,10 @@ export default {
       loading: false,
       categories: [],
       trendingProducts: {
+        data: [],
+        no_datas: false,
+      },
+      gelleryPhoto: {
         data: [],
         no_datas: false,
       },
@@ -777,9 +332,16 @@ export default {
       if (girlCat.state) {
         this.girlCatProducts.data = girlCat.data;
         console.log(this.girlCatProducts.data);
-        this.loading = false;
       } else {
         this.girlCatProducts.no_datas = true;
+      }
+
+      const gallery = await getGalleryList();
+      if (gallery.state) {
+        this.gelleryPhoto.data = gallery.data;
+        this.loading = false;
+      } else {
+        this.gelleryPhoto.no_datas = true;
         this.loading = false;
       }
     },

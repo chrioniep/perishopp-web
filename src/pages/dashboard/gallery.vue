@@ -12,23 +12,71 @@
             <Navigation :menu="4" />
           </div>
         </div>
+        <loading
+          color="#6618CE"
+          v-model:active="loading"
+          :can-cancel="true"
+          :on-cancel="onCancel"
+          :is-full-page="true"
+        />
 
         <div class="col-12 col-md-12 col-lg-8 col-xl-8 text-center">
           <!-- row -->
           <div class="row align-items-center">
-            <Picture />
-            <Picture />
-            <Picture />
-            <Picture />
-            <Picture />
+            <div
+              v-for="item in galleryList"
+              :key="item"
+              class="col-xl-3 col-lg-3 col-md-4 col-sm-12"
+            >
+              <div class="card-wrap border rounded mb-4">
+                <div
+                  class="card-wrap-header px-3 py-2 br-bottom d-flex align-items-center justify-content-between"
+                >
+                  <!-- <div class="card-header-flex">
+          <h4 class="fs-md ft-bold mb-1">Shipping Address</h4> -->
+                  <!-- <p class="m-0 p-0">
+            <span
+              class="text-success bg-light-success small ft-medium px-2 py-1"
+              >Primary Account</span
+            >
+          </p> -->
+                  <!-- </div> -->
+                  <div class="card-head-last-flex">
+                    <!-- Button -->
+                    <!-- <a
+            class="border p-3 circle text-dark d-inline-flex align-items-center justify-content-center"
+            href="/dashboard/category/1/detail"
+            ><i class="fas fa-pen-nib position-absolute"></i
+          ></a> -->
+                    <!-- Button -->
+                    <button
+                      @click="deletePhoto(item.id)"
+                      style="cursor: pointer"
+                      class="border bg-white text-danger p-3 circle text-dark d-inline-flex align-items-center justify-content-center"
+                    >
+                      <i class="fas fa-times position-absolute"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="card-wrap-body px-3 py-3">
+                  <img :src="item.url" class="img-fluid rounded" alt="" />
+                </div>
+              </div>
+            </div>
           </div>
           <!-- row -->
           <!-- row -->
           <div class="row">
             <div class="col-12 col-lg-12 col-xl-12 col-md-12 mb-3">
               <div class="form-group">
-                <!-- <label class="text-dark">Upload image</label> -->
+                <label v-if="progress == null" class="text-dark"
+                  >Upload image</label
+                >
+                <label v-if="progress != null" class="text-dark"
+                  >Uploading...{{ progress }}%</label
+                >
                 <input
+                  @change="addImage"
                   type="file"
                   class="form-control"
                   placeholder="Upload image"
@@ -946,10 +994,111 @@ import Footer from "../../components/Footer.vue";
 import Navigation from "../../components/dashboard/navigation.vue";
 import SingleProduct from "../../components/dashboard/product.vue";
 import SingleCat from "../../components/dashboard/category.vue";
+import Loading from "vue-loading-overlay";
+import "vue-loading-overlay/dist/vue-loading.css";
 import Picture from "../../components/dashboard/galleryPhoto.vue";
+import {
+  getGalleryList,
+  DeleteGallery,
+  createNewGallery,
+} from "@/services/gallery.services";
+import firebase from "@/firebase/config";
 
 export default {
-  components: { Header, Footer, Navigation, SingleProduct, Picture },
+  components: { Header, Footer, Navigation, SingleProduct, Picture, Loading },
+  data() {
+    return {
+      loading: false,
+      galleryList: [],
+      image: null,
+      progress: null,
+    };
+  },
+  methods: {
+    addImage(event) {
+      let value = event.target.files[0];
+      this.uploadImage(value);
+    },
+    uploadImage(image) {
+      const storageRef = firebase.storage().ref();
+      this.uploadLoadingImage = true;
+      const productImage = storageRef.child(`gallery/${image.name}`);
+      const task = productImage.put(image);
+      task.on(
+        "state_changed",
+        (snapshot) => {
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          this.progress = progress;
+          if (progress == 100) {
+            this.progress = null;
+            snapshot.ref.getDownloadURL().then((url) => {
+              this.image = url;
+              this.loading = true;
+              createNewGallery(this.$data).then((res) => {
+                if (res.state) {
+                  this.loading = false;
+                  this.galleryList.push(res.data);
+                  this.$swal({
+                    toast: true,
+                    icon: "success",
+                    title: "Image uploaded",
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                  });
+                }
+              });
+            });
+          }
+        },
+        (err) => {
+          this.$swal({
+            title: "Erreur",
+            text: err,
+            icon: "error",
+            button: "Ok",
+          });
+        }
+      );
+    },
+    deletePhoto(id) {
+      this.loading = true;
+      DeleteGallery(id).then((res) => {
+        if (res.state) {
+          this.loading = false;
+          this.galleryList = this.galleryList.filter((item) => item.id !== id);
+          this.$swal({
+            toast: true,
+            icon: "success",
+            title: "Image deleted",
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+          });
+        }
+      });
+    },
+  },
+  mounted() {
+    this.loading = true;
+    getGalleryList().then((res) => {
+      if (res.state) {
+        this.galleryList = res.data;
+        this.loading = false;
+      } else {
+        this.loading = false;
+        this.$swal({
+          title: "Erreur",
+          icon: "error",
+          text: res.message,
+          button: "Ok",
+        });
+      }
+    });
+  },
 };
 </script>
 

@@ -30,13 +30,27 @@
     <div class="container">
       <div class="row">
         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-          <div class="sp-loading">
-            <img src="/assets/img/product/15.png" alt="" /><br />LOADING IMAGES
-          </div>
-          <div class="sp-wrap">
-            <a href="/assets/img/product/16.png"
-              ><img src="/assets/img/product/16.png" alt=""
-            /></a>
+          <!-- Main detail image  -->
+          <ImageDetailImage :image="mainImage" />
+          <!-- Main detail image -->
+          <div class="row d-flex mt-2">
+            <div
+              v-for="item in product.images"
+              :key="item"
+              class="col-xl-3 col-lg-3 col-md-3"
+              style="cursor: pointer"
+            >
+              <div @click="setMainImage(item)" class="prod-image-small">
+                <img
+                  class="p-1"
+                  :style="`border: ${
+                    item == mainImage ? '1px solid #000' : 'none'
+                  }`"
+                  :src="item"
+                  alt=""
+                />
+              </div>
+            </div>
           </div>
         </div>
 
@@ -68,7 +82,12 @@
                   ><span
                     v-if="product.stock"
                     class="ft-regular text-light bg-success py-1 px-2 fs-sm"
-                    >In Stock</span
+                    >En stocke</span
+                  >
+                  <span
+                    v-if="!product.stock"
+                    class="ft-regular text-light bg-danger py-1 px-2 fs-sm"
+                    >Indisponible</span
                   >
                 </div>
               </div>
@@ -154,151 +173,31 @@
               </div>
             </div> -->
 
-            <!-- <div class="prt_04 mb-4">
+            <div class="prt_04 mb-4">
               <p class="d-flex align-items-center mb-0 text-dark ft-medium">
-                Size:
+                Taille disponible:
               </p>
               <div class="text-left pb-0 pt-2">
                 <div
+                  v-for="item in product.size"
+                  :key="item"
                   class="form-check size-option form-option form-check-inline mb-2"
                 >
                   <input
                     class="form-check-input"
                     type="radio"
                     name="size"
-                    id="28"
+                    :id="item"
                     checked=""
                   />
-                  <label class="form-option-label" for="28">28</label>
-                </div>
-                <div
-                  class="form-check form-option size-option form-check-inline mb-2"
-                >
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="size"
-                    id="30"
-                  />
-                  <label class="form-option-label" for="30">30</label>
-                </div>
-                <div
-                  class="form-check form-option size-option form-check-inline mb-2"
-                >
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="size"
-                    id="32"
-                  />
-                  <label class="form-option-label" for="32">32</label>
-                </div>
-                <div
-                  class="form-check form-option size-option form-check-inline mb-2"
-                >
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="size"
-                    id="34"
-                  />
-                  <label class="form-option-label" for="34">34</label>
-                </div>
-                <div
-                  class="form-check form-option size-option form-check-inline mb-2"
-                >
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="size"
-                    id="36"
-                  />
-                  <label class="form-option-label" for="36">36</label>
-                </div>
-                <div
-                  class="form-check form-option size-option form-check-inline mb-2"
-                >
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="size"
-                    id="38"
-                  />
-                  <label class="form-option-label" for="38">38</label>
-                </div>
-                <div
-                  class="form-check form-option size-option form-check-inline mb-2"
-                >
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="size"
-                    id="40"
-                  />
-                  <label class="form-option-label" for="40">40</label>
-                </div>
-                <div
-                  class="form-check form-option size-option form-check-inline mb-2"
-                >
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="size"
-                    id="42"
-                  />
-                  <label class="form-option-label" for="42">42</label>
-                </div>
-                <div
-                  class="form-check form-option size-option form-check-inline mb-2"
-                >
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="size"
-                    id="44"
-                  />
-                  <label class="form-option-label" for="44">44</label>
-                </div>
-                <div
-                  class="form-check form-option size-option form-check-inline mb-2"
-                >
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="size"
-                    id="46"
-                  />
-                  <label class="form-option-label" for="46">46</label>
-                </div>
-                <div
-                  class="form-check form-option size-option form-check-inline mb-2"
-                >
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="size"
-                    id="48"
-                  />
-                  <label class="form-option-label" for="48">48</label>
-                </div>
-                <div
-                  class="form-check form-option size-option form-check-inline mb-2"
-                >
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="size"
-                    id="50"
-                  />
-                  <label class="form-option-label" for="50">50</label>
+                  <label class="form-option-label" for="28">{{ item }}</label>
                 </div>
               </div>
-            </div> -->
+            </div>
 
             <div class="prt_05 mb-4">
               <div class="form-row mb-7">
-                <div class="col-12 col-lg-auto">
-                  <!-- Quantity -->
+                <!-- <div class="col-12 col-lg-auto">
                   <select class="mb-2 custom-select">
                     <option value="1" selected="">1</option>
                     <option value="2">2</option>
@@ -306,7 +205,7 @@
                     <option value="4">4</option>
                     <option value="5">5</option>
                   </select>
-                </div>
+                </div> -->
                 <div class="col-12 col-lg">
                   <!-- Submit -->
                   <!-- <button
@@ -367,7 +266,7 @@
   <!-- ======================= Product Detail End ======================== -->
 
   <!-- ======================= Product Description ======================= -->
-  <section class="middle">
+  <!-- <section class="middle">
     <div class="container">
       <div class="row align-items-center justify-content-center">
         <div class="col-xl-11 col-lg-12 col-md-12 col-sm-12">
@@ -412,11 +311,11 @@
                 >Reviews</a
               >
             </li>
-          </ul>
+          </ul> -->
 
-          <div class="tab-content" id="myTabContent">
-            <!-- Description Content -->
-            <div
+  <!-- <div class="tab-content" id="myTabContent"> -->
+  <!-- Description Content -->
+  <!-- <div
               class="tab-pane fade show active"
               id="description"
               role="tabpanel"
@@ -439,10 +338,10 @@
                   mollitia animi, id est laborum et dolorum fuga.
                 </p>
               </div>
-            </div>
+            </div> -->
 
-            <!-- Additional Content -->
-            <div
+  <!-- Additional Content -->
+  <!-- <div
               class="tab-pane fade"
               id="information"
               role="tabpanel"
@@ -474,17 +373,17 @@
                   </tbody>
                 </table>
               </div>
-            </div>
+            </div> -->
 
-            <!-- Reviews Content -->
-            <div
+  <!-- Reviews Content -->
+  <!-- <div
               class="tab-pane fade"
               id="reviews"
               role="tabpanel"
               aria-labelledby="reviews-tab"
             >
-              <div class="reviews_info">
-                <div class="single_rev d-flex align-items-start br-bottom py-3">
+              <div class="reviews_info"> -->
+  <!-- <div class="single_rev d-flex align-items-start br-bottom py-3">
                   <div class="single_rev_thumb">
                     <img
                       src="assets/img/team-1.jpg"
@@ -518,10 +417,10 @@
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> -->
 
-                <!-- Single Review -->
-                <div class="single_rev d-flex align-items-start br-bottom py-3">
+  <!-- Single Review -->
+  <!-- <div class="single_rev d-flex align-items-start br-bottom py-3">
                   <div class="single_rev_thumb">
                     <img
                       src="assets/img/team-2.jpg"
@@ -555,10 +454,10 @@
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> -->
 
-                <!-- Single Review -->
-                <div class="single_rev d-flex align-items-start br-bottom py-3">
+  <!-- Single Review -->
+  <!-- <div class="single_rev d-flex align-items-start br-bottom py-3">
                   <div class="single_rev_thumb">
                     <img
                       src="assets/img/team-3.jpg"
@@ -592,10 +491,10 @@
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> -->
 
-                <!-- Single Review -->
-                <div class="single_rev d-flex align-items-start py-3">
+  <!-- Single Review -->
+  <!-- <div class="single_rev d-flex align-items-start py-3">
                   <div class="single_rev_thumb">
                     <img
                       src="assets/img/team-4.jpg"
@@ -629,10 +528,10 @@
                       </div>
                     </div>
                   </div>
-                </div>
-              </div>
+                </div> -->
+  <!-- </div> -->
 
-              <div class="reviews_rate">
+  <!-- <div class="reviews_rate">
                 <form class="row">
                   <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                     <h4>Submit Rating</h4>
@@ -733,17 +632,17 @@
                     </div>
                   </div>
                 </form>
-              </div>
-            </div>
+              </div> -->
+  <!-- </div>
           </div>
         </div>
       </div>
     </div>
-  </section>
+  </section> -->
   <!-- ======================= Product Description End ==================== -->
 
   <!-- ======================= Similar Products Start ============================ -->
-  <section class="middle pt-0">
+  <!-- <section class="middle pt-0">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
@@ -756,20 +655,42 @@
 
       <div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-          <div class="slide_items">
-            <!-- <single-product />
-            <single-product />
-            <single-product />
-            <single-product /> -->
+          <div class="slide_items slick-initialized slick-slider">
+            <button
+              type="button"
+              data-role="none"
+              class="slick-prev slick-arrow"
+              aria-label="Previous"
+              role="button"
+              style=""
+            >
+              Previous
+            </button>
+
+            <single-product
+              v-for="item in similarProducts"
+              :key="item.id"
+              :data="item"
+            />
+            <button
+              type="button"
+              data-role="none"
+              class="slick-next slick-arrow"
+              aria-label="Next"
+              role="button"
+              style=""
+            >
+              Next
+            </button>
           </div>
         </div>
       </div>
     </div>
-  </section>
+  </section> -->
   <!-- ======================= Similar Products Start ============================ -->
 
   <!-- ======================= Customer Features ======================== -->
-  <section class="px-0 py-3 br-top">
+  <!-- <section class="px-0 py-3 br-top">
     <div class="container">
       <div class="row">
         <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
@@ -821,7 +742,7 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> -->
   <!-- ======================= Customer Features ======================== -->
 
   <Footer />
@@ -836,32 +757,51 @@
 import Header from "../../components/Header.vue";
 import Footer from "../../components/Footer.vue";
 import SingleProduct from "../../components/product/singleProduct.vue";
+import ImageDetailImage from "../../components/product/mainDetailImage.vue";
 import SearchModal from "../../components/searchModal.vue";
 import Loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/vue-loading.css";
-import { getProductDetail } from "../../services/product.services";
+import {
+  getProductDetail,
+  getProductByCategory,
+} from "../../services/product.services";
 export default {
   components: {
     Header,
     Footer,
     SingleProduct,
     SearchModal,
+    ImageDetailImage,
     Loading,
   },
   data() {
     return {
       loading: false,
+      mainImage: null,
       product: {},
+      similarProducts: [],
       fullPath: window.location.href,
     };
   },
   methods: {
+    setMainImage(src) {
+      this.mainImage = src;
+    },
     productDetail() {
       this.loading = true;
       getProductDetail(this.$route.params.id).then((res) => {
         if (res.state) {
           this.product = res.data;
-          console.log(res.data);
+          this.mainImage = res.data.images[0];
+          getProductByCategory(res.data.category.id).then((resp) => {
+            if (resp.state) {
+              this.similarProducts = resp.data;
+              this.loading = false;
+            } else {
+              this.similarProducts = [];
+              this.loading = false;
+            }
+          });
           this.loading = false;
         } else {
           this.loading = false;

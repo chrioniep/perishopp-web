@@ -71,6 +71,30 @@ export const getSubCategoryDetail = (id) => {
       });
   });
 };
+
+export const getSubCategoryProduct = (id) => {
+  return new Promise((resolve, reject) => {
+    db.collection("Product")
+      .where("subCategory", "==", id)
+      .get()
+      .then((snapshot) => {
+        let products = [];
+        if (snapshot.size > 0) {
+          snapshot.forEach((doc) => {
+            products.push(doc.data());
+          });
+          console.log(products);
+          resolve({ state: true, data: products, message: "product list" });
+        } else {
+          resolve({ state: false, data: [], message: "no products found" });
+        }
+      })
+      .catch((err) => {
+        reject({ state: false, data: null, message: err });
+      });
+  });
+};
+
 export const CreateSubCategory = (data) => {
   return new Promise((resolve, reject) => {
     const id = db.collection("SubCategory").doc().id;

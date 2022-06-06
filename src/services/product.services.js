@@ -83,34 +83,35 @@ export const getProductByCategory = (category) => {
 };
 
 export const CreateProduct = (data) => {
-  return new Promise((resolve, reject) => {
-    const id = db.collection("Product").doc().id;
-    db.collection("Product")
-      .doc(id)
-      .set({
-        id: id,
-        name: data.name,
-        price: data.price,
-        images: data.images,
-        fakePrice: data.fakePrice,
-        description: data.description,
-        category: data.category,
-        subCategory: data.subCategory,
-        size: data.sizes,
-        badge: data.badge,
-        isTrending: data.isTrending,
-        inCategory: data.inCategory,
-        stock: data.stock,
-        flag: true,
-        createdAt: new Date(),
-      })
-      .then(() => {
-        resolve({ state: true, data: null, message: "product created" });
-      })
-      .catch((err) => {
-        resolve({ state: false, data: null, message: err });
-      });
-  });
+  console.log(data);
+  // return new Promise((resolve, reject) => {
+  //   const id = db.collection("Product").doc().id;
+  //   db.collection("Product")
+  //     .doc(id)
+  //     .set({
+  //       id: id,
+  //       name: data.name,
+  //       price: data.price,
+  //       images: data.images,
+  //       fakePrice: data.fakePrice,
+  //       description: data.description,
+  //       category: data.category,
+  //       subCategory: data.subCategory,
+  //       size: data.sizes,
+  //       badge: data.badge,
+  //       isTrending: data.isTrending,
+  //       inCategory: data.inCategory,
+  //       stock: data.stock,
+  //       flag: true,
+  //       createdAt: new Date(),
+  //     })
+  //     .then(() => {
+  //       resolve({ state: true, data: null, message: "product created" });
+  //     })
+  //     .catch((err) => {
+  //       resolve({ state: false, data: null, message: err });
+  //     });
+  // });
 };
 export const UploadImage = (data, callback) => {
   const id = db.collection("Products").doc().id;

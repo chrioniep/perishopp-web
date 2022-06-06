@@ -72,7 +72,7 @@
               </div>
             </div>
 
-            <div class="row">
+            <!-- <div class="row">
               <div class="col-xl-12 col-lg-12 col-md-12 justify-content-center">
                 <div
                   v-if="progress != null"
@@ -84,12 +84,17 @@
                   aria-valuemax="100"
                 ></div>
               </div>
-            </div>
+            </div> -->
 
             <div class="row">
               <div class="col-12 col-lg-12 col-xl-12 col-md-12 mb-3">
                 <div class="form-group">
-                  <label class="text-dark">Upload image</label>
+                  <label v-if="progress == null" class="text-dark"
+                    >Upload image</label
+                  >
+                  <label v-if="progress != null" class="text-dark"
+                    >Uploading...{{ progress }}%</label
+                  >
                   <input
                     @change="addImage"
                     type="file"

@@ -14,6 +14,7 @@ import DashboardSubCategoryNew from "../pages/dashboard/subCategoryNew.vue";
 import DashboardCategoryNew from "../pages/dashboard/categoryNew.vue";
 import DasboardGallery from "../pages/dashboard/gallery.vue";
 import CategoryShop from "../pages/shop/category.vue";
+import SubCategoryShop from "../pages/shop/subCategory.vue";
 
 const routes = [
   {
@@ -27,6 +28,11 @@ const routes = [
     component: ShopPage,
   },
   {
+    path: "/category/:id",
+    name: "CategoryShop",
+    component: CategoryShop,
+  },
+  {
     path: "/dashboard",
     name: "DashboardLogin",
     component: DashboardLogin,
@@ -37,9 +43,9 @@ const routes = [
     component: DashboardProduct,
   },
   {
-    path: "/shop/category/:id",
-    name: "ShopCategory",
-    component: CategoryShop,
+    path: "/sub-category/:id",
+    name: "SubCategory",
+    component: SubCategoryShop,
   },
   {
     path: "/dashboard/category",

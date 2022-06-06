@@ -293,7 +293,7 @@
                         :checked="product.stock ? 'checked' : null"
                       />
                       <label for="stock" class="checkbox-custom-label"
-                        >Stock épuiser</label
+                        >En stock ?</label
                       >
                     </div>
                   </div>

@@ -17,6 +17,7 @@
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
           <div class="text-center py-5 mt-3 mb-3">
             <h1 class="ft-medium mb-3">{{ categoryDetail.name }}</h1>
+            <h3 class="ft-small mb-3">{{ subCatDetail.name }}</h3>
             <!-- <ul class="shop_categories_list m-0 p-0">
               <li><a href="#">Men</a></li>
               <li><a href="#">Speakers</a></li>
@@ -557,7 +558,10 @@ import SingleProduct from "../../components/product/singleProduct.vue";
 import SearchModal from "../../components/searchModal.vue";
 import Loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/vue-loading.css";
-import { getProductByCategory } from "@/services/product.services";
+import {
+  getSubCategoryDetail,
+  getSubCategoryProduct,
+} from "@/services/subCategory.services";
 import { getCategoryDetail } from "@/services/category.services";
 
 export default {
@@ -567,20 +571,24 @@ export default {
       loading: false,
       productList: [],
       categoryDetail: {},
+      subCatDetail: {},
     };
   },
   mounted() {
     this.loading = true;
-    getCategoryDetail(this.$route.params.id).then((res) => {
-      this.categoryDetail = res.data;
-      getProductByCategory(this.$route.params.id).then((resp) => {
-        if (resp.state) {
-          this.productList = resp.data;
-          this.loading = false;
-        } else {
-          this.productList = [];
-          this.loading = false;
-        }
+    getSubCategoryDetail(this.$route.params.id).then((res) => {
+      this.subCatDetail = res.data;
+      getCategoryDetail(res.data.category.id).then((respc) => {
+        this.categoryDetail = respc.data;
+        getSubCategoryProduct(this.$route.params.id).then((resp) => {
+          if (resp.state) {
+            this.productList = resp.data;
+            this.loading = false;
+          } else {
+            this.productList = [];
+            this.loading = false;
+          }
+        });
       });
     });
   },

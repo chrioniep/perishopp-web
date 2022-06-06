@@ -17,12 +17,11 @@
       <div class="row align-items-center justify-content-center">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
           <div class="text-center py-5 mt-3 mb-3">
-            <h1 class="ft-medium mb-3">Shop</h1>
+            <h1 class="ft-medium mb-3">Boutique</h1>
             <ul class="shop_categories_list m-0 p-0">
-              <li><a href="#">Men</a></li>
-              <li><a href="#">Speakers</a></li>
-              <li><a href="#">Women</a></li>
-              <li><a href="#">Accessories</a></li>
+              <li v-for="item in categories" :key="item.id">
+                <a :href="`/category/${item.id}`">{{ item.name }}</a>
+              </li>
             </ul>
           </div>
         </div>
@@ -63,26 +62,6 @@
                 ><span class="hide_mob">Filters</span></a
               >
             </div>
-            <div class="single_fitres mr-2 br-right">
-              <select class="custom-select simple">
-                <option value="1" selected="">Default Sorting</option>
-                <option value="2">Sort by price: Low price</option>
-                <option value="3">Sort by price: Hight price</option>
-                <option value="4">Sort by rating</option>
-                <option value="5">Sort by trending</option>
-              </select>
-            </div>
-            <div class="single_fitres">
-              <a href="shop-style-4.html" class="simple-button mr-1"
-                ><i class="ti-layout-grid3"></i
-              ></a>
-              <a href="shop-grid-3.html" class="simple-button mr-1"
-                ><i class="ti-layout-grid2"></i
-              ></a>
-              <a href="shop-list-view.html" class="simple-button active"
-                ><i class="ti-view-list"></i
-              ></a>
-            </div>
           </div>
         </div>
       </div>
@@ -96,97 +75,18 @@
                 <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
                   <div class="single_filter_title mb-2">
                     <h6 class="mb-0 fs-sm ft-medium text-muted">
-                      Choose Categories
+                      Choisir une categorie
                     </h6>
                   </div>
-                  <div class="single_filter_card mb-2">
-                    <h5>
-                      <a
-                        href="#mens"
-                        data-toggle="collapse"
-                        class="collapsed"
-                        aria-expanded="false"
-                        role="button"
-                        >Men's<i class="accordion-indicator ti-angle-down"></i
-                      ></a>
-                    </h5>
-                    <div
-                      class="collapse"
-                      id="mens"
-                      data-parent="#mens-categories"
-                    >
-                      <div class="card-body">
-                        <div class="inner_widget_link">
-                          <ul class="m-0 p-0">
-                            <li>
-                              <a href="#">Pumps & high Heals<span>112</span></a>
-                            </li>
-                            <li>
-                              <a href="#">Sandels<span>82</span></a>
-                            </li>
-                            <li>
-                              <a href="#">Sneakers<span>56</span></a>
-                            </li>
-                            <li>
-                              <a href="#">Boots<span>101</span></a>
-                            </li>
-                            <li>
-                              <a href="#">Casual Shoes<span>212</span></a>
-                            </li>
-                            <li>
-                              <a href="#">Flats Sandel<span>92</span></a>
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="single_filter_card">
-                    <h5>
-                      <a
-                        href="#womens"
-                        data-toggle="collapse"
-                        class="collapsed"
-                        aria-expanded="false"
-                        role="button"
-                        >Women's<i class="accordion-indicator ti-angle-down"></i
-                      ></a>
-                    </h5>
-                    <div
-                      class="collapse"
-                      id="womens"
-                      data-parent="#womens-categories"
-                    >
-                      <div class="card-body">
-                        <div class="inner_widget_link">
-                          <ul class="p-0 m-0">
-                            <li>
-                              <a href="#">Pumps & high Heals<span>112</span></a>
-                            </li>
-                            <li>
-                              <a href="#">Sandels<span>82</span></a>
-                            </li>
-                            <li>
-                              <a href="#">Sneakers<span>56</span></a>
-                            </li>
-                            <li>
-                              <a href="#">Boots<span>101</span></a>
-                            </li>
-                            <li>
-                              <a href="#">Casual Shoes<span>212</span></a>
-                            </li>
-                            <li>
-                              <a href="#">Flats Sandel<span>92</span></a>
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  <ShopMenu
+                    v-for="item in categories"
+                    :key="item.id"
+                    :data="item"
+                  />
                 </div>
 
                 <!-- Choose Category -->
-                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+                <!-- <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
                   <div class="single_filter_title mb-2">
                     <h6 class="mb-0 fs-sm ft-medium text-muted">Choose Size</h6>
                   </div>
@@ -274,7 +174,7 @@
                       <label class="form-option-label" for="a42">42</label>
                     </div>
                   </div>
-                </div>
+                </div> -->
 
                 <!-- Choose Category -->
                 <!-- <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
@@ -421,7 +321,7 @@
                 </div> -->
 
                 <!-- Choose Category -->
-                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+                <!-- <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
                   <div class="single_filter_title mb-2">
                     <h6 class="mb-0 fs-sm ft-medium text-muted">
                       Filter By Price
@@ -437,7 +337,7 @@
                       />
                     </div>
                   </div>
-                </div>
+                </div> -->
               </div>
             </div>
           </div>
@@ -487,7 +387,7 @@
   <!-- ======================= All Product List ======================== -->
 
   <!-- ======================= Customer Features ======================== -->
-  <section class="px-0 py-3 br-top">
+  <!-- <section class="px-0 py-3 br-top">
     <div class="container">
       <div class="row">
         <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
@@ -539,7 +439,7 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> -->
   <!-- ======================= Customer Features ======================== -->
 
   <Footer />
@@ -556,16 +456,19 @@
 import Header from "../../components/Header.vue";
 import Footer from "../../components/Footer.vue";
 import SingleProduct from "../../components/product/singleProduct.vue";
+import ShopMenu from "../../components/shopMenu.vue";
 import SearchModal from "../../components/searchModal.vue";
 import Loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/vue-loading.css";
 import { getProductList } from "../../services/product.services";
+import { getCategoryList } from "../../services/category.services";
 export default {
-  components: { Footer, Header, SingleProduct, SearchModal, Loading },
+  components: { Footer, Header, SingleProduct, SearchModal, Loading, ShopMenu },
   data() {
     return {
       loading: false,
       products: [],
+      categories: null,
       no_datas: false,
     };
   },
@@ -585,6 +488,11 @@ export default {
     },
   },
   mounted() {
+    getCategoryList().then((res) => {
+      if (res.state) {
+        this.categories = res.data;
+      }
+    });
     this.getAvailableProduct();
   },
 };
