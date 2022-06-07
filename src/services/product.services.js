@@ -82,36 +82,56 @@ export const getProductByCategory = (category) => {
   });
 };
 
+export const getProductByHaveCategory = (category) => {
+  return new Promise((resolve, reject) => {
+    db.collection("Product")
+      .where("category", "==", category)
+      .where("inCategory", "==", true)
+      .get()
+      .then((query) => {
+        if (query.size > 0) {
+          let products = [];
+          query.forEach((doc) => {
+            products.push(doc.data());
+          });
+          resolve({ state: true, data: products, message: "product list" });
+        } else {
+          resolve({ state: false, data: [], message: "no products found" });
+        }
+      });
+  });
+};
+
 export const CreateProduct = (data) => {
   console.log(data);
-  // return new Promise((resolve, reject) => {
-  //   const id = db.collection("Product").doc().id;
-  //   db.collection("Product")
-  //     .doc(id)
-  //     .set({
-  //       id: id,
-  //       name: data.name,
-  //       price: data.price,
-  //       images: data.images,
-  //       fakePrice: data.fakePrice,
-  //       description: data.description,
-  //       category: data.category,
-  //       subCategory: data.subCategory,
-  //       size: data.sizes,
-  //       badge: data.badge,
-  //       isTrending: data.isTrending,
-  //       inCategory: data.inCategory,
-  //       stock: data.stock,
-  //       flag: true,
-  //       createdAt: new Date(),
-  //     })
-  //     .then(() => {
-  //       resolve({ state: true, data: null, message: "product created" });
-  //     })
-  //     .catch((err) => {
-  //       resolve({ state: false, data: null, message: err });
-  //     });
-  // });
+  return new Promise((resolve, reject) => {
+    const id = db.collection("Product").doc().id;
+    db.collection("Product")
+      .doc(id)
+      .set({
+        id: id,
+        name: data.name,
+        price: data.price,
+        images: data.images,
+        fakePrice: data.fakePrice,
+        description: data.description,
+        category: data.category,
+        subCategory: data.subCategory,
+        size: data.sizes,
+        badge: data.badge,
+        isTrending: data.isTrending,
+        inCategory: data.inCategory,
+        stock: data.stock,
+        flag: true,
+        createdAt: new Date(),
+      })
+      .then(() => {
+        resolve({ state: true, data: null, message: "product created" });
+      })
+      .catch((err) => {
+        resolve({ state: false, data: null, message: err });
+      });
+  });
 };
 export const UploadImage = (data, callback) => {
   const id = db.collection("Products").doc().id;

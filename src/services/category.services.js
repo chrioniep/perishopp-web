@@ -3,6 +3,12 @@ import firebase from "../firebase/config";
 const db = firebase.firestore();
 const storage = firebase.storage();
 
+function remove_duplicate(arr) {
+  let s = new Set(arr);
+  let it = s.values();
+  return Array.from(it);
+}
+
 export const getCategoryList = () => {
   return new Promise((resolve, reject) => {
     db.collection("Categorie")
@@ -15,6 +21,38 @@ export const getCategoryList = () => {
             categories.push(doc.data());
           });
           resolve({ state: true, data: categories, message: "category list" });
+        } else {
+          resolve({ state: false, data: [], message: "no categories found" });
+        }
+      });
+  });
+};
+
+export const getCategoryHaveProductsInCat = () => {
+  return new Promise((resolve, reject) => {
+    db.collection("Product")
+      .where("flag", "==", true)
+      .where("inCategory", "==", true)
+      .get()
+      .then((query) => {
+        let categories = [];
+        let count = 0;
+        if (query.size > 0) {
+          query.forEach((doc) => {
+            db.collection("Categorie")
+              .doc(doc.data().category)
+              .get()
+              .then((catDoc) => {
+                if (catDoc.exists) {
+                  categories.push(catDoc.data());
+                  resolve({
+                    state: true,
+                    data: [...new Set(categories)],
+                    message: "category list",
+                  });
+                }
+              });
+          });
         } else {
           resolve({ state: false, data: [], message: "no categories found" });
         }

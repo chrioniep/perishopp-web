@@ -35,7 +35,7 @@
     <div class="container">
       <div class="row align-items-center justify-content-between">
         <div class="col-xl-3 col-lg-4 col-md-5 col-sm-12">
-          <nav aria-label="breadcrumb">
+          <!-- <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
               <li class="breadcrumb-item"><a href="#">Shop</a></li>
@@ -43,7 +43,7 @@
                 Women's
               </li>
             </ol>
-          </nav>
+          </nav> -->
         </div>
 
         <div class="col-xl-9 col-lg-8 col-md-7 col-sm-12">
@@ -357,7 +357,7 @@
       </div>
       <!-- row -->
 
-      <div class="row">
+      <!-- <div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 text-center">
           <div class="row">
             <div class="col-xl-12 col-lg-12 col-md-12 text-center">
@@ -381,7 +381,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </section>
   <!-- ======================= All Product List ======================== -->

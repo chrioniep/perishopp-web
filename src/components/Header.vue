@@ -13,7 +13,7 @@
             <img src="/assets/img/logo-header.png" class="logo" alt="" />
           </a>
           <div class="nav-toggle"></div>
-          <div class="mobile_nav">
+          <!-- <div class="mobile_nav">
             <ul>
               <li>
                 <a href="#" onclick="openSearch()">
@@ -37,7 +37,7 @@
                 </a>
               </li>
             </ul>
-          </div>
+          </div> -->
         </div>
         <div class="nav-menus-wrapper" style="transition-property: none">
           <ul class="nav-menu">
@@ -46,11 +46,11 @@
           </ul>
 
           <ul class="nav-menu nav-menu-social align-to-right">
-            <li>
+            <!-- <li>
               <a href="#" onclick="openSearch()">
                 <i class="lni lni-search-alt"></i>
               </a>
-            </li>
+            </li> -->
             <!-- <li>
               <a href="#" data-toggle="modal" data-target="#login">
                 <i class="lni lni-user"></i>

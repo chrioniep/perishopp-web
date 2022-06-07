@@ -84,7 +84,7 @@
       <div class="row justify-content-center">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
           <div class="position-relative text-center">
-            <a href="shop-style-1.html" class="btn stretched-link borders"
+            <a href="/shop" class="btn stretched-link borders"
               >Explore More<i class="lni lni-arrow-right ml-2"></i
             ></a>
           </div>
@@ -115,7 +115,7 @@
               facilis est et expedita distinctio.
             </p>
             <div class="mt-5">
-              <a href="#" class="btn btn-white stretched-link"
+              <a href="/shop" class="btn btn-white stretched-link"
                 >Start Shopping <i class="lni lni-arrow-right"></i
               ></a>
             </div>
@@ -126,79 +126,8 @@
   </section>
   <!-- ======================= Deals of The Day ====================== -->
 
-  <!-- ======================= Blog Start ============================ -->
-  <section class="space min">
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-          <div class="sec_title position-relative text-center">
-            <h2 class="off_title">Femmes</h2>
-            <h3 class="ft-bold pt-3">Produit pour femme</h3>
-          </div>
-        </div>
-      </div>
+  <CategorySecVue v-for="item in trendingCat" :key="item.id" :data="item" />
 
-      <div class="row align-items-center rows-products">
-        <SingleProduct
-          v-for="item in girlCatProducts.data"
-          :key="item.id"
-          :data="item"
-        />
-      </div>
-    </div>
-  </section>
-  <!-- ======================= Blog Start ============================ -->
-
-  <section
-    class="bg-cover"
-    style="background: url(assets/img/banner-c.jpg) no-repeat"
-    data-overlay="5"
-  >
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-xl-8 col-lg-9 col-md-12 col-sm-12">
-          <div class="deals_wrap text-center">
-            <h4 class="ft-medium text-light">Get up to -40% Off</h4>
-            <h2 class="ft-bold text-light">Only Summer Collections</h2>
-            <p class="text-light">
-              At vero eos et accusamus et iusto odio dignissimos ducimus qui
-              blanditiis praesentium voluptatum deleniti atque corrupti quos
-              dolores et quas molestias excepturi sint occaecati cupiditate non
-              provident, similique sunt in culpa qui officia deserunt mollitia
-              animi, id est laborum et dolorum fuga. Et harum quidem rerum
-              facilis est et expedita distinctio.
-            </p>
-            <div class="mt-5">
-              <a href="#" class="btn btn-white stretched-link"
-                >Start Shopping <i class="lni lni-arrow-right"></i
-              ></a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="space min">
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-          <div class="sec_title position-relative text-center">
-            <h2 class="off_title">Hommes</h2>
-            <h3 class="ft-bold pt-3">Produit pour Hommes</h3>
-          </div>
-        </div>
-      </div>
-
-      <div class="row align-items-center rows-products">
-        <SingleProduct
-          v-for="item in menCatProducts.data"
-          :key="item.id"
-          :data="item"
-        />
-      </div>
-    </div>
-  </section>
   <!-- ======================= Instagram Start ============================ -->
   <section class="p-0">
     <div class="container-fluid p-0">
@@ -250,10 +179,14 @@ import Footer from "../components/Footer.vue";
 import SingleProduct from "../components/product/singleProduct.vue";
 import SingleQuickView from "../components/product/singleQuickView.vue";
 import CategoryCard from "../components/categoryCard.vue";
+import CategorySecVue from "@/components/CategorySec.vue";
 import SearchModal from "../components/searchModal.vue";
 import Loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/vue-loading.css";
-import { getCategoryList } from "../services/category.services";
+import {
+  getCategoryList,
+  getCategoryHaveProductsInCat,
+} from "../services/category.services";
 import { getGalleryList } from "@/services/gallery.services";
 import {
   getTrendingProducts,
@@ -269,6 +202,7 @@ export default {
     SingleQuickView,
     SearchModal,
     CategoryCard,
+    CategorySecVue,
     Loading,
   },
   name: "HomePage",
@@ -276,6 +210,7 @@ export default {
     return {
       loading: false,
       categories: [],
+      trendingCat: [],
       trendingProducts: {
         data: [],
         no_datas: false,
@@ -312,8 +247,16 @@ export default {
       if (cats.state) {
         this.categories = cats.data;
       } else {
-        console.log("no cat found !");
+        this.categories = [];
       }
+
+      const trendCat = await getCategoryHaveProductsInCat();
+      if (trendCat.state) {
+        this.trendingCat = trendCat.data;
+      } else {
+        this.trendingCat = [];
+      }
+
       const trending = await getTrendingProducts();
       if (trending.state) {
         this.trendingProducts.data = trending.data;
