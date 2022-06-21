@@ -10,13 +10,13 @@
   <!-- ======================= Shop Style 1 ======================== -->
   <section
     class="bg-cover"
-    style="background: url(/assets/img/cover-1.jpg) no-repeat"
+    style="background: url(/BANNIERE-mo-b-VRAI.jpg) no-repeat"
   >
     <div class="container">
       <div class="row align-items-center justify-content-center">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
           <div class="text-center py-5 mt-3 mb-3">
-            <h1 class="ft-medium mb-3">{{ categoryDetail.name }}</h1>
+            <h1 class="ft-medium mb-3 text-white">{{ categoryDetail.name }}</h1>
             <!-- <ul class="shop_categories_list m-0 p-0">
               <li><a href="#">Men</a></li>
               <li><a href="#">Speakers</a></li>

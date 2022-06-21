@@ -16,7 +16,7 @@
     <!-- Slide -->
     <!-- Slide -->
     <div
-      data-background-image="/assets/img/banner-c.jpg"
+      data-background-image="/BANNIERE-SITE-VRAI.jpg"
       class="item"
       data-overlay="3"
     >
@@ -97,7 +97,7 @@
   <!-- ======================= Deals of The Day ====================== -->
   <section
     class="bg-cover"
-    style="background: url(assets/img/banner-c.jpg) no-repeat"
+    style="background: url(/BANNIERE-SITE-VRAI.jpg) no-repeat"
     data-overlay="5"
   >
     <div class="container">

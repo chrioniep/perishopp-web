@@ -215,7 +215,9 @@
                    
                   </button> -->
                   <a
-                    :href="`https://wa.me/${243995303733}`"
+                    :href="`https://wa.me/${243995303733}?text=https://perishopp-web.web.app${
+                      this.$route.fullPath
+                    }`"
                     target="_blank"
                     class="btn btn-block text-light custom-height bg-green mb-2"
                     :description="product.description"
@@ -810,6 +812,7 @@ export default {
     },
   },
   mounted() {
+    console.log(this.$route);
     this.productDetail();
   },
 };

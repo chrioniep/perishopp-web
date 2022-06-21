@@ -10,14 +10,14 @@
   <!-- ======================= Shop Style 1 ======================== -->
   <section
     class="bg-cover"
-    style="background: url(/assets/img/cover-1.jpg) no-repeat"
+    style="background: url(/BANNIERE-mo-b-VRAI.jpg) no-repeat"
   >
     <div class="container">
       <div class="row align-items-center justify-content-center">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
           <div class="text-center py-5 mt-3 mb-3">
-            <h1 class="ft-medium mb-3">{{ categoryDetail.name }}</h1>
-            <h3 class="ft-small mb-3">{{ subCatDetail.name }}</h3>
+            <h1 class="ft-medium mb-3 text-white">{{ categoryDetail.name }}</h1>
+            <h3 class="ft-small mb-3 text-white">{{ subCatDetail.name }}</h3>
             <!-- <ul class="shop_categories_list m-0 p-0">
               <li><a href="#">Men</a></li>
               <li><a href="#">Speakers</a></li>
@@ -461,7 +461,7 @@
       </div>
       <!-- row -->
 
-      <div class="row">
+      <!-- <div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 text-center">
           <nav aria-label="Page navigation example">
             <ul class="pagination">
@@ -481,7 +481,7 @@
             </ul>
           </nav>
         </div>
-      </div>
+      </div> -->
     </div>
   </section>
   <!-- ======================= All Product List ======================== -->
@@ -496,8 +496,8 @@
               <i class="fas fa-shopping-basket"></i>
             </div>
             <div class="d_capt">
-              <h5 class="mb-0">Free Shipping</h5>
-              <span class="text-muted">Capped at $10 per order</span>
+              <h5 class="mb-0">Livraison gratuite</h5>
+              <!-- <span class="text-muted">càd 0$ comme frais de livraison</span> -->
             </div>
           </div>
         </div>
@@ -508,8 +508,8 @@
               <i class="far fa-credit-card"></i>
             </div>
             <div class="d_capt">
-              <h5 class="mb-0">Secure Payments</h5>
-              <span class="text-muted">Up to 6 months installments</span>
+              <h5 class="mb-0">Paiement à la livraison</h5>
+              <!-- <span class="text-muted">Up to 6 months installments</span> -->
             </div>
           </div>
         </div>
@@ -520,8 +520,8 @@
               <i class="fas fa-shield-alt"></i>
             </div>
             <div class="d_capt">
-              <h5 class="mb-0">15-Days Returns</h5>
-              <span class="text-muted">Shop with fully confidence</span>
+              <h5 class="mb-0">Retour sous 24h</h5>
+              <!-- <span class="text-muted">Shop with fully confidence</span> -->
             </div>
           </div>
         </div>
@@ -532,8 +532,8 @@
               <i class="fas fa-headphones-alt"></i>
             </div>
             <div class="d_capt">
-              <h5 class="mb-0">24x7 Fully Support</h5>
-              <span class="text-muted">Get friendly support</span>
+              <h5 class="mb-0">Support technique 24/24</h5>
+              <!-- <span class="text-muted">Get friendly support</span> -->
             </div>
           </div>
         </div>
