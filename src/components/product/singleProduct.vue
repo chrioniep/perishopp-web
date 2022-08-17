@@ -32,7 +32,7 @@
         <div class="text-left">
           <div class="text-center">
             <h5 class="fw-bolder fs-md mb-0 lh-1 mb-1">
-              <a href="shop-single-v1.html">{{ data.name }}</a>
+              <a :href="`/product/${data.id}`">{{ data.name }}</a>
             </h5>
             <div class="elis_rty">
               <span class="ft-bold fs-md text-dark">${{ data.price }}</span>

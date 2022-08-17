@@ -48,7 +48,9 @@
         <div class="text-left">
           <div class="text-center">
             <h5 class="fw-bolder fs-md mb-0 lh-1 mb-1">
-              <a href="shop-single-v1.html">{{ user.name }}</a>
+              <a :href="`/dashboard/product/${user.id}/detail`">{{
+                user.name
+              }}</a>
             </h5>
             <div class="elis_rty">
               <span class="ft-bold fs-md text-dark">${{ user.price }}</span>

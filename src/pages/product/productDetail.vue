@@ -33,11 +33,12 @@
           <!-- Main detail image  -->
           <ImageDetailImage :image="mainImage" />
           <!-- Main detail image -->
-          <div class="row d-flex mt-2">
+          <div
+            class="align-items-center justify-content-left ml-1 row d-flex mt-2 mb-4"
+          >
             <div
               v-for="item in product.images"
               :key="item"
-              class="col-xl-3 col-lg-3 col-md-3"
               style="cursor: pointer"
             >
               <div @click="setMainImage(item)" class="prod-image-small">
@@ -64,16 +65,22 @@
             <div class="prt_02 mb-3">
               <h2 class="ft-bold mb-1">{{ product.name }}</h2>
               <div class="text-left">
-                <!-- <div
-                  class="star-rating align-items-center d-flex justify-content-left mb-1 p-0"
+                <div
+                  v-if="product.deliveryTime"
+                  class="star-rating align-items-center d-flex justify-content-left mb-1 p-2"
                 >
+                  <!-- <i class="fas fa-star filled"></i>
                   <i class="fas fa-star filled"></i>
                   <i class="fas fa-star filled"></i>
-                  <i class="fas fa-star filled"></i>
-                  <i class="fas fa-star filled"></i>
-                  <i class="fas fa-star"></i>
-                  <span class="small">(412 Reviews)</span>
-                </div> -->
+                  <i class="fas fa-star filled"></i> -->
+                  <i class="fas fa-truck"></i>
+                  <span class="small"
+                    >Temps de livraison pour c'est produit
+                    <span class="ft-bold"
+                      >{{ product.deliveryTime }} jours</span
+                    ></span
+                  >
+                </div>
                 <div class="elis_rty">
                   <span class="ft-medium text-muted line-through fs-md mr-2"
                     >${{ product.fakePrice }}</span

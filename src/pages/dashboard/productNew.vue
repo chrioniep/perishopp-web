@@ -183,6 +183,17 @@
                   </select>
                 </div>
               </div>
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="form-group">
+                  <label class="text-dark">Temps de livraison</label>
+                  <input
+                    v-model="deliveryTime"
+                    type="text"
+                    class="form-control"
+                    placeholder="en jour ex: 23"
+                  />
+                </div>
+              </div>
 
               <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 <div class="row mb-2">
@@ -1227,6 +1238,7 @@ export default {
       id: "",
       name: "",
       price: "",
+      deliveryTime: "",
       images: [],
       fakePrice: "",
       description: "",
