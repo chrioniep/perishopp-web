@@ -651,51 +651,26 @@
   <!-- ======================= Product Description End ==================== -->
 
   <!-- ======================= Similar Products Start ============================ -->
-  <!-- <section class="middle pt-0">
+  <section class="middle pt-0">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
           <div class="sec_title position-relative text-center">
             <h2 class="off_title">Similar Products</h2>
-            <h3 class="ft-bold pt-3">Matching Producta</h3>
+            <h3 class="ft-bold pt-3">Produits similaires</h3>
           </div>
         </div>
       </div>
 
       <div class="row">
-        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-          <div class="slide_items slick-initialized slick-slider">
-            <button
-              type="button"
-              data-role="none"
-              class="slick-prev slick-arrow"
-              aria-label="Previous"
-              role="button"
-              style=""
-            >
-              Previous
-            </button>
-
-            <single-product
-              v-for="item in similarProducts"
-              :key="item.id"
-              :data="item"
-            />
-            <button
-              type="button"
-              data-role="none"
-              class="slick-next slick-arrow"
-              aria-label="Next"
-              role="button"
-              style=""
-            >
-              Next
-            </button>
-          </div>
-        </div>
+        <single-product
+          v-for="item in similarProducts"
+          :key="item.id"
+          :data="item"
+        />
       </div>
     </div>
-  </section> -->
+  </section>
   <!-- ======================= Similar Products Start ============================ -->
 
   <!-- ======================= Customer Features ======================== -->
@@ -753,7 +728,7 @@
     </div>
   </section> -->
   <!-- ======================= Customer Features ======================== -->
-
+  <ShipDetailVue />
   <Footer />
   <SearchModal />
 
@@ -766,6 +741,7 @@
 import Header from "../../components/Header.vue";
 import Footer from "../../components/Footer.vue";
 import SingleProduct from "../../components/product/singleProduct.vue";
+import ShipDetailVue from "@/components/product/ShipDetail.vue";
 import ImageDetailImage from "../../components/product/mainDetailImage.vue";
 import SearchModal from "../../components/searchModal.vue";
 import Loading from "vue-loading-overlay";
@@ -779,6 +755,7 @@ export default {
     Header,
     Footer,
     SingleProduct,
+    ShipDetailVue,
     SearchModal,
     ImageDetailImage,
     Loading,
@@ -802,10 +779,12 @@ export default {
         if (res.state) {
           this.product = res.data;
           this.mainImage = res.data.images[0];
+          console.log(res.data);
           getProductByCategory(res.data.category.id).then((resp) => {
             if (resp.state) {
               this.similarProducts = resp.data;
               this.loading = false;
+              console.log(this.similarProducts);
             } else {
               this.similarProducts = [];
               this.loading = false;
@@ -819,7 +798,6 @@ export default {
     },
   },
   mounted() {
-    console.log(this.$route);
     this.productDetail();
   },
 };

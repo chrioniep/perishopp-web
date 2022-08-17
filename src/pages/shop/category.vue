@@ -486,61 +486,9 @@
   <!-- ======================= All Product List ======================== -->
 
   <!-- ======================= Customer Features ======================== -->
-  <section class="px-0 py-3 br-top">
-    <div class="container">
-      <div class="row">
-        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
-          <div class="d-flex align-items-center justify-content-start py-2">
-            <div class="d_ico">
-              <i class="fas fa-shopping-basket"></i>
-            </div>
-            <div class="d_capt">
-              <h5 class="mb-0">Free Shipping</h5>
-              <span class="text-muted">Capped at $10 per order</span>
-            </div>
-          </div>
-        </div>
 
-        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
-          <div class="d-flex align-items-center justify-content-start py-2">
-            <div class="d_ico">
-              <i class="far fa-credit-card"></i>
-            </div>
-            <div class="d_capt">
-              <h5 class="mb-0">Secure Payments</h5>
-              <span class="text-muted">Up to 6 months installments</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
-          <div class="d-flex align-items-center justify-content-start py-2">
-            <div class="d_ico">
-              <i class="fas fa-shield-alt"></i>
-            </div>
-            <div class="d_capt">
-              <h5 class="mb-0">15-Days Returns</h5>
-              <span class="text-muted">Shop with fully confidence</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
-          <div class="d-flex align-items-center justify-content-start py-2">
-            <div class="d_ico">
-              <i class="fas fa-headphones-alt"></i>
-            </div>
-            <div class="d_capt">
-              <h5 class="mb-0">24x7 Fully Support</h5>
-              <span class="text-muted">Get friendly support</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
   <!-- ======================= Customer Features ======================== -->
-
+  <ship-detail-vue />
   <Footer />
 
   <SearchModal />
@@ -553,6 +501,7 @@
 <script>
 import Header from "../../components/Header.vue";
 import Footer from "../../components/Footer.vue";
+import ShipDetailVue from "@/components/product/ShipDetail.vue";
 import SingleProduct from "../../components/product/singleProduct.vue";
 import SearchModal from "../../components/searchModal.vue";
 import Loading from "vue-loading-overlay";
@@ -561,7 +510,14 @@ import { getProductByCategory } from "@/services/product.services";
 import { getCategoryDetail } from "@/services/category.services";
 
 export default {
-  components: { Footer, Header, SingleProduct, SearchModal, Loading },
+  components: {
+    Footer,
+    Header,
+    SingleProduct,
+    SearchModal,
+    Loading,
+    ShipDetailVue,
+  },
   data() {
     return {
       loading: false,

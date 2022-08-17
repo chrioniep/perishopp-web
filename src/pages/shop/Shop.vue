@@ -443,7 +443,7 @@
     </div>
   </section> -->
   <!-- ======================= Customer Features ======================== -->
-
+  <ship-detail-vue />
   <Footer />
 
   <!-- Search -->
@@ -458,6 +458,7 @@
 import Header from "../../components/Header.vue";
 import Footer from "../../components/Footer.vue";
 import SingleProduct from "../../components/product/singleProduct.vue";
+import ShipDetailVue from "@/components/product/ShipDetail.vue";
 import ShopMenu from "../../components/shopMenu.vue";
 import SearchModal from "../../components/searchModal.vue";
 import Loading from "vue-loading-overlay";
@@ -465,7 +466,15 @@ import "vue-loading-overlay/dist/vue-loading.css";
 import { getProductList } from "../../services/product.services";
 import { getCategoryList } from "../../services/category.services";
 export default {
-  components: { Footer, Header, SingleProduct, SearchModal, Loading, ShopMenu },
+  components: {
+    Footer,
+    Header,
+    SingleProduct,
+    SearchModal,
+    ShipDetailVue,
+    Loading,
+    ShopMenu,
+  },
   data() {
     return {
       loading: false,
