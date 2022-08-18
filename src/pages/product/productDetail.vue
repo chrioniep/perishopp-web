@@ -219,10 +219,11 @@
                     type="submit"
                     class="btn btn-block text-light custom-height bg-green mb-2"
                   >
+                  https://perishopp.com/dashboard/gallery
                    
                   </button> -->
                   <a
-                    :href="`https://wa.me/${243995303733}?text=https://perishopp-web.web.app${
+                    :href="`https://wa.me/${243995303733}?text=https://perishopp.com${
                       this.$route.fullPath
                     }`"
                     target="_blank"
