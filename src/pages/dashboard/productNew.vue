@@ -183,7 +183,7 @@
                   </select>
                 </div>
               </div>
-              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                 <div class="form-group">
                   <label class="text-dark">Temps de livraison</label>
                   <input
@@ -191,6 +191,17 @@
                     type="text"
                     class="form-control"
                     placeholder="en jour ex: 23"
+                  />
+                </div>
+              </div>
+              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                <div class="form-group">
+                  <label class="text-dark">Provenance</label>
+                  <input
+                    v-model="origin"
+                    type="text"
+                    class="form-control"
+                    placeholder=""
                   />
                 </div>
               </div>
@@ -1239,6 +1250,7 @@ export default {
       name: "",
       price: "",
       deliveryTime: "",
+      origin: "",
       images: [],
       fakePrice: "",
       description: "",

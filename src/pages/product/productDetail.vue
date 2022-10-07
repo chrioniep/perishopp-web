@@ -76,16 +76,23 @@
                   <i class="fas fa-truck"></i>
                   <span class="small"
                     >Temps de livraison pour c'est produit
-                    <span class="ft-bold"
-                      >{{ product.deliveryTime }} jours</span
-                    ></span
+                    <span class="ft-bold mr-2"
+                      >{{ product.deliveryTime }} jours
+                    </span></span
+                  >
+                  <span
+                    v-if="product.origin"
+                    class="text-success bg-light-success rounded px-2 py-1"
+                    >{{ product.origin }}</span
                   >
                 </div>
                 <div class="elis_rty">
-                  <span class="ft-medium text-muted line-through fs-md mr-2"
-                    >${{ product.fakePrice }}</span
-                  ><span class="ft-bold theme-cl fs-lg mr-2"
-                    >${{ product.price }}</span
+                  <span class="ft-medium text-muted line-through fs-md mr-2">{{
+                    `${product.fakePrice ? "$" + product.fakePrice : ""}`
+                  }}</span
+                  ><span class="ft-bold theme-cl fs-lg mr-2">{{
+                    "$" + product.price
+                  }}</span
                   ><span
                     v-if="product.stock"
                     class="ft-regular text-light bg-success py-1 px-2 fs-sm"
@@ -213,7 +220,7 @@
                     <option value="5">5</option>
                   </select>
                 </div> -->
-                <div class="col-12 col-lg">
+                <div class="col-6 col-lg">
                   <!-- Submit -->
                   <!-- <button
                     type="submit"
@@ -231,6 +238,24 @@
                     :description="product.description"
                   >
                     <i class="lni lni-whatsapp mr-2"></i>Acheter sur whatsapp
+                  </a>
+                </div>
+                <div class="col-6 col-lg">
+                  <!-- Submit -->
+                  <!-- <button
+                    type="submit"
+                    class="btn btn-block text-light custom-height bg-green mb-2"
+                  >
+                  https://perishopp.com/dashboard/gallery
+                   
+                  </button> -->
+                  <a
+                    href="https://telegram.me/Henock_Emporio"
+                    target="_blank"
+                    class="btn btn-block bg-blue text-light custom-height bg-green mb-2"
+                    :description="product.description"
+                  >
+                    <i class="lni lni-telegram mr-2"></i>Acheter sur telegram
                   </a>
                 </div>
                 <div class="col-12 col-lg-auto">
