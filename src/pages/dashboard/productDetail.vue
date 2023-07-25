@@ -94,6 +94,9 @@
               <div class="col-12 col-lg-12 col-xl-12 col-md-12 mb-3">
                 <div class="form-group">
                   <label class="text-dark">Upload image</label>
+                  <label v-if="progress != null" class="text-dark"
+                    >Uploading...{{ Math.round(progress) }}%</label
+                  >
                   <input
                     @change="addImage"
                     type="file"
