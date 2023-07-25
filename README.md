@@ -36,20 +36,18 @@ By incorporating these major functions and features, our app revolutionizes the 
 
 ---
 
-Make sure to paste the formatted section in your README file, and you'll have a clear and organized overview of the major functions and features of your app!
-
 ## Dependencies
 
 To run "Perishopp-web," you will need the following dependencies and libraries:
 
-core-js - Version 3.8.3
-firebase - Version 8.10.0
-vue - Version 3.2.13
-vue-loading-overlay - Version 5.0.3
-vue-router - Version 4.0.3
-vue-social-sharing - Version 4.0.0-alpha4
-vue-sweetalert2 - Version 5.0.5
-vuex - Version 4.0.0
+- core-js - Version 3.8.3
+- firebase - Version 8.10.0
+- vue - Version 3.2.13
+- vue-loading-overlay - Version 5.0.3
+- vue-router - Version 4.0.3
+- vue-social-sharing - Version 4.0.0-alpha4
+- vue-sweetalert2 - Version 5.0.5
+- vuex - Version 4.0.0
 
 ## Project setup
 
