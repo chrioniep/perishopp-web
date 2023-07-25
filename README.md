@@ -91,7 +91,13 @@ Follow the steps below to effectively use "Perishopp-web" and accomplish tasks i
 
 3. **Accessing the Dashboard:**
 
-   To access the integrated dashboard for content management, you need to authenticate with valid credentials. The authentication system restricts access to authorized personnel only. the credentials is username: _admin_ and password: _azerty_
+   To access the integrated dashboard for content management, you need to authenticate with valid credentials.
+   To access the dashboard, use the following login credentials:
+
+   - Username: admin
+   - Password: azerty
+
+   Simply navigate to the dashboard login page by clicking on this URL: https://www.perishopp.com/dashboard
 
 4. **Placing Orders:**
 
